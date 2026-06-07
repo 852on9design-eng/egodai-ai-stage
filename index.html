@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>惡搞大舞台｜AI 設計服務</title>
+  <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/video-hotspots.css">
+</head>
+<body>
+  <section class="chat-page" id="chatPage" aria-label="AI 引導對話">
+
+    <!-- 第 1 層（最底）：MP4 — 視窗縮細時可上下左右捲動 -->
+    <div class="chat-bg-scroll" id="bgScroll" aria-hidden="true">
+      <div class="chat-bg-inner" id="bgInner">
+        <video
+          class="chat-bg-video"
+          id="bgVideo"
+          autoplay
+          loop
+          muted
+          defaultMuted
+          playsinline
+          disablePictureInPicture
+          preload="auto"
+        ></video>
+      </div>
+    </div>
+
+    <!-- 第 2 層：圖1 + 對話框 — 一組，可拖動（固定喺畫面，唔跟底圖捲） -->
+    <div class="chat-widget" id="chatWidget">
+      <button type="button" class="chat-widget__drag" id="dragHandle" title="按住拖動位置" aria-label="拖動對話框">
+        ⠿
+      </button>
+
+      <img
+        class="chat-widget__frame"
+        src="assets/chat-frame.png"
+        width="1024"
+        height="1024"
+        alt="惡搞大舞台 AI 設計顧問"
+        draggable="false"
+      >
+
+      <div class="chat-slot" id="chatSlot">
+        <button type="button" class="chat-slot__toggle" id="chatToggle" title="收起對話" aria-label="收起對話">—</button>
+        <div class="chat-panel" id="chatPanel">
+          <h2 class="sr-only">AI 設計顧問</h2>
+          <div class="chat-panel__body">
+            <div class="chat-messages" id="chatMessages" role="log" aria-live="polite"></div>
+            <div class="chat-input-row" id="chatInputRow" hidden>
+              <input type="text" id="chatInput" autocomplete="organization" />
+              <button type="button" id="chatSend">送出</button>
+            </div>
+          </div>
+          <footer class="chat-panel__foot">
+            <div class="chat-actions">
+              <a class="wts" id="chatWts" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+              <a href="frontpage.html">🎭 價目</a>
+            </div>
+            <div class="chat-apps" id="chatApps"></div>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <script src="js/config.js"></script>
+  <script src="js/bg-video.js"></script>
+  <script src="js/video-hotspots.js"></script>
+  <script src="js/drag-widget.js"></script>
+  <script src="js/gemini-client.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>

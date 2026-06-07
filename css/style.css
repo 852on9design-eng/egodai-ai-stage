@@ -1,0 +1,108 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #0a0604;
+  overflow: hidden;
+}
+
+.page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-stage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-frame {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: 1920 / 1080;
+  width: min(100vw, calc(100vh * 1920 / 1080));
+  height: min(100vh, calc(100vw * 1080 / 1920));
+}
+
+.hero-base {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+
+/*
+  招牌位置（對應 1920×1080 底圖頂部中央 marquee）
+  用 ?debug=1 可看到紅框，方便你跟我一起微調
+*/
+.sign-slot {
+  /* 對準頂部 marquee 燈牌區（1920×1080） */
+  --sign-left: 27.5%;
+  --sign-top: 2.2%;
+  --sign-width: 45%;
+  --sign-height: 15.5%;
+
+  position: absolute;
+  left: var(--sign-left);
+  top: var(--sign-top);
+  width: var(--sign-width);
+  height: var(--sign-height);
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sign-slot.is-ready {
+  opacity: 1;
+}
+
+/* debug：顯示招牌框位置 */
+.hero-stage.is-debug .sign-slot {
+  outline: 2px dashed rgba(255, 80, 80, 0.9);
+  background: rgba(255, 80, 80, 0.12);
+  opacity: 1;
+}
+
+.sign-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+/*
+  混合模式（視乎你 MP4 背景）：
+  - normal  ：已去背 / 只有招牌（推薦）
+  - screen  ：黑底光效影片
+  - lighten ：深色底影片
+  URL 例：?blend=screen
+*/
+.sign-slot[data-blend="screen"] .sign-video {
+  mix-blend-mode: screen;
+}
+
+.sign-slot[data-blend="lighten"] .sign-video {
+  mix-blend-mode: lighten;
+}
+
+.sign-slot[data-blend="normal"] .sign-video,
+.sign-slot:not([data-blend]) .sign-video {
+  mix-blend-mode: normal;
+}

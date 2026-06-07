@@ -1,0 +1,186 @@
+/* 透明 hotspot — 貼 MP4 招牌位置，唔顯示圖 */
+
+.mp4-hotspots {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.mp4-hotspot {
+  --btn-rotate: 11deg;
+  --btn-skew: 0deg;
+  --btn-origin: 50% 50%;
+
+  position: absolute;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  pointer-events: auto;
+  cursor: pointer;
+  text-decoration: none;
+  transform: rotate(var(--btn-rotate)) skewY(var(--btn-skew));
+  transform-origin: var(--btn-origin);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mp4-hotspot:focus-visible {
+  outline: 2px solid #ffd56a;
+  outline-offset: 2px;
+}
+
+body[data-hotspot-debug] .mp4-hotspot {
+  outline: 2px dashed rgba(255, 70, 70, 0.95);
+  background: rgba(255, 70, 70, 0.22);
+}
+
+/* ── 試位模式：多個候選框 ── */
+body[data-hotspot-try] .chat-widget {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+body[data-hotspot-try] .mp4-hotspot--try {
+  outline: 3px solid var(--try-color, #ff3355);
+  background: color-mix(in srgb, var(--try-color, #ff3355) 28%, transparent);
+  border: 2px solid var(--try-color, #ff3355);
+  z-index: 1;
+}
+
+body[data-hotspot-try] .mp4-hotspot--try.is-picked {
+  outline-width: 4px;
+  background: color-mix(in srgb, var(--try-color, #ff3355) 45%, transparent);
+  z-index: 3;
+  box-shadow: 0 0 18px var(--try-color, #ff3355);
+}
+
+.mp4-hotspot__tag {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font: bold 14px/1.2 system-ui, sans-serif;
+  color: #fff;
+  text-shadow: 0 1px 3px #000, 0 0 8px #000;
+  pointer-events: none;
+}
+
+.hotspot-try-legend {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 100;
+  max-width: 280px;
+  max-height: 70vh;
+  overflow: auto;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(10, 6, 4, 0.92);
+  border: 1px solid rgba(255, 213, 106, 0.45);
+  color: #f5e6c8;
+  font: 13px/1.45 system-ui, sans-serif;
+  pointer-events: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+}
+
+.hotspot-try-legend strong {
+  color: #ffd56a;
+  font-size: 14px;
+}
+
+.hotspot-try-legend ul {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hotspot-try-legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.hotspot-try-legend__swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.hotspot-try-legend code {
+  color: #ffd56a;
+  font-size: 12px;
+}
+
+.hotspot-try-legend__hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+.hotspot-try-legend__pick {
+  margin: 10px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 213, 106, 0.25);
+  color: #ffd56a;
+  font-size: 13px;
+}
+
+/* shimmer — 滑鼠移上先有光帶 */
+.mp4-hotspot--fx-shimmer {
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.mp4-hotspot--fx-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  clip-path: var(--hotspot-clip, none);
+  -webkit-clip-path: var(--hotspot-clip, none);
+  background: linear-gradient(
+    var(--shimmer-angle, 94deg),
+    transparent 40%,
+    rgba(255, 235, 170, 0.45) 50%,
+    transparent 60%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.mp4-hotspot--fx-shimmer:hover::after,
+.mp4-hotspot--fx-shimmer:focus-visible::after {
+  opacity: 1;
+  animation: hotspot-shimmer 2.8s ease-in-out infinite;
+}
+
+.mp4-hotspot--fx-shimmer:hover {
+  filter: brightness(1.08);
+}
+
+@keyframes hotspot-shimmer {
+  0% { transform: translateX(-120%) translateY(-6%); }
+  100% { transform: translateX(120%) translateY(6%); }
+}
+
+.mp4-hotspot--fx-none::after {
+  display: none;
+}
+
+.mp4-hotspot--fx-glow {
+  transition: filter 0.25s ease;
+}
+
+.mp4-hotspot--fx-glow:hover,
+.mp4-hotspot--fx-glow:focus-visible {
+  animation: hotspot-glow 2.4s ease-in-out infinite;
+}
+
+@keyframes hotspot-glow {
+  0%, 100% { box-shadow: inset 0 0 12px rgba(255, 180, 60, 0.15); }
+  50% { box-shadow: inset 0 0 22px rgba(255, 200, 80, 0.45); }
+}

@@ -1,0 +1,343 @@
+/* 底 = MP4 全屏；上 = 圖1+對話框（可拖動） */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.chat-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #0a0604;
+}
+
+/* ── 第 1 層：MP4 捲動底圖 ── */
+.chat-bg-scroll {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: auto;
+  overflow-x: auto;
+  overflow-y: auto;
+  background: #0a0604;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 至少填滿視窗；視窗細過影片時出現捲軸 */
+.chat-bg-inner {
+  position: relative;
+  width: max(100vw, var(--bg-video-w, 1920px));
+  height: max(100vh, var(--bg-video-h, 1080px));
+  min-width: var(--bg-video-w, 1920px);
+  min-height: var(--bg-video-h, 1080px);
+}
+
+.chat-bg-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+/* ── 第 2 層：圖1 + 對話（一組） ── */
+.chat-widget {
+  --widget-w: min(520px, 90vw);
+  position: fixed;
+  z-index: 10;
+  width: var(--widget-w);
+  aspect-ratio: 1 / 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  touch-action: none;
+}
+
+.chat-widget.is-dragging {
+  cursor: grabbing;
+}
+
+.chat-widget__frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: 4px;
+}
+
+/* 拖動手把 — 頂部惡搞區下方 */
+.chat-widget__drag {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: 36px;
+  height: 22px;
+  border: 1px solid rgba(255, 213, 106, 0.5);
+  border-radius: 6px;
+  background: rgba(40, 25, 15, 0.75);
+  color: #ffd56a;
+  font-size: 12px;
+  line-height: 1;
+  cursor: grab;
+  opacity: 0.85;
+}
+
+.chat-widget__drag:active {
+  cursor: grabbing;
+}
+
+.chat-widget.is-dragging .chat-widget__drag {
+  opacity: 1;
+}
+
+/* 金框內 parchment — % 相對於 chat-widget */
+.chat-slot {
+  --slot-left: 13%;
+  --slot-top: 31.25%;
+  --slot-width: 74%;
+  --slot-height: 60%;
+  --slot-pad-x: 0%;
+  --slot-pad-y: 0%;
+
+  position: absolute;
+  left: var(--slot-left);
+  top: var(--slot-top);
+  width: var(--slot-width);
+  height: var(--slot-height);
+  padding: var(--slot-pad-y) var(--slot-pad-x);
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.chat-page.is-debug .chat-slot {
+  outline: 2px dashed rgba(255, 60, 60, 0.9);
+  background: rgba(255, 60, 60, 0.1);
+}
+
+.chat-slot__toggle {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 6;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  border: 1px solid rgba(139, 105, 20, 0.45);
+  border-radius: 5px;
+  background: rgba(61, 40, 23, 0.8);
+  color: #ffd56a;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* 收起 */
+.chat-page.is-collapsed .chat-widget {
+  width: min(240px, 70vw);
+  aspect-ratio: auto;
+  height: 44px;
+  cursor: pointer;
+}
+
+.chat-page.is-collapsed .chat-widget__frame,
+.chat-page.is-collapsed .chat-widget__drag,
+.chat-page.is-collapsed .chat-panel {
+  display: none;
+}
+
+.chat-page.is-collapsed .chat-slot {
+  position: static;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.chat-page.is-collapsed .chat-slot__toggle {
+  position: static;
+  width: 100%;
+  height: 44px;
+  border-radius: 22px;
+  font-size: 14px;
+}
+
+.chat-page.is-collapsed .chat-slot__toggle::after {
+  content: ' AI 設計顧問（按此展開）';
+  font-size: 12px;
+}
+
+.chat-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+}
+
+.chat-panel__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  scroll-behavior: smooth;
+}
+
+.chat-msg {
+  max-width: 96%;
+  padding: 7px 9px;
+  border-radius: 8px;
+  font-size: clamp(10px, 2.8vw, 12px);
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.chat-msg--bot {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(180, 140, 60, 0.2);
+  color: #2a2018;
+}
+
+.chat-msg--user {
+  align-self: flex-end;
+  background: rgba(61, 40, 23, 0.88);
+  color: #fff8e7;
+}
+
+.chat-msg--typing {
+  opacity: 0.65;
+  font-style: italic;
+}
+
+.chat-msg__note {
+  display: block;
+  font-size: 11px;
+  opacity: 0.75;
+  margin-bottom: 4px;
+}
+
+.chat-msg--bot a {
+  color: #8b6914;
+  font-weight: 600;
+}
+
+.chat-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.chat-quick button {
+  padding: 4px 8px;
+  font-size: 10px;
+  border: 1px solid rgba(180, 140, 60, 0.45);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #3d2817;
+  cursor: pointer;
+}
+
+.chat-quick button.is-primary {
+  background: linear-gradient(135deg, #c9a227, #8b6914);
+  color: #fff;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 4px;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.chat-input-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 1px solid rgba(180, 140, 60, 0.4);
+  border-radius: 6px;
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.chat-input-row button {
+  padding: 6px 9px;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #c9a227, #8b6914);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chat-panel__foot {
+  flex-shrink: 0;
+  padding-top: 3px;
+  margin-top: 2px;
+  border-top: 1px dashed rgba(139, 105, 20, 0.2);
+}
+
+.chat-apps__label {
+  display: none;
+}
+
+.chat-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.chat-actions a,
+.chat-actions .link-btn {
+  padding: 3px 6px;
+  font-size: 9px;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 1px solid rgba(180, 140, 60, 0.35);
+  background: rgba(255, 255, 255, 0.88);
+  color: #3d2817;
+}
+
+.chat-actions a.wts {
+  background: #25d366;
+  color: #fff;
+  border-color: #1da851;
+  font-weight: 600;
+}
+
+.chat-apps__label {
+  font-size: 8px;
+  color: #8a7355;
+  margin: 3px 0 2px;
+}
+
+.chat-apps .chat-actions {
+  gap: 2px;
+}
+
+@media (max-width: 768px) {
+  .chat-widget {
+    --widget-w: min(420px, 94vw);
+  }
+}

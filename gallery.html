@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>惡搞大舞台｜上畫惡搞 作品一覽</title>
+  <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/works-gallery.css">
+</head>
+<body class="works-page">
+  <div class="chat-bg-scroll" id="bgScroll" aria-hidden="true">
+    <div class="chat-bg-inner" id="bgInner">
+      <video class="chat-bg-video" id="bgVideo" autoplay loop muted defaultMuted playsinline disablePictureInPicture preload="auto"></video>
+    </div>
+  </div>
+
+  <main class="works-stage">
+    <header class="works-head">
+      <a class="works-head__back" href="index.html">← 返回大舞台</a>
+      <h1 class="works-head__title">上畫惡搞 · 作品一覽</h1>
+      <p class="works-head__sub">滑鼠移上睇名 · 撳一下大氣放大放映</p>
+    </header>
+
+    <div class="works-grid" id="worksGrid" aria-label="App 作品牆"></div>
+  </main>
+
+  <div class="work-reveal" id="workReveal" hidden aria-hidden="true">
+    <div class="work-reveal__flash" aria-hidden="true"></div>
+    <div class="work-reveal__backdrop" data-close></div>
+    <article class="work-reveal__panel" role="dialog" aria-modal="true" aria-labelledby="workRevealTitle">
+      <button type="button" class="work-reveal__close" data-close aria-label="關閉">✕</button>
+      <h2 class="work-reveal__title" id="workRevealTitle"></h2>
+      <div class="work-reveal__body">
+        <div class="work-phone">
+          <video class="work-phone__video" id="workVideo" playsinline controls muted loop preload="auto"></video>
+        </div>
+        <div class="work-reveal__info">
+          <img class="work-reveal__poster" id="workPoster" alt="" width="640" height="360">
+          <p class="work-reveal__price" id="workPrice"></p>
+          <a class="work-reveal__wts" id="workWts" href="#" target="_blank" rel="noopener">💬 WhatsApp 查詢</a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/bg-video.js"></script>
+  <script src="js/works-gallery.js"></script>
+</body>
+</html>
