@@ -198,8 +198,8 @@ window.CHAT_CONFIG = {
     },
     {
       name: 'Nutrition AI Coach',
-      desc: '營養 AI 教練',
-      url: '#',
+      desc: 'AI 辨識食物卡路里',
+      url: 'https://nutrition-ai-coach-five.vercel.app/',
     },
   ],
 
@@ -250,8 +250,7 @@ window.CHAT_CONFIG = {
     {
       id: 'lash-mockup',
       title: 'AI 睫毛 Mockup Apps',
-      shortLabel: 'AI睫毛MOCKUP APPS',
-      featured: true,
+      shortLabel: 'AI睫毛MOCKUP',
       icon: 'assets/works/lash-mockup-poster.png',
       poster: 'assets/works/lash-mockup-poster.png',
       video: 'assets/video/works/lash-mockup-demo.mp4',
@@ -260,7 +259,18 @@ window.CHAT_CONFIG = {
       demoLabel: 'Demo 免費試玩',
       wts: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 AI 睫毛 Mockup App 倒模'),
     },
-    /* 之後加更多 App — 複製上面一個 object 改 icon / video / shortLabel 即可 */
+    {
+      id: 'nutrition-ai',
+      title: 'AI 辨識食物卡路里 App',
+      shortLabel: 'AI食物卡路里',
+      icon: 'assets/works/nutrition-ai-coach-poster.png',
+      poster: 'assets/works/nutrition-ai-coach-poster.png',
+      video: 'assets/video/works/nutrition-ai-coach-demo.mp4',
+      price: '倒模改你品牌只需 $680',
+      demoUrl: 'https://nutrition-ai-coach-five.vercel.app/',
+      demoLabel: 'Demo 免費試玩',
+      wts: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 AI 辨識食物卡路里 App 倒模'),
+    },
   ],
 
   mp4Hotspots: [

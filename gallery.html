@@ -18,10 +18,37 @@
     <header class="works-head">
       <a class="works-head__back" href="index.html">← 返回大舞台</a>
       <h1 class="works-head__title">上畫惡搞 · 作品一覽</h1>
-      <p class="works-head__sub">撳海報睇介紹片 · <strong>Demo 免費試玩</strong> 即開即用</p>
+      <p class="works-head__sub">左右滑動揀作品 · 撳海報放大 · <strong>Demo 免費試玩</strong></p>
     </header>
 
-    <div class="works-grid" id="worksGrid" aria-label="App 作品牆"></div>
+    <section class="works-coverflow" id="worksCoverflow" aria-label="App 作品展示">
+      <button type="button" class="works-coverflow__nav works-coverflow__nav--prev" id="coverflowPrev" aria-label="上一個作品">‹</button>
+
+      <div class="works-coverflow__viewport" id="coverflowViewport">
+        <div class="works-coverflow__track" id="coverflowTrack"></div>
+        <div class="works-coverflow__glow" id="coverflowGlow" aria-hidden="true"></div>
+        <div class="works-coverflow__floor" aria-hidden="true"></div>
+      </div>
+
+      <button type="button" class="works-coverflow__nav works-coverflow__nav--next" id="coverflowNext" aria-label="下一個作品">›</button>
+
+      <div class="works-coverflow__dots" id="coverflowDots" role="tablist" aria-label="作品索引"></div>
+
+      <div class="works-coverflow__detail" id="coverflowDetail">
+        <h2 class="works-coverflow__title" id="coverflowTitle"></h2>
+        <p class="works-coverflow__price" id="coverflowPrice"></p>
+        <div class="works-coverflow__actions">
+          <button type="button" class="works-coverflow__play" id="coverflowPlay">
+            <span class="works-coverflow__play-icon" aria-hidden="true">▶</span> 睇介紹片
+          </button>
+          <a class="work-demo-cta" id="coverflowDemo" href="#" target="_blank" rel="noopener" hidden>
+            <span class="work-demo-cta__shine" aria-hidden="true"></span>
+            <span class="work-demo-cta__text">Demo 免費試玩</span>
+          </a>
+          <a class="works-coverflow__wts" id="coverflowWts" href="#">💬 WhatsApp</a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <div class="work-reveal" id="workReveal" hidden aria-hidden="true">
