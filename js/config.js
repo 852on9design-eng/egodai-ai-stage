@@ -189,7 +189,7 @@ window.CHAT_CONFIG = {
     {
       name: 'PB Tracker',
       desc: '健身訓練 PB 記錄 PWA',
-      url: '#', /* 換成正式 link */
+      url: 'https://hip-concept-pb-tracker.vercel.app/',
     },
     {
       name: 'PetKuso AI',
@@ -277,6 +277,21 @@ window.CHAT_CONFIG = {
         { src: 'assets/works/nutrition-ai-coach-poster.png', label: '宣傳海報' },
         { src: 'assets/works/nutrition-ref-menu.png', label: 'AI 餐牌辨識' },
         { src: 'assets/works/nutrition-ref-steak.png', label: '鐵板牛扒卡路里分析' },
+      ],
+    },
+    {
+      id: 'pb-tracker',
+      title: 'PB Tracker 健身追蹤工具',
+      shortLabel: 'PB TRACKER',
+      icon: 'assets/works/pb-tracker-poster.png',
+      poster: 'assets/works/pb-tracker-poster.png',
+      video: 'assets/video/works/pb-tracker-demo.mp4',
+      price: '倒模改你品牌只需 $680',
+      demoUrl: 'https://hip-concept-pb-tracker.vercel.app/',
+      demoLabel: 'Demo 免費試玩',
+      wts: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 PB Tracker 健身追蹤 App 倒模'),
+      refs: [
+        { src: 'assets/works/pb-tracker-poster.png', label: '宣傳海報' },
       ],
     },
   ],
