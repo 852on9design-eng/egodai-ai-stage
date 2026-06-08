@@ -258,6 +258,9 @@ window.CHAT_CONFIG = {
       demoUrl: 'https://lash-mockup-demo.vercel.app/',
       demoLabel: 'Demo 免費試玩',
       wts: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 AI 睫毛 Mockup App 倒模'),
+      refs: [
+        { src: 'assets/works/lash-mockup-poster.png', label: '宣傳海報' },
+      ],
     },
     {
       id: 'nutrition-ai',
@@ -270,6 +273,11 @@ window.CHAT_CONFIG = {
       demoUrl: 'https://nutrition-ai-coach-five.vercel.app/',
       demoLabel: 'Demo 免費試玩',
       wts: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 AI 辨識食物卡路里 App 倒模'),
+      refs: [
+        { src: 'assets/works/nutrition-ai-coach-poster.png', label: '宣傳海報' },
+        { src: 'assets/works/nutrition-ref-menu.png', label: 'AI 餐牌辨識' },
+        { src: 'assets/works/nutrition-ref-steak.png', label: '鐵板牛扒卡路里分析' },
+      ],
     },
   ],
 

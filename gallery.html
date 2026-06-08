@@ -47,6 +47,10 @@
           </a>
           <a class="works-coverflow__wts" id="coverflowWts" href="#">💬 WhatsApp</a>
         </div>
+        <div class="works-refs" id="coverflowRefs" hidden>
+          <p class="works-refs__heading">參考圖 · 撳一下放大</p>
+          <div class="works-refs__grid" id="coverflowRefsGrid"></div>
+        </div>
       </div>
     </section>
   </main>
@@ -70,9 +74,24 @@
             </a>
             <a class="work-reveal__wts" id="workWts" href="#" target="_blank" rel="noopener">💬 WhatsApp 查詢</a>
           </div>
+          <div class="works-refs works-refs--modal" id="revealRefs" hidden>
+            <p class="works-refs__heading">參考圖 · 撳一下放大</p>
+            <div class="works-refs__grid" id="revealRefsGrid"></div>
+          </div>
         </div>
       </div>
     </article>
+  </div>
+
+  <div class="ref-lightbox" id="refLightbox" hidden aria-hidden="true">
+    <div class="ref-lightbox__backdrop" data-ref-close></div>
+    <figure class="ref-lightbox__panel" role="dialog" aria-modal="true" aria-labelledby="refLightboxCaption">
+      <button type="button" class="ref-lightbox__close" data-ref-close aria-label="關閉">✕</button>
+      <button type="button" class="ref-lightbox__nav ref-lightbox__nav--prev" id="refLightboxPrev" aria-label="上一張">‹</button>
+      <img class="ref-lightbox__img" id="refLightboxImg" alt="">
+      <button type="button" class="ref-lightbox__nav ref-lightbox__nav--next" id="refLightboxNext" aria-label="下一張">›</button>
+      <figcaption class="ref-lightbox__caption" id="refLightboxCaption"></figcaption>
+    </figure>
   </div>
 
   <script src="js/config.js"></script>

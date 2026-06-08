@@ -22,6 +22,15 @@
   var revealPrice = document.getElementById('workPrice');
   var revealDemo = document.getElementById('workDemo');
   var revealWts = document.getElementById('workWts');
+  var coverflowRefs = document.getElementById('coverflowRefs');
+  var coverflowRefsGrid = document.getElementById('coverflowRefsGrid');
+  var revealRefs = document.getElementById('revealRefs');
+  var revealRefsGrid = document.getElementById('revealRefsGrid');
+  var lightbox = document.getElementById('refLightbox');
+  var lightboxImg = document.getElementById('refLightboxImg');
+  var lightboxCaption = document.getElementById('refLightboxCaption');
+  var lightboxPrev = document.getElementById('refLightboxPrev');
+  var lightboxNext = document.getElementById('refLightboxNext');
 
   if (!track || !works.length) return;
 
@@ -30,15 +39,98 @@
   var dragging = false;
   var dragStartX = 0;
   var dragDelta = 0;
+  var lightboxRefs = [];
+  var lightboxIndex = 0;
 
   function wtsUrl(text) {
     var num = (cfg.whatsapp || '85291306847').replace(/\D/g, '');
     return 'https://wa.me/' + num + '?text=' + encodeURIComponent(text || '你好，想查詢 App 作品');
   }
 
-  function clampIndex(i) {
+  function getRefs(work) {
+    return (work && work.refs && work.refs.length) ? work.refs : [];
+  }
+
+  function renderRefs(container, gridEl, work) {
+    if (!container || !gridEl) return;
+    var refs = getRefs(work);
+    gridEl.innerHTML = '';
+    if (!refs.length) {
+      container.hidden = true;
+      return;
+    }
+    container.hidden = false;
+    refs.forEach(function (ref, i) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'works-ref-thumb';
+      btn.setAttribute('aria-label', ref.label || '參考圖 ' + (i + 1));
+
+      var img = document.createElement('img');
+      img.src = ref.src;
+      img.alt = ref.label || '';
+      img.loading = 'lazy';
+      btn.appendChild(img);
+
+      if (ref.label) {
+        var cap = document.createElement('span');
+        cap.className = 'works-ref-thumb__label';
+        cap.textContent = ref.label;
+        btn.appendChild(cap);
+      }
+
+      btn.addEventListener('click', function () {
+        openLightbox(refs, i);
+      });
+
+      gridEl.appendChild(btn);
+    });
+  }
+
+  function openLightbox(refs, index) {
+    if (!lightbox || !refs.length) return;
+    lightboxRefs = refs;
+    lightboxIndex = index;
+    updateLightbox();
+    lightbox.hidden = false;
+    lightbox.setAttribute('aria-hidden', 'false');
+    lightbox.classList.add('is-opening');
+    document.body.style.overflow = 'hidden';
+    lightbox.querySelector('.ref-lightbox__close').focus();
+  }
+
+  function updateLightbox() {
+    var ref = lightboxRefs[lightboxIndex];
+    if (!ref) return;
+    lightboxImg.src = ref.src;
+    lightboxImg.alt = ref.label || '';
+    lightboxCaption.textContent = ref.label || '';
+    var multi = lightboxRefs.length > 1;
+    lightboxPrev.hidden = !multi;
+    lightboxNext.hidden = !multi;
+    lightboxPrev.disabled = lightboxIndex <= 0;
+    lightboxNext.disabled = lightboxIndex >= lightboxRefs.length - 1;
+  }
+
+  function closeLightbox() {
+    if (!lightbox || lightbox.hidden) return;
+    lightbox.classList.remove('is-opening');
+    lightbox.hidden = true;
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImg.removeAttribute('src');
+    if (!reveal || reveal.hidden) {
+      document.body.style.overflow = '';
+    }
+  }
+
+  function stepLightbox(delta) {
+    lightboxIndex = clampIndex(lightboxIndex + delta, lightboxRefs.length);
+    updateLightbox();
+  }
+
+  function clampIndex(i, max) {
     if (i < 0) return 0;
-    if (i >= works.length) return works.length - 1;
+    if (i >= max) return max - 1;
     return i;
   }
 
@@ -150,10 +242,14 @@
     if (glow) {
       glow.style.backgroundImage = 'url(' + (work.poster || work.icon) + ')';
     }
+
+    renderRefs(coverflowRefs, coverflowRefsGrid, work);
   }
 
   function setActive(i) {
-    active = clampIndex(i);
+    if (i < 0) i = 0;
+    if (i >= works.length) i = works.length - 1;
+    active = i;
     updateLayout();
   }
 
@@ -163,6 +259,10 @@
     revealTitle.textContent = work.title || '';
     posterEl.src = work.poster || '';
     posterEl.alt = work.title || '';
+    posterEl.style.cursor = getRefs(work).length ? 'zoom-in' : '';
+    posterEl.onclick = getRefs(work).length
+      ? function () { openLightbox(getRefs(work), 0); }
+      : null;
     revealPrice.textContent = work.price || '';
     revealPrice.hidden = !work.price;
     revealWts.href = work.wts || wtsUrl('想查詢：' + (work.title || 'App 作品'));
@@ -176,6 +276,8 @@
     } else if (revealDemo) {
       revealDemo.hidden = true;
     }
+
+    renderRefs(revealRefs, revealRefsGrid, work);
 
     videoEl.pause();
     videoEl.removeAttribute('src');
@@ -255,12 +357,26 @@
   viewport.addEventListener('touchend', onDragEnd);
 
   document.addEventListener('keydown', function (e) {
+    if (lightbox && !lightbox.hidden) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') stepLightbox(-1);
+      if (e.key === 'ArrowRight') stepLightbox(1);
+      return;
+    }
     if (!reveal || reveal.hidden) {
       if (e.key === 'ArrowLeft') setActive(active - 1);
       if (e.key === 'ArrowRight') setActive(active + 1);
     }
     if (e.key === 'Escape') closeReveal();
   });
+
+  if (lightbox) {
+    lightbox.querySelectorAll('[data-ref-close]').forEach(function (el) {
+      el.addEventListener('click', closeLightbox);
+    });
+    lightboxPrev.addEventListener('click', function () { stepLightbox(-1); });
+    lightboxNext.addEventListener('click', function () { stepLightbox(1); });
+  }
 
   reveal.querySelectorAll('[data-close]').forEach(function (el) {
     el.addEventListener('click', closeReveal);
