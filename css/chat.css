@@ -410,3 +410,48 @@ body.mobile-page .chat-widget__resize {
   border-color: rgba(180, 140, 60, 0.55);
 }
 
+/* 手機版 — 作品連結可開合 */
+body.mobile-page .chat-works-panel {
+  margin-top: 4px;
+}
+
+body.mobile-page .chat-works__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 5px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #3d2817;
+  border-radius: 4px;
+  border: 1px solid rgba(180, 140, 60, 0.35);
+  background: rgba(255, 255, 255, 0.88);
+  cursor: pointer;
+}
+
+body.mobile-page .chat-works__chev {
+  font-size: 9px;
+  opacity: 0.75;
+  transition: transform 0.2s ease;
+}
+
+body.mobile-page .chat-works-panel.is-open .chat-works__chev {
+  transform: rotate(180deg);
+}
+
+body.mobile-page .chat-works-panel .chat-works {
+  margin-top: 3px;
+}
+
+body.mobile-page .chat-works-panel:not(.is-open) .chat-works {
+  display: none;
+}
+
+body.mobile-page .chat-works-panel.is-open .chat-works {
+  display: grid;
+}
+

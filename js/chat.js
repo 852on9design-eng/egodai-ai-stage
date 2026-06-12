@@ -338,6 +338,38 @@
       .join('');
   }
 
+  function initMobileWorksToggle() {
+    if (!isMobile) return;
+    var panel = document.getElementById('chatWorksPanel');
+    var toggle = document.getElementById('chatWorksToggle');
+    if (!panel || !toggle || !worksEl) return;
+
+    var storageKey = 'chatWorksOpenMobile';
+    var open = false;
+
+    try {
+      open = localStorage.getItem(storageKey) === '1';
+    } catch (e) {
+      open = false;
+    }
+
+    function setOpen(next) {
+      open = next;
+      panel.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      worksEl.hidden = !open;
+      try {
+        localStorage.setItem(storageKey, open ? '1' : '0');
+      } catch (err) { /* ignore */ }
+    }
+
+    toggle.addEventListener('click', function () {
+      setOpen(!open);
+    });
+
+    setOpen(open);
+  }
+
   function escapeHtml(str) {
     return str
       .replace(/&/g, '&amp;')
@@ -903,6 +935,7 @@
 
   /* ── 初始化 ── */
   renderWorkLinks();
+  initMobileWorksToggle();
   updateWts();
   inputRow.hidden = true;
   stepWelcome();

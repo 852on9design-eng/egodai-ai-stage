@@ -60,7 +60,19 @@
             <div class="chat-actions chat-actions--wts">
               <a class="wts" id="chatWts" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
             </div>
-            <nav class="chat-works" id="chatWorks" aria-label="作品連結"></nav>
+            <div class="chat-works-panel" id="chatWorksPanel">
+              <button
+                type="button"
+                class="chat-works__toggle"
+                id="chatWorksToggle"
+                aria-expanded="false"
+                aria-controls="chatWorks"
+              >
+                🖼 作品連結
+                <span class="chat-works__chev" aria-hidden="true">▼</span>
+              </button>
+              <nav class="chat-works" id="chatWorks" aria-label="作品連結" hidden></nav>
+            </div>
             <div class="chat-actions chat-actions--nav">
               <a href="index.html">🖥 桌面版</a>
             </div>
