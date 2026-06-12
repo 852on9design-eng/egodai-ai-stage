@@ -1,10 +1,13 @@
-/** 手機直向 → mobile.html · 打橫 → index.html（desktop） */
+/** 手機直向 → mobile.html · 打橫 → desktop（index）· 直向開 desktop 亦會自動轉手機版 */
 (function () {
   var MOBILE_MAX = 900;
   var debounceTimer;
+  var booted = false;
 
   function isPhoneLike() {
-    return window.matchMedia('(max-width: ' + MOBILE_MAX + 'px)').matches;
+    var narrow = window.matchMedia('(max-width: ' + MOBILE_MAX + 'px)').matches;
+    var touch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    return narrow && touch;
   }
 
   function isPortrait() {
@@ -15,28 +18,32 @@
     return /mobile\.html$/i.test(window.location.pathname);
   }
 
-  function targetPath() {
-    if (!isPhoneLike()) return 'index.html';
-    return isPortrait() ? 'mobile.html' : 'index.html';
+  function onDesktopPage() {
+    var path = window.location.pathname;
+    return path === '/' || /index\.html$/i.test(path);
   }
 
   function applyRoute() {
     if (!isPhoneLike()) return;
 
-    var want = targetPath();
-    var here = onMobilePage() ? 'mobile.html' : 'index.html';
-    if (want === here) return;
+    var wantMobile = isPortrait();
+    var onMobile = onMobilePage();
+    var onDesktop = onDesktopPage();
 
-    var url = want + window.location.search + window.location.hash;
+    if (wantMobile && onMobile) return;
+    if (!wantMobile && onDesktop) return;
+
+    var url = (wantMobile ? 'mobile.html' : 'index.html') + window.location.search + window.location.hash;
     window.location.replace(url);
   }
 
   function schedule() {
     clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(applyRoute, 120);
+    debounceTimer = setTimeout(applyRoute, booted ? 120 : 0);
+    booted = true;
   }
 
   window.addEventListener('orientationchange', schedule);
   window.addEventListener('resize', schedule);
-  applyRoute();
+  schedule();
 })();
