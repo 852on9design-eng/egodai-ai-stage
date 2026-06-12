@@ -771,14 +771,14 @@ window.CHAT_CONFIG = {
       label: '免費查詢按此',
       href: 'LINKS.wtsFree',
       effect: 'shimmer',
-      position: { left: '24.6', top: '93.82', width: '24.4', height: '6.5', rotate: 0 },
+      position: { left: '24.6', top: '90.12', width: '24.4', height: '6.5', rotate: 0 },
     },
     {
       id: 'contact-advisor',
       label: '立即搵設計師 HONG',
       href: 'LINKS.wtsAdvisor',
       effect: 'shimmer',
-      position: { left: '51', top: '93.82', width: '24.4', height: '6.5', rotate: 0 },
+      position: { left: '51', top: '90.12', width: '24.4', height: '6.5', rotate: 0 },
     },
     {
       id: 'pricing',
