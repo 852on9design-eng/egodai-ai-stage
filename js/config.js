@@ -21,6 +21,7 @@ window.CHAT_CONFIG = {
     shop852: 'https://852on9design.myshopify.com/',
     gallery: 'gallery.html',
     trialAi: 'trial-ai.html',
+    plan100: 'info-100.html',
     plan180: 'info-180.html',
     pricing: 'frontpage.html',
     hipconceptClass: 'https://hipconcept-class-mgmt.vercel.app/',
@@ -289,7 +290,7 @@ window.CHAT_CONFIG = {
     {
       id: 'plan-100',
       label: '$100 平民企劃',
-      href: 'LINKS.wtsPlan100',
+      href: 'LINKS.plan100',
       effect: 'shimmer',
       position: { left: '4.63', top: '40.37', width: '90.74', height: '16.93' },
     },
@@ -357,11 +358,90 @@ window.CHAT_CONFIG = {
   hotspotTryRotates: [8, 11, 14],
 
   /*
+   * $100 平民企劃 — 網店尺寸表 / 試穿導購展示（info-100.html · Apple Cover Flow）
+   */
+  plan100Graphics: {
+    title: '$100 平民企劃',
+    titleEn: '$100 Quick Smart Package',
+    introZh:
+      'AI 網店尺寸表與試穿導購 Info Graphic — 原版 vs 優化版對照。左右滑動，撳放大睇細節。',
+    introEn:
+      'AI shop size charts & try-on graphics — original vs optimized layouts. Swipe to browse, tap to zoom.',
+    packagePrice: '$100 起',
+    wtsLabel: '💬 WhatsApp 查詢 $100',
+    wtsQuery: '想查詢 $100 平民企劃',
+    items: [
+      {
+        id: 'tank-size-original',
+        title: '背心尺寸表 · 原版',
+        titleEn: 'Tank Size Chart · Original',
+        shortLabel: '背心 原版',
+        introZh:
+          '240G 100% Cotton 中磅洗水背心尺寸表 — 四色展示、S–XXL 胸圍／肩寬／衫長，經典 PRICE LIST 排版。',
+        introEn:
+          '240G washed tank top size chart — 4 colors, S–XXL chest/shoulder/length in classic price-list layout.',
+        poster: 'assets/plan-100/size-chart-tank-original.png',
+        price: 'Info Graphic · 尺寸表',
+        wts:
+          'https://wa.me/85291306847?text=' +
+          encodeURIComponent('你好，想查詢 $100 平民企劃 — 背心尺寸表（原版）'),
+      },
+      {
+        id: 'tank-size-optimized',
+        title: '背心尺寸表 · 優化版',
+        titleEn: 'Tank Size Chart · Optimized',
+        shortLabel: '背心 優化',
+        introZh:
+          '852 ON9 CULTURE 霓虹風格優化 — SIZE CHART 雙語、產品展示更搶眼，適合 IG / 網店主圖。',
+        introEn:
+          '852 ON9 neon-styled upgrade — bilingual size chart with bolder product hero for IG & online shop.',
+        poster: 'assets/plan-100/size-chart-tank-optimized.png',
+        price: 'Info Graphic · 優化設計',
+        wts:
+          'https://wa.me/85291306847?text=' +
+          encodeURIComponent('你好，想查詢 $100 平民企劃 — 背心尺寸表（優化版）'),
+      },
+      {
+        id: 'tee-guide-original',
+        title: 'T恤尺碼建議 · 原版',
+        titleEn: 'Tee Size Guide · Original',
+        shortLabel: 'T恤 原版',
+        introZh:
+          '身高體重對照尺碼表 + 胸圍肩寬衣長袖長 — 解決網購尺碼焦慮，適合 AI 試穿導購配套。',
+        introEn:
+          'Height/weight size matrix plus garment measurements — ideal base for AI virtual try-on guides.',
+        poster: 'assets/plan-100/size-guide-tee-original.png',
+        price: 'Info Graphic · 尺碼建議',
+        wts:
+          'https://wa.me/85291306847?text=' +
+          encodeURIComponent('你好，想查詢 $100 平民企劃 — T恤尺碼建議（原版）'),
+      },
+      {
+        id: 'tee-guide-optimized',
+        title: 'T恤尺碼建議 · 優化版',
+        titleEn: 'Tee Size Guide · Optimized',
+        shortLabel: 'T恤 優化',
+        introZh:
+          '惡搞大舞台 ON9 品牌風格優化 — 產品 flat-lay、雙語標題、身高體重矩陣更清晰，轉化率更高。',
+        introEn:
+          'ON9 branded upgrade — product flat-lay, bilingual headers & clearer size matrix for higher conversion.',
+        poster: 'assets/plan-100/size-guide-tee-optimized.png',
+        price: 'Info Graphic · 優化設計',
+        wts:
+          'https://wa.me/85291306847?text=' +
+          encodeURIComponent('你好，想查詢 $100 平民企劃 — T恤尺碼建議（優化版）'),
+      },
+    ],
+  },
+
+  /*
    * $180 二樓超值 — Info Graphic 作品牆（info-180.html · Apple Cover Flow）
    */
   infoGraphics180: {
     title: '$180 二樓超值',
     titleEn: '$180 Value · Brand Design',
+    wtsLabel: '💬 WhatsApp 查詢 $180',
+    wtsQuery: '想查詢 $180 二樓超值',
     introZh:
       '品牌 Logo 設計、海報、Info Graphic 與社交平台視覺 — 設計師 HONG 實戰作品參考。左右滑動，撳放大睇細節。',
     introEn:
@@ -618,7 +698,7 @@ window.CHAT_CONFIG = {
     {
       id: 'plan-100',
       label: '$100 平民企劃',
-      href: 'LINKS.wtsPlan100',
+      href: 'LINKS.plan100',
       effect: 'shimmer',
       position: { left: '36', top: '38', width: '28', height: '12', rotate: 0 },
     },

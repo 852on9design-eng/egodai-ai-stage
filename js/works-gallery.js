@@ -2,9 +2,7 @@
 (function () {
   var cfg = window.CHAT_CONFIG || {};
   var galleryKey = document.body.getAttribute('data-gallery-key') || 'works';
-  var pack = galleryKey === 'infoGraphics180' && cfg.infoGraphics180
-    ? cfg.infoGraphics180
-    : null;
+  var pack = cfg[galleryKey] && galleryKey !== 'works' ? cfg[galleryKey] : null;
   var isInfoGallery = !!pack;
   var works = pack ? (pack.items || []) : (cfg.works || []);
 
@@ -54,6 +52,15 @@
     if (pageTitleEn && pack.titleEn) pageTitleEn.textContent = pack.titleEn;
     if (pageIntroZh && pack.introZh) pageIntroZh.textContent = pack.introZh;
     if (pageIntroEn && pack.introEn) pageIntroEn.textContent = pack.introEn;
+    if (pack.wtsLabel) {
+      if (wtsEl) wtsEl.textContent = pack.wtsLabel;
+      if (revealWts) revealWts.textContent = pack.wtsLabel;
+    }
+  }
+
+  function defaultWtsQuery(work) {
+    var prefix = (pack && pack.wtsQuery) || '想查詢作品';
+    return prefix + '：' + (work.title || '');
   }
 
   if (isInfoGallery && playBtn) {
@@ -267,7 +274,7 @@
     }
     priceEl.textContent = work.price || (pack && pack.packagePrice) || '';
     priceEl.hidden = !priceEl.textContent;
-    wtsEl.href = work.wts || wtsUrl('想查詢 $180 二樓超值：' + (work.title || 'Info Graphic'));
+    wtsEl.href = work.wts || wtsUrl(defaultWtsQuery(work));
 
     if (work.demoUrl && demoEl && !isInfoGallery) {
       demoEl.href = work.demoUrl;
@@ -315,7 +322,7 @@
       : function () { openLightbox([{ src: work.poster, label: work.title }], 0); };
     revealPrice.textContent = work.price || (pack && pack.packagePrice) || '';
     revealPrice.hidden = !revealPrice.textContent;
-    revealWts.href = work.wts || wtsUrl('想查詢 $180 二樓超值：' + (work.title || 'Info Graphic'));
+    revealWts.href = work.wts || wtsUrl(defaultWtsQuery(work));
 
     if (work.demoUrl && revealDemo && !isInfoGallery) {
       revealDemo.href = work.demoUrl;

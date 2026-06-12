@@ -308,6 +308,9 @@
     if (cfg.links && cfg.links.gallery) {
       add('🖼 作品牆一覽', cfg.links.gallery);
     }
+    if (cfg.links && cfg.links.plan100) {
+      add('👕 $100 尺寸表', cfg.links.plan100);
+    }
     if (cfg.links && cfg.links.plan180) {
       add('🎨 $180 Info Graphic', cfg.links.plan180);
     }
