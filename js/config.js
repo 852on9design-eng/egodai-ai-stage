@@ -25,25 +25,28 @@ window.CHAT_CONFIG = {
     hipconceptClass: 'https://hipconcept-class-mgmt.vercel.app/',
   },
 
+  pricingAdvisorNote: '我會建議做品牌功能的 Apps $880 起',
+
   pricing: [
     {
-      id: 'basic',
-      name: '平民企劃',
-      price: '$100 起',
-      items: ['快速加料包', '簡單執圖', '原圖加字', 'AI 主題優化'],
+      id: 'website',
+      name: 'Set up 網站',
+      price: '$1800 起',
+      items: ['Landing / 引導式網站', '品牌視覺整合', '手機 + Desktop 同步', '可整合 AI 對話引導'],
     },
     {
-      id: 'value',
-      name: '二樓超值',
-      price: '$180 起',
-      items: ['品牌 Logo', '品牌色 + 周邊', '字體排版', '海報 / 產品展示'],
-    },
-    {
-      id: 'premium',
-      name: '金主尊享',
-      price: '$380 起',
-      items: ['AI 多媒體設計', '平面 / 3D / 產品', 'Pop 歌 + 語音片', '角色 / 產品片', '統一品牌風格'],
+      id: 'brand-app',
+      name: '品牌功能 Apps',
+      price: '$880 起',
+      items: ['PWA / 工具型 App', '客戶記錄、Mock-up、套票等模組', '可先試玩作品牆 Demo 再客製'],
       highlight: true,
+      recommend: true,
+    },
+    {
+      id: 'mockup',
+      name: 'App 倒模試玩',
+      price: '$680 起',
+      items: ['作品牆已有 Demo', '改你品牌即用', '美容 Mock-up、卡路里、健身等'],
     },
   ],
 
@@ -51,26 +54,26 @@ window.CHAT_CONFIG = {
     design: {
       title: '美術設計',
       text: 'Logo、海報、品牌視覺、惡搞創意圖 — 20 年實戰經驗，可免費試出一張。',
-      tier: 'value',
+      tier: 'brand-app',
     },
     pwa: {
       title: 'PWA App 創作',
-      text: 'Progressive Web App：免 App Store 都用到，離線、推送、分享 — 適合工具型、展示型產品。呢類客製功能多，價位通常高於一般執圖，按功能報價。',
-      tier: 'premium',
+      text: 'Progressive Web App：免 App Store 都用到，離線、推送、分享 — 適合工具型、展示型產品。我會建議做品牌功能的 Apps $880 起，按功能模組報價。',
+      tier: 'brand-app',
     },
     web: {
       title: '網站製作',
-      text: 'Landing Page、引導式網站、AI 對話框整合 — 配合你嘅視覺風格，手機 + Desktop 同步。',
-      tier: 'value',
+      text: 'Landing Page、引導式網站、AI 對話框整合 — 配合你嘅視覺風格，手機 + Desktop 同步。Set up 網站 $1800 起。',
+      tier: 'website',
     },
     ai: {
       title: 'AI 可以幫你咩',
       text: '文案、執圖、主題優化、短片構思、自動化流程 — 按你行業同目標度身建議，唔使一次過買晒。',
-      tier: 'basic',
+      tier: 'brand-app',
     },
     price: {
       title: '價錢方案',
-      text: '下面係三檔參考，實際可按需求研究同報價。',
+      text: '設計師 HONG 會按你目標度身建議，以下係參考起步價：',
       tier: null,
     },
     cases: {
@@ -139,7 +142,7 @@ window.CHAT_CONFIG = {
       tagline: '拍相幾秒出效果圖，現場推銷療程',
       benefits: ['識別面部/手部，模擬眉型、睫毛、美甲、染髮效果', '傳統 mock-up 要花大量時間，AI 幾秒完成', '提高高價療程成交率'],
       industries: ['美容', '美髮', '美甲', '美睫', '修眉', '染髮'],
-      priceHint: 'App 倒模 $680 起',
+      priceHint: '倒模 $680 起 · 品牌 Apps $880 起',
       demoLink: 'gallery.html',
     },
     {
@@ -148,7 +151,7 @@ window.CHAT_CONFIG = {
       tagline: '療程記錄、會員資料、自主綁定',
       benefits: ['客人資料自動分類，隨時查閱', '取代紙本 / Excel，減少出錯', '會員套票、療程次數一目了然'],
       industries: ['美容', '零售', '餐飲', '服務', '教育', '課程'],
-      priceHint: '按功能模組報價',
+      priceHint: '品牌功能 Apps $880 起',
     },
     {
       id: 'ticketing',
@@ -156,7 +159,7 @@ window.CHAT_CONFIG = {
       tagline: 'App 內購票、綁資料、後台管理',
       benefits: ['客人自行登記綁定，減輕前台壓力', '大量客戶數據仍井然有序', '適合課程、活動、套票銷售'],
       industries: ['零售', '服務', '活動', '課程', '套票'],
-      priceHint: '按功能模組報價',
+      priceHint: '品牌功能 Apps $880 起',
     },
     {
       id: 'gym-track',
@@ -164,7 +167,7 @@ window.CHAT_CONFIG = {
       tagline: '器材、重量、組數、Timeline 進步',
       benefits: ['學員每日訓練數據視覺化', '教練管理學員更有效', '學員自我激勵、續課率提升'],
       industries: ['健身', 'gym', '教練', '運動', '訓練'],
-      priceHint: '參考 PB Tracker，按 scope 報價',
+      priceHint: '品牌功能 Apps $880 起',
     },
     {
       id: 'brand-web',
@@ -172,7 +175,7 @@ window.CHAT_CONFIG = {
       tagline: 'Logo、海報、引導式 Landing',
       benefits: ['統一品牌視覺，提升專業感', '手機 + Desktop 同步', '可整合 AI 對話引導客人'],
       industries: [],
-      priceHint: '二樓超值 $180 起',
+      priceHint: 'Set up 網站 $1800 起',
     },
     {
       id: 'ai-assistant',
@@ -180,7 +183,7 @@ window.CHAT_CONFIG = {
       tagline: '文案、執圖、自動化流程',
       benefits: ['按行業度身建議，唔使一次過買齊', '客服/查詢自動化，省人力', '主題優化、短片構思'],
       industries: [],
-      priceHint: '平民企劃 $100 起',
+      priceHint: '品牌功能 Apps $880 起',
     },
   ],
 

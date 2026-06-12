@@ -436,12 +436,17 @@
       html += '<br>' + (i + 1) + '. ' + formatOptionDetail(opt);
     });
 
-    var tierHint = '平民企劃 $100 起';
-    if (state.picks.indexOf('mockup') >= 0 || state.picks.indexOf('customer-data') >= 0) {
-      tierHint = 'App 功能按模組報價（Mock-up 倒模 $680 起）';
-    }
-    if (state.picks.indexOf('brand-web') >= 0 && state.picks.length === 1) {
-      tierHint = '二樓超值 $180 起';
+    var tierHint = cfg.pricingAdvisorNote || '品牌功能 Apps $880 起';
+    if (state.picks.indexOf('brand-web') >= 0) {
+      tierHint = 'Set up 網站 $1800 起';
+    } else if (
+      state.picks.indexOf('mockup') >= 0 ||
+      state.picks.indexOf('customer-data') >= 0 ||
+      state.picks.indexOf('ticketing') >= 0 ||
+      state.picks.indexOf('gym-track') >= 0 ||
+      state.picks.indexOf('ai-assistant') >= 0
+    ) {
+      tierHint = '倒模 $680 起；' + (cfg.pricingAdvisorNote || '品牌功能 Apps $880 起');
     }
 
     html +=
@@ -491,7 +496,7 @@
     addQuick([
       { label: '➕ 再揀其他方案', action: function () { stepPickSolutions(true); } },
       { label: '🏆 實戰案例', action: function () { showCaseStudies(); } },
-      { label: '💰 價錢三檔', action: function () { answerLocalTopic('price'); } },
+      { label: '💰 價錢方案', action: function () { answerLocalTopic('price'); } },
       {
         label: '💬 WhatsApp ' + designerTitle,
         action: function () { window.open(buildWtsUrl(), '_blank', 'noopener'); },
@@ -584,7 +589,18 @@
         html += '<br><br>📌 實戰例子：<br>' + formatCaseStudyHtml(primary);
       }
     }
-    if (svc.tier && cfg.pricing) {
+    if (key === 'price' && cfg.pricing && cfg.pricing.length) {
+      cfg.pricing.forEach(function (tier) {
+        html += '<br><br><strong>' + escapeHtml(tier.name) + ' ' + escapeHtml(tier.price) + '</strong>';
+        if (tier.recommend) html += ' <span style="opacity:0.85">← 設計師建議</span>';
+        if (tier.items && tier.items.length) {
+          html += '<br>' + escapeHtml(tier.items.join(' · '));
+        }
+      });
+      if (cfg.pricingAdvisorNote) {
+        html += '<br><br><em>' + escapeHtml(cfg.pricingAdvisorNote) + '</em>';
+      }
+    } else if (svc.tier && cfg.pricing) {
       var tier = cfg.pricing.filter(function (p) { return p.id === svc.tier; })[0];
       if (tier) {
         html += '<br><br>參考方案：<strong>' + escapeHtml(tier.name) + ' ' + escapeHtml(tier.price) + '</strong>';
@@ -754,7 +770,7 @@
       { label: '🏆 實戰案例', action: function () { askGemini('請按我嘅行業，介紹設計師 HONG 嘅 AI 實戰案例同 Demo'); } },
       { label: '🎨 美術設計', action: function () { askGemini('我想了解美術設計服務同價錢'); } },
       { label: '📱 PWA App', action: function () { askGemini('我想做 PWA App，可以點報價？'); } },
-      { label: '💰 價錢方案', action: function () { askGemini('請介紹三檔價錢方案'); } },
+      { label: '💰 價錢方案', action: function () { askGemini('請介紹網站同 App 價錢方案'); } },
       { label: '💬 WhatsApp', primary: true, action: function () { window.open(buildWtsUrl(), '_blank', 'noopener'); } },
     ]);
   }
