@@ -49,8 +49,21 @@ body[data-hotspot-edit] .mobile-hotspot.is-editor-selected {
 .hotspot-editor__handle--br { cursor: nwse-resize; }
 .hotspot-editor__handle--bl { cursor: nesw-resize; }
 
+.hotspot-editor__handle--edge {
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 3px;
+  background: #33ccff;
+}
+
+.hotspot-editor__handle--t { cursor: ns-resize; }
+.hotspot-editor__handle--b { cursor: ns-resize; }
+.hotspot-editor__handle--l { cursor: ew-resize; }
+.hotspot-editor__handle--r { cursor: ew-resize; }
+
 body[data-hotspot-edit]::before {
-  content: '框位編輯模式 — 拖四角 / 拖框移動 → 右下角「複製全部設定」';
+  content: '框位編輯 — 紅點四角 · 藍點上下左右邊可拉高拉闊 →「複製全部設定」';
   position: fixed;
   top: 0;
   left: 0;

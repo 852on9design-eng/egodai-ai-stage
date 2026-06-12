@@ -141,13 +141,66 @@
     );
   }
 
+  /** 角點拖出 0–100% 時，擴大 left/top/width/height 並重算 clip */
+  function expandBoxToFitVerts(st) {
+    var xs = st.verts.map(function (v) { return v.x; });
+    var ys = st.verts.map(function (v) { return v.y; });
+    var minX = Math.min.apply(null, xs);
+    var maxX = Math.max.apply(null, xs);
+    var minY = Math.min.apply(null, ys);
+    var maxY = Math.max.apply(null, ys);
+
+    if (minX >= 0 && minY >= 0 && maxX <= 100 && maxY <= 100) {
+      st.useClip = !isAxisRect(st.verts);
+      return;
+    }
+
+    var ps = parentSize(st.el);
+    var boxW = (st.width / 100) * ps.w;
+    var boxH = (st.height / 100) * ps.h;
+    var leftPx = (st.left / 100) * ps.w + (minX / 100) * boxW;
+    var topPx = (st.top / 100) * ps.h + (minY / 100) * boxH;
+    var widthPx = ((maxX - minX) / 100) * boxW;
+    var heightPx = ((maxY - minY) / 100) * boxH;
+    var rangeX = maxX - minX || 1;
+    var rangeY = maxY - minY || 1;
+
+    st.verts = st.verts.map(function (v) {
+      return {
+        x: round2(((v.x - minX) / rangeX) * 100),
+        y: round2(((v.y - minY) / rangeY) * 100),
+      };
+    });
+    st.left = round2((leftPx / ps.w) * 100);
+    st.top = round2((topPx / ps.h) * 100);
+    st.width = round2(Math.max(0.5, (widthPx / ps.w) * 100));
+    st.height = round2(Math.max(0.5, (heightPx / ps.h) * 100));
+    st.useClip = !isAxisRect(st.verts);
+  }
+
+  function clampVert(n) {
+    return round2(Math.max(-120, Math.min(220, n)));
+  }
+
   function syncHandles(st) {
-    var keys = ['tl', 'tr', 'br', 'bl'];
-    keys.forEach(function (key, i) {
+    var corners = ['tl', 'tr', 'br', 'bl'];
+    corners.forEach(function (key, i) {
       var handle = st.handles[key];
       if (!handle) return;
       handle.style.left = round2(st.verts[i].x) + '%';
       handle.style.top = round2(st.verts[i].y) + '%';
+    });
+    var edges = {
+      t: { x: (st.verts[0].x + st.verts[1].x) / 2, y: (st.verts[0].y + st.verts[1].y) / 2 },
+      r: { x: (st.verts[1].x + st.verts[2].x) / 2, y: (st.verts[1].y + st.verts[2].y) / 2 },
+      b: { x: (st.verts[2].x + st.verts[3].x) / 2, y: (st.verts[2].y + st.verts[3].y) / 2 },
+      l: { x: (st.verts[3].x + st.verts[0].x) / 2, y: (st.verts[3].y + st.verts[0].y) / 2 },
+    };
+    ['t', 'r', 'b', 'l'].forEach(function (key) {
+      var handle = st.handles[key];
+      if (!handle) return;
+      handle.style.left = round2(edges[key].x) + '%';
+      handle.style.top = round2(edges[key].y) + '%';
     });
   }
 
@@ -171,10 +224,10 @@
           var dx = ((ev.clientX - start.x) / bw) * 100;
           var dy = ((ev.clientY - start.y) / bh) * 100;
           st.verts[i] = {
-            x: round2(Math.max(-20, Math.min(120, start.v.x + dx))),
-            y: round2(Math.max(-20, Math.min(120, start.v.y + dy))),
+            x: clampVert(start.v.x + dx),
+            y: clampVert(start.v.y + dy),
           };
-          st.useClip = !isAxisRect(st.verts);
+          expandBoxToFitVerts(st);
           applyState(st);
         }
         function onUp() {
@@ -190,6 +243,67 @@
       st.el.appendChild(btn);
       st.handles[key] = btn;
     });
+
+    function bindEdge(key, mutate) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'hotspot-editor__handle hotspot-editor__handle--edge hotspot-editor__handle--' + key;
+      btn.setAttribute('aria-label', key.toUpperCase());
+      btn.addEventListener('pointerdown', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        selectHotspot(st);
+        var ps = parentSize(st.el);
+        var start = {
+          x: e.clientX,
+          y: e.clientY,
+          left: st.left,
+          top: st.top,
+          width: st.width,
+          height: st.height,
+          verts: st.verts.map(function (v) { return { x: v.x, y: v.y }; }),
+        };
+        btn.setPointerCapture(e.pointerId);
+        function onMove(ev) {
+          var dx = ((ev.clientX - start.x) / ps.w) * 100;
+          var dy = ((ev.clientY - start.y) / ps.h) * 100;
+          mutate(st, start, dx, dy);
+          expandBoxToFitVerts(st);
+          applyState(st);
+        }
+        function onUp() {
+          btn.removeEventListener('pointermove', onMove);
+          btn.removeEventListener('pointerup', onUp);
+          btn.removeEventListener('pointercancel', onUp);
+          saveDraft();
+        }
+        btn.addEventListener('pointermove', onMove);
+        btn.addEventListener('pointerup', onUp);
+        btn.addEventListener('pointercancel', onUp);
+      });
+      st.el.appendChild(btn);
+      st.handles[key] = btn;
+    }
+
+    bindEdge('t', function (st, start, dx, dy) {
+      st.top = round2(start.top + dy);
+      st.height = round2(Math.max(0.5, start.height - dy));
+      st.verts = start.verts.map(function (v) { return { x: v.x, y: v.y }; });
+    });
+    bindEdge('b', function (st, start, dx, dy) {
+      st.height = round2(Math.max(0.5, start.height + dy));
+      st.verts = start.verts.map(function (v) { return { x: v.x, y: v.y }; });
+    });
+    bindEdge('l', function (st, start, dx, dy) {
+      st.left = round2(start.left + dx);
+      st.width = round2(Math.max(0.5, start.width - dx));
+      st.verts = start.verts.map(function (v) { return { x: v.x, y: v.y }; });
+    });
+    bindEdge('r', function (st, start, dx, dy) {
+      st.width = round2(Math.max(0.5, start.width + dx));
+      st.verts = start.verts.map(function (v) { return { x: v.x, y: v.y }; });
+    });
+
     syncHandles(st);
   }
 
@@ -322,7 +436,7 @@
     bindPanelDrag(head);
 
     var hint = document.createElement('p');
-    hint.textContent = '撳掣選取 → 拖四角 · 拖標題移動面板 · 撳「複製全部」貼俾我';
+    hint.textContent = '拖四角改形 · 拖上下左右邊拉高拉闊 · 拖標題移面板 · 複製全部貼俾我';
     panel.appendChild(hint);
     statusEl = document.createElement('p');
     statusEl.className = 'hotspot-editor-panel__status';
