@@ -225,8 +225,8 @@ window.CHAT_CONFIG = {
    * 微調：?debug=1 顯示邊界 · ?hotspotDebug=1 顯示按鈕框
    */
   mobileBgVideo: {
-    width: 1152,
-    height: 2048,
+    width: 1080,
+    height: 1920,
     sources: ['assets/video/bg-loop-mobile.mp4'],
   },
 

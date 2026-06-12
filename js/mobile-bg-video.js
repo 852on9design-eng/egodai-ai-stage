@@ -1,7 +1,8 @@
-/** 手機版底層 MP4 — 1152×2048，視窗細過片時可捲動 */
+/** 手機版底層 MP4 — 實際 1080×1920，直向貼滿闊度、可捲動睇全片 */
 (function () {
   var video = document.getElementById('mobileBgVideo');
   var scroll = document.getElementById('mobileBgScroll');
+  var inner = document.getElementById('mobileBgInner');
   var stage = document.getElementById('chatPage');
   var fallback = document.getElementById('mobileFallback');
   if (!video) return;
@@ -17,21 +18,39 @@
   }
 
   var cfg = (window.CHAT_CONFIG && window.CHAT_CONFIG.mobileBgVideo) || {};
-  var fallbackW = cfg.width || 1152;
-  var fallbackH = cfg.height || 2048;
+  var fallbackW = cfg.width || 1080;
+  var fallbackH = cfg.height || 1920;
   var sources = cfg.sources || ['assets/video/bg-loop-mobile.mp4'];
+
+  function isPhonePortrait() {
+    return (
+      window.matchMedia('(orientation: portrait)').matches &&
+      window.matchMedia('(max-width: 900px)').matches
+    );
+  }
 
   function setVideoSize(w, h) {
     var vw = w || fallbackW;
     var vh = h || fallbackH;
-    document.documentElement.style.setProperty('--mobile-bg-w', vw + 'px');
-    document.documentElement.style.setProperty('--mobile-bg-h', vh + 'px');
+    document.documentElement.style.setProperty('--mobile-bg-w', String(vw));
+    document.documentElement.style.setProperty('--mobile-bg-h', String(vh));
+    document.documentElement.style.setProperty('--mobile-bg-ar', String(vh / vw));
+    if (inner) {
+      inner.setAttribute('data-size', vw + ' × ' + vh);
+    }
   }
 
   setVideoSize(fallbackW, fallbackH);
 
-  function centerScroll() {
+  function alignScroll() {
     if (!scroll) return;
+
+    if (isPhonePortrait()) {
+      scroll.scrollLeft = 0;
+      scroll.scrollTop = 0;
+      return;
+    }
+
     var maxX = scroll.scrollWidth - scroll.clientWidth;
     var maxY = scroll.scrollHeight - scroll.clientHeight;
     if (maxX > 0) scroll.scrollLeft = maxX / 2;
@@ -41,11 +60,14 @@
   video.addEventListener('loadedmetadata', function () {
     if (video.videoWidth && video.videoHeight) {
       setVideoSize(video.videoWidth, video.videoHeight);
-      centerScroll();
+      alignScroll();
     }
   });
 
-  window.addEventListener('resize', centerScroll);
+  window.addEventListener('resize', alignScroll);
+  window.addEventListener('orientationchange', function () {
+    setTimeout(alignScroll, 200);
+  });
 
   function showFallback(show) {
     if (fallback) fallback.hidden = !show;
@@ -65,7 +87,7 @@
     function onReady() {
       clear();
       showFallback(false);
-      centerScroll();
+      alignScroll();
       video.play().catch(function () {});
     }
 

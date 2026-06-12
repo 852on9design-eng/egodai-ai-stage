@@ -1,14 +1,16 @@
-/* 手機版 — 直向 1152×2048 底層 MP4 + desktop 同款 AI 對話框 */
+/* 手機版 — 直向 MP4 底 + desktop 同款 AI 對話框 */
 
 .mobile-page {
-  --mobile-bg-w: 1152px;
-  --mobile-bg-h: 2048px;
+  --mobile-bg-w: 1080;
+  --mobile-bg-h: 1920;
+  --mobile-bg-ar: 1.7778;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .mobile-page .chat-page {
   background: #0a0604;
+  height: 100dvh;
 }
 
 .mobile-page .chat-widget {
@@ -20,13 +22,14 @@
   touch-action: none;
 }
 
-.mobile-stage.is-debug .mobile-bg-inner {
+.mobile-stage.is-debug .mobile-bg-inner,
+.chat-page.is-debug .mobile-bg-inner {
   outline: 2px dashed rgba(255, 80, 80, 0.85);
   outline-offset: -2px;
 }
 
-.mobile-stage.is-debug .mobile-bg-inner::after {
-  content: '1152 × 2048';
+.chat-page.is-debug .mobile-bg-inner::after {
+  content: attr(data-size);
   position: absolute;
   top: 8px;
   left: 8px;
@@ -46,20 +49,32 @@
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   background: #0a0604;
+  overscroll-behavior: contain;
 }
 
-.mobile-bg-inner {
+/* 直向手機：闊度貼滿螢幕，高度跟片比例；唔夠高就拉高避免底部黑邊 */
+.mobile-page .mobile-bg-inner {
   position: relative;
-  width: max(100vw, var(--mobile-bg-w));
-  height: max(100vh, var(--mobile-bg-h));
-  min-width: var(--mobile-bg-w);
-  min-height: var(--mobile-bg-h);
+  width: 100vw;
+  min-height: 100dvh;
+  height: max(100dvh, calc(100vw * var(--mobile-bg-ar)));
+}
+
+/* 打橫 / 闊螢幕：用原片像素尺寸可捲動（同 desktop 邏輯） */
+@media (orientation: landscape), (min-width: 901px) {
+  .mobile-page .mobile-bg-inner {
+    width: max(100vw, calc(var(--mobile-bg-w) * 1px));
+    height: max(100dvh, calc(var(--mobile-bg-h) * 1px));
+    min-width: calc(var(--mobile-bg-w) * 1px);
+    min-height: calc(var(--mobile-bg-h) * 1px);
+  }
 }
 
 .mobile-bg-video {
   display: block;
   width: 100%;
   height: 100%;
+  min-height: 100%;
   object-fit: fill;
   pointer-events: none;
   background: #0a0604;
