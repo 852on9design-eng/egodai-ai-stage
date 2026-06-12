@@ -1,0 +1,63 @@
+/* 手機版 MP4 透明 hotspot — 1152×2048 百分比定位 */
+
+.mobile-hotspots {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.mobile-hotspot {
+  position: absolute;
+  display: block;
+  pointer-events: auto;
+  background: transparent;
+  border: 0;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-hotspot--fx-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.mobile-hotspot--fx-shimmer:hover::after,
+.mobile-hotspot--fx-shimmer:focus-visible::after {
+  opacity: 1;
+  animation: mobile-hotspot-shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes mobile-hotspot-shimmer {
+  0%, 100% { transform: translateX(-20%); }
+  50% { transform: translateX(20%); }
+}
+
+.mobile-stage.is-debug .mobile-hotspot {
+  outline: 2px dashed rgba(0, 255, 120, 0.85);
+  background: rgba(0, 255, 120, 0.12);
+}
+
+.mobile-stage.is-debug .mobile-hotspot::before {
+  content: attr(aria-label);
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  padding: 2px 5px;
+  font-size: 9px;
+  color: #0a0604;
+  background: rgba(0, 255, 120, 0.9);
+  border-radius: 3px;
+  white-space: nowrap;
+  pointer-events: none;
+}

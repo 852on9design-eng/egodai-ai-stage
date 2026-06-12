@@ -20,9 +20,10 @@
     page.classList.add('is-debug');
   }
 
-  /* 金框對位 — 由 config.slot + URL 微調 */
+  /* 金框對位 — desktop 用 slot；mobile.html 用 mobileSlot */
+  var isMobile = document.body.classList.contains('mobile-page');
+  var slotCfg = isMobile ? (cfg.mobileSlot || cfg.slot || {}) : (cfg.slot || {});
   var slotEl = document.getElementById('chatSlot');
-  var slotCfg = cfg.slot || {};
 
   function applySlot(s) {
     if (!slotEl) return;

@@ -1,0 +1,96 @@
+/* 手機版 — 直向 1152×2048 底層 MP4 + desktop 同款 AI 對話框 */
+
+.mobile-page {
+  --mobile-bg-w: 1152px;
+  --mobile-bg-h: 2048px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.mobile-page .chat-page {
+  background: #0a0604;
+}
+
+.mobile-page .chat-widget {
+  --widget-w: min(92vw, 400px);
+  z-index: 20;
+}
+
+.mobile-page .chat-widget__drag {
+  touch-action: none;
+}
+
+.mobile-stage.is-debug .mobile-bg-inner {
+  outline: 2px dashed rgba(255, 80, 80, 0.85);
+  outline-offset: -2px;
+}
+
+.mobile-stage.is-debug .mobile-bg-inner::after {
+  content: '1152 × 2048';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(255, 80, 80, 0.9);
+  color: #fff;
+  font: 12px/1.4 system-ui, sans-serif;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.mobile-bg-scroll {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #0a0604;
+}
+
+.mobile-bg-inner {
+  position: relative;
+  width: max(100vw, var(--mobile-bg-w));
+  height: max(100vh, var(--mobile-bg-h));
+  min-width: var(--mobile-bg-w);
+  min-height: var(--mobile-bg-h);
+}
+
+.mobile-bg-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  background: #0a0604;
+}
+
+.mobile-fallback {
+  position: fixed;
+  left: 50%;
+  bottom: calc(16px + var(--safe-bottom));
+  transform: translateX(-50%);
+  z-index: 30;
+  margin: 0;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: rgba(10, 6, 4, 0.9);
+  border: 1px solid rgba(255, 213, 106, 0.45);
+  color: rgba(245, 230, 200, 0.85);
+  font-size: 12px;
+  text-align: center;
+}
+
+.mobile-fallback code {
+  color: #ffd56a;
+}
+
+.mobile-page .chat-panel__foot .chat-actions {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mobile-page .chat-panel__foot .chat-actions a {
+  font-size: 11px;
+  padding: 6px 10px;
+}

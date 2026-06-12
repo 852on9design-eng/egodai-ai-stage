@@ -5,7 +5,9 @@
   var page = document.getElementById('chatPage');
   if (!widget || !handle) return;
 
-  var STORAGE_KEY = 'chatWidgetPos';
+  var STORAGE_KEY = document.body.classList.contains('mobile-page')
+    ? 'chatWidgetPosMobile'
+    : 'chatWidgetPos';
   var dragging = false;
   var offsetX = 0;
   var offsetY = 0;
@@ -19,7 +21,11 @@
   function centerWidget() {
     var w = widget.offsetWidth;
     var h = widget.offsetHeight;
-    setPos((window.innerWidth - w) / 2, (window.innerHeight - h) / 2);
+    var top = (window.innerHeight - h) / 2;
+    if (document.body.classList.contains('mobile-page')) {
+      top = Math.max(80, window.innerHeight * 0.48 - h / 2);
+    }
+    setPos((window.innerWidth - w) / 2, top);
   }
 
   function loadPos() {

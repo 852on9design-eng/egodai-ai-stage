@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0604">
+  <title>惡搞大舞台｜手機版 AI 設計服務</title>
+  <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/mobile.css">
+  <link rel="stylesheet" href="css/mobile-hotspots.css">
+</head>
+<body class="mobile-page">
+  <section class="chat-page mobile-stage" id="chatPage" aria-label="惡搞大舞台手機版 AI 引導">
+
+    <!-- 第 1 層（最底）：直向 MP4 1152×2048 — 視窗細過片時可捲動 -->
+    <div class="mobile-bg-scroll" id="mobileBgScroll" aria-hidden="true">
+      <div class="mobile-bg-inner" id="mobileBgInner">
+        <video
+          class="mobile-bg-video"
+          id="mobileBgVideo"
+          autoplay
+          loop
+          muted
+          defaultMuted
+          playsinline
+          disablePictureInPicture
+          preload="auto"
+        ></video>
+        <nav class="mobile-hotspots" id="mobileHotspots" aria-label="片上按鈕"></nav>
+      </div>
+    </div>
+
+    <!-- 第 2 層：金框 + AI 對話（同 desktop，可拖動） -->
+    <div class="chat-widget" id="chatWidget">
+      <button type="button" class="chat-widget__drag" id="dragHandle" title="按住拖動位置" aria-label="拖動對話框">
+        ⠿
+      </button>
+
+      <img
+        class="chat-widget__frame"
+        src="assets/chat-frame.png"
+        width="1024"
+        height="1024"
+        alt="惡搞大舞台 AI 設計顧問"
+        draggable="false"
+      >
+
+      <div class="chat-slot" id="chatSlot">
+        <button type="button" class="chat-slot__toggle" id="chatToggle" title="收起對話" aria-label="收起對話">—</button>
+        <div class="chat-panel" id="chatPanel">
+          <h2 class="sr-only">AI 設計顧問</h2>
+          <div class="chat-panel__body">
+            <div class="chat-messages" id="chatMessages" role="log" aria-live="polite"></div>
+            <div class="chat-input-row" id="chatInputRow" hidden>
+              <input type="text" id="chatInput" autocomplete="organization" />
+              <button type="button" id="chatSend">送出</button>
+            </div>
+          </div>
+          <footer class="chat-panel__foot">
+            <div class="chat-actions">
+              <a class="wts" id="chatWts" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+              <a href="gallery.html">🖼 作品牆</a>
+              <a href="index.html">🖥 桌面版</a>
+            </div>
+            <div class="chat-apps" id="chatApps"></div>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <p class="mobile-fallback" id="mobileFallback" hidden>
+      請放入 <code>assets/video/bg-loop-mobile.mp4</code>（1152×2048）
+    </p>
+
+  </section>
+
+  <script src="js/config.js"></script>
+  <script src="js/mobile-bg-video.js"></script>
+  <script src="js/mobile-hotspots.js"></script>
+  <script src="js/drag-widget.js"></script>
+  <script src="js/gemini-client.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>

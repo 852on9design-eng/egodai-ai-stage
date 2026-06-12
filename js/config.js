@@ -219,12 +219,51 @@ window.CHAT_CONFIG = {
   },
 
   /*
-   * 金框內對話 — 1024×1024 新圖，填滿內框
+   * 手機版底層 MP4 — mobile.html
+   * 畫布：1152 × 2048（9:16 直向）
+   * 放入：assets/video/bg-loop-mobile.mp4
+   * 微調：?debug=1 顯示邊界 · ?hotspotDebug=1 顯示按鈕框
+   */
+  mobileBgVideo: {
+    width: 1152,
+    height: 2048,
+    sources: ['assets/video/bg-loop-mobile.mp4'],
+  },
+
+  /* 手機版 MP4 透明按鈕（1152×2048 百分比）— 之後按你片加 */
+  mp4MobileHotspots: [
+    {
+      id: 'gallery',
+      label: '作品一覽',
+      href: 'LINKS.gallery',
+      effect: 'shimmer',
+      position: { left: '4', top: '28', width: '28', height: '8' },
+    },
+    {
+      id: 'contact',
+      label: 'WhatsApp',
+      href: 'LINKS.wtsAdvisor',
+      effect: 'shimmer',
+      position: { left: '4', top: '88', width: '40', height: '6' },
+    },
+  ],
+
+  /* 金框內對話 — 1024×1024 新圖，填滿內框
    * 微調：?left=13&top=31&w=74&h=60&debug=1
    */
   slot: {
     aspectW: 1024,
     aspectH: 1024,
+    left: 13,
+    top: 31.25,
+    width: 74,
+    height: 60,
+    padX: 0,
+    padY: 0,
+  },
+
+  /* 手機版金框對位 — mobile.html（同 desktop 框架，可獨立微調） */
+  mobileSlot: {
     left: 13,
     top: 31.25,
     width: 74,
