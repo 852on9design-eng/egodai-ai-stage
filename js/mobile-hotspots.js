@@ -42,10 +42,55 @@
     return 'mobile-hotspot mobile-hotspot--fx-' + (key || 'shimmer');
   }
 
+  function navigateTo(url) {
+    if (url.startsWith('http')) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    } else {
+      window.location.assign(url);
+    }
+  }
+
+  function bindPressFeedback(el, url, effectKey) {
+    if (fxPreview || !url || url === '#') return;
+    if (effectKey !== 'shimmer' && effectKey !== 'lift') return;
+
+    var delay = effectKey === 'lift' ? 260 : 200;
+    var busy = false;
+
+    el.addEventListener('pointerdown', function () {
+      el.classList.add('is-fx-pressed');
+    });
+
+    el.addEventListener('pointerup', function () {
+      if (!el.classList.contains('is-fx-pressed')) return;
+    });
+
+    el.addEventListener('pointerleave', function () {
+      if (!busy) el.classList.remove('is-fx-pressed');
+    });
+
+    el.addEventListener('pointercancel', function () {
+      if (!busy) el.classList.remove('is-fx-pressed');
+    });
+
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (busy) return;
+      busy = true;
+      el.classList.add('is-fx-pressed');
+      setTimeout(function () {
+        el.classList.remove('is-fx-pressed');
+        busy = false;
+        navigateTo(url);
+      }, delay);
+    });
+  }
+
   function applyFx(el, index) {
     var fx = FX_OPTIONS[index] || FX_OPTIONS[0];
     el.className = fxClass(fx.key);
     el.dataset.fxIndex = String(index);
+    el.dataset.fxKey = fx.key;
     el.dataset.fxPreview = fx.id;
     var badge = el.querySelector('.mobile-hotspot__fx-badge');
     if (!badge) {
@@ -64,7 +109,8 @@
   list.forEach(function (spot) {
     var pos = spot.position || {};
     var el = document.createElement('a');
-    var startFx = FX_OPTIONS.findIndex(function (f) { return f.key === (spot.effect || 'shimmer'); });
+    var effectKey = spot.effect || 'shimmer';
+    var startFx = FX_OPTIONS.findIndex(function (f) { return f.key === effectKey; });
     if (startFx < 0) startFx = 1;
     applyFx(el, startFx);
     var url = resolveHref(spot.href);
@@ -90,6 +136,8 @@
         var next = (parseInt(el.dataset.fxIndex, 10) + 1) % FX_OPTIONS.length;
         applyFx(el, next);
       });
+    } else {
+      bindPressFeedback(el, url, effectKey);
     }
 
     wrap.appendChild(el);
