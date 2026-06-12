@@ -723,7 +723,7 @@ window.CHAT_CONFIG = {
       label: '試玩 AI 功能 apps 威力',
       href: 'LINKS.trialAi',
       effect: 'shimmer',
-      position: { left: '1', top: '4', width: '14.4', height: '12', rotate: 11 },
+      position: { left: '1', top: '10.48', width: '15.96', height: '12', rotate: 11 },
     },
     {
       num: 2,
