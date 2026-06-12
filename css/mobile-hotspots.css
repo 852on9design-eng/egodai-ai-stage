@@ -15,34 +15,150 @@
   border: 0;
   text-decoration: none;
   cursor: pointer;
+  border-radius: 6px;
+  overflow: hidden;
   -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* ── A: none ── */
+.mobile-hotspot--fx-none::after,
+.mobile-hotspot--fx-none::before {
+  display: none;
+}
+
+/* ── B: shimmer 光帶掃過 ── */
 .mobile-hotspot--fx-shimmer::after {
   content: '';
   position: absolute;
-  inset: 0;
+  inset: -10%;
   background: linear-gradient(
     105deg,
-    transparent 40%,
-    rgba(255, 255, 255, 0.35) 50%,
-    transparent 60%
+    transparent 38%,
+    rgba(255, 235, 170, 0.55) 50%,
+    transparent 62%
   );
-  opacity: 0;
-  transition: opacity 0.25s ease;
+  opacity: 0.35;
+  pointer-events: none;
+  animation: mobile-hotspot-shimmer 2.4s ease-in-out infinite;
 }
 
-.mobile-hotspot--fx-shimmer:hover::after,
-.mobile-hotspot--fx-shimmer:focus-visible::after {
-  opacity: 1;
-  animation: mobile-hotspot-shimmer 1.2s ease-in-out infinite;
+.mobile-hotspot--fx-shimmer:active::after {
+  opacity: 0.85;
+  animation-duration: 1s;
+}
+
+.mobile-hotspot--fx-shimmer:active {
+  filter: brightness(1.12);
 }
 
 @keyframes mobile-hotspot-shimmer {
-  0%, 100% { transform: translateX(-20%); }
-  50% { transform: translateX(20%); }
+  0%, 100% { transform: translateX(-35%); }
+  50% { transform: translateX(35%); }
 }
 
+/* ── C: glow 金色呼吸光 ── */
+.mobile-hotspot--fx-glow {
+  animation: mobile-hotspot-glow 2.2s ease-in-out infinite;
+}
+
+.mobile-hotspot--fx-glow:active {
+  animation-duration: 0.9s;
+  filter: brightness(1.15);
+}
+
+@keyframes mobile-hotspot-glow {
+  0%, 100% { box-shadow: inset 0 0 10px rgba(255, 190, 70, 0.12); }
+  50% { box-shadow: inset 0 0 26px rgba(255, 210, 100, 0.5); }
+}
+
+/* ── D: pulse 輕微脈動 ── */
+.mobile-hotspot--fx-pulse {
+  animation: mobile-hotspot-pulse 1.8s ease-in-out infinite;
+}
+
+.mobile-hotspot--fx-pulse:active {
+  animation: mobile-hotspot-pulse-press 0.35s ease;
+}
+
+@keyframes mobile-hotspot-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+@keyframes mobile-hotspot-pulse-press {
+  0% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+/* ── E: ripple 撳下水紋 ── */
+.mobile-hotspot--fx-ripple::before {
+  content: '';
+  position: absolute;
+  inset: 50%;
+  width: 0;
+  height: 0;
+  margin: auto;
+  border-radius: 50%;
+  background: rgba(255, 220, 120, 0.45);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mobile-hotspot--fx-ripple:active::before {
+  animation: mobile-hotspot-ripple 0.55s ease-out;
+}
+
+@keyframes mobile-hotspot-ripple {
+  0% { width: 0; height: 0; opacity: 0.7; }
+  100% { width: 180%; height: 180%; opacity: 0; }
+}
+
+/* ── F: flash 撳下閃白 ── */
+.mobile-hotspot--fx-flash:active {
+  background: rgba(255, 255, 255, 0.35);
+  transition: background 0.08s ease;
+}
+
+.mobile-hotspot--fx-flash:active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 248, 220, 0.4);
+  animation: mobile-hotspot-flash 0.4s ease;
+  pointer-events: none;
+}
+
+@keyframes mobile-hotspot-flash {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ── G: border 金色邊框呼吸 ── */
+.mobile-hotspot--fx-border {
+  animation: mobile-hotspot-border 2s ease-in-out infinite;
+}
+
+.mobile-hotspot--fx-border:active {
+  box-shadow: inset 0 0 0 3px rgba(255, 215, 90, 0.95);
+}
+
+@keyframes mobile-hotspot-border {
+  0%, 100% { box-shadow: inset 0 0 0 1px rgba(255, 200, 80, 0.25); }
+  50% { box-shadow: inset 0 0 0 2px rgba(255, 220, 110, 0.75); }
+}
+
+/* ── H: lift 按下浮起 ── */
+.mobile-hotspot--fx-lift {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.mobile-hotspot--fx-lift:active {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(255, 180, 60, 0.35);
+}
+
+/* ── debug 綠框 ── */
 .mobile-stage.is-debug .mobile-hotspot {
   outline: 2px dashed rgba(0, 255, 120, 0.85);
   background: rgba(0, 255, 120, 0.12);
@@ -60,4 +176,80 @@
   border-radius: 3px;
   white-space: nowrap;
   pointer-events: none;
+  z-index: 2;
+}
+
+.mobile-stage.is-debug .mobile-hotspot--fx-ripple::before {
+  content: attr(aria-label);
+  width: auto;
+  height: auto;
+  inset: auto;
+  top: 2px;
+  left: 2px;
+  border-radius: 3px;
+  animation: none;
+  opacity: 1;
+}
+
+/* ── 效果預覽模式 ?hotspotFxPreview=1 ── */
+.mobile-fx-legend {
+  position: fixed;
+  left: 8px;
+  right: 8px;
+  bottom: max(8px, env(safe-area-inset-bottom));
+  z-index: 200;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(10, 6, 4, 0.94);
+  border: 1px solid rgba(255, 213, 106, 0.5);
+  color: #f5e6c8;
+  font: 12px/1.45 system-ui, -apple-system, sans-serif;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+
+.mobile-fx-legend strong {
+  display: block;
+  color: #ffd56a;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.mobile-fx-legend__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 10px;
+}
+
+.mobile-fx-legend__grid span {
+  display: block;
+}
+
+.mobile-fx-legend__code {
+  color: #ffd56a;
+  font-weight: 700;
+}
+
+.mobile-fx-legend__hint {
+  display: block;
+  margin-top: 8px;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.mobile-stage.is-fx-preview .mobile-hotspot[data-fx-preview] {
+  outline: 1px dashed rgba(255, 213, 106, 0.45);
+}
+
+.mobile-hotspot__fx-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  padding: 2px 6px;
+  font: bold 10px/1.2 system-ui, sans-serif;
+  color: #0a0604;
+  background: rgba(255, 213, 106, 0.95);
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 3;
 }
