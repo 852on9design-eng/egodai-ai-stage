@@ -135,6 +135,7 @@
           rotate: rotate,
           skew: base.skew,
           origin: base.origin,
+          topLeftDrop: base.topLeftDrop,
           topRightDrop: base.topRightDrop,
           bottomRightDrop: base.bottomRightDrop,
           clip: base.clip,
