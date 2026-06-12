@@ -724,12 +724,12 @@ window.CHAT_CONFIG = {
       href: 'LINKS.trialAi',
       effect: 'shimmer',
       position: {
-        left: '2.32',
-        top: '12.03',
-        width: '14.26',
-        height: '14.4',
+        left: '-3.73',
+        top: '5.56',
+        width: '24.34',
+        height: '26.85',
         rotate: 11,
-        clip: 'polygon(0% 0%, 93.06% 47.58%, 107.91% 120%, 0% 100%)',
+        clip: 'polygon(18.37% 13.23%, 80.37% 44.62%, 85.64% 95.65%, 25.63% 78.74%)',
       },
     },
     {
@@ -754,8 +754,8 @@ window.CHAT_CONFIG = {
       href: 'LINKS.shop852',
       effect: 'shimmer',
       position: {
-        left: '82.82',
-        top: '10.46',
+        left: '82.8',
+        top: '10.59',
         width: '14.5',
         height: '30.56',
         rotate: -11,
@@ -851,14 +851,6 @@ window.CHAT_CONFIG = {
         rotate: 0,
         clip: 'polygon(3.24% -0.74%, 69.15% -20%, 69.63% 100.64%, 3.74% 98.79%)',
       },
-    },
-    {
-      num: 10,
-      id: 'pricing',
-      label: '價目表',
-      href: 'LINKS.pricing',
-      effect: 'none',
-      position: { left: '27.5', top: '2.2', width: '45', height: '15.5', rotate: 0 },
     },
   ],
 };
