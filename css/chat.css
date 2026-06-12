@@ -341,10 +341,6 @@ body.mobile-page .chat-widget__resize {
   border-top: 1px dashed rgba(139, 105, 20, 0.2);
 }
 
-.chat-apps__label {
-  display: none;
-}
-
 .chat-actions {
   display: flex;
   flex-wrap: wrap;
@@ -362,27 +358,55 @@ body.mobile-page .chat-widget__resize {
   color: #3d2817;
 }
 
-.chat-actions a.wts {
+.chat-actions--wts {
+  display: block;
+}
+
+.chat-actions--wts .wts {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 5px 8px;
+  font-size: 10px;
   background: #25d366;
   color: #fff;
   border-color: #1da851;
   font-weight: 600;
 }
 
-.chat-actions a.chat-link-hipconcept {
-  background: linear-gradient(135deg, #4a6cf7, #3558e6);
-  color: #fff;
-  border-color: #2f4fd4;
-  font-weight: 600;
+.chat-actions--nav {
+  margin-top: 3px;
 }
 
-.chat-apps__label {
-  font-size: 8px;
-  color: #8a7355;
-  margin: 3px 0 2px;
+/* 作品連結 — WTS 下方，統一金色 parchment tone */
+.chat-works {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3px;
+  margin-top: 4px;
 }
 
-.chat-apps .chat-actions {
-  gap: 2px;
+.chat-works a {
+  display: block;
+  padding: 4px 5px;
+  font-size: 9px;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 1px solid rgba(180, 140, 60, 0.35);
+  background: rgba(255, 255, 255, 0.88);
+  color: #3d2817;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.chat-works a:hover,
+.chat-works a:focus-visible {
+  background: rgba(255, 248, 230, 0.98);
+  border-color: rgba(180, 140, 60, 0.55);
 }
 

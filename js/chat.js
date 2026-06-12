@@ -9,8 +9,7 @@
   var sendBtn = document.getElementById('chatSend');
   var toggleBtn = document.getElementById('chatToggle');
   var wtsLink = document.getElementById('chatWts');
-  var hipLink = document.getElementById('chatHipconcept');
-  var appsEl = document.getElementById('chatApps');
+  var worksEl = document.getElementById('chatWorks');
 
   if (!cfg || !page) return;
 
@@ -225,25 +224,50 @@
     wtsLink.href = buildWtsUrl();
   }
 
-  function updateHipconcept() {
-    if (!hipLink || !cfg.links) return;
-    var url = cfg.links.hipconceptClass;
-    if (url) hipLink.href = url;
+  function collectWorkLinks() {
+    var seen = {};
+    var items = [];
+
+    function add(name, url) {
+      if (!name || !url || url === '#' || seen[url]) return;
+      seen[url] = true;
+      items.push({ name: name, url: url });
+    }
+
+    if (cfg.links && cfg.links.gallery) {
+      add('🖼 作品牆一覽', cfg.links.gallery);
+    }
+    (cfg.works || []).forEach(function (w) {
+      add(w.shortLabel || w.title, w.demoUrl);
+    });
+    (cfg.apps || []).forEach(function (a) {
+      add(a.name, a.url);
+    });
+    if (cfg.links) {
+      add('📚 HipConcept 課堂', cfg.links.hipconceptClass);
+      add('852on9 網店', cfg.links.shop852);
+    }
+    return items;
   }
 
-  function renderApps() {
-    appsEl.innerHTML =
-      '<div class="chat-apps__label">已做 Apps 示例（唔包括 TRACY）</div>' +
-      '<div class="chat-actions">' +
-      cfg.apps
-        .map(function (a) {
-          if (a.url === '#') {
-            return '<span class="link-btn" title="請喺 config.js 加 link">' + a.name + '</span>';
-          }
-          return '<a href="' + a.url + '" target="_blank" rel="noopener">' + a.name + '</a>';
-        })
-        .join('') +
-      '</div>';
+  function renderWorkLinks() {
+    if (!worksEl) return;
+    var items = collectWorkLinks();
+    worksEl.innerHTML = items
+      .map(function (item) {
+        var external = /^https?:\/\//i.test(item.url);
+        if (external) {
+          return (
+            '<a href="' +
+            item.url +
+            '" target="_blank" rel="noopener noreferrer">' +
+            escapeHtml(item.name) +
+            '</a>'
+          );
+        }
+        return '<a href="' + item.url + '">' + escapeHtml(item.name) + '</a>';
+      })
+      .join('');
   }
 
   function escapeHtml(str) {
@@ -802,9 +826,8 @@
   }
 
   /* ── 初始化 ── */
-  renderApps();
+  renderWorkLinks();
   updateWts();
-  updateHipconcept();
   inputRow.hidden = true;
   stepWelcome();
 })();
