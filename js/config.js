@@ -275,14 +275,14 @@ window.CHAT_CONFIG = {
       label: '免費查詢按此',
       href: 'LINKS.wtsFree',
       effect: 'shimmer',
-      position: { left: '6.48', top: '92.6', width: '43.52', height: '5.21' },
+      position: { left: '4.81', top: '93.54', width: '42.59', height: '5.21' },
     },
     {
       id: 'contact-advisor',
       label: '立即搵班主任傾!',
       href: 'LINKS.wtsAdvisor',
       effect: 'shimmer',
-      position: { left: '50', top: '92.6', width: '44.44', height: '5.21' },
+      position: { left: '50', top: '93.54', width: '44.44', height: '5.21' },
     },
   ],
 
