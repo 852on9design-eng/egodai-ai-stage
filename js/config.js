@@ -587,6 +587,27 @@ window.CHAT_CONFIG = {
       position: { left: '83', top: '52', width: '16', height: '22', rotate: -11 },
     },
     {
+      id: 'plan-100',
+      label: '$100 平民企劃',
+      href: 'LINKS.wtsPlan100',
+      effect: 'shimmer',
+      position: { left: '36', top: '38', width: '28', height: '12', rotate: 0 },
+    },
+    {
+      id: 'plan-180',
+      label: '$180 二樓超值',
+      href: 'LINKS.plan180',
+      effect: 'shimmer',
+      position: { left: '36', top: '52', width: '28', height: '14', rotate: 0 },
+    },
+    {
+      id: 'plan-380',
+      label: '$380up 金主尊享',
+      href: 'LINKS.wtsPlan380',
+      effect: 'shimmer',
+      position: { left: '34', top: '68', width: '32', height: '16', rotate: 0 },
+    },
+    {
       id: 'free-consult',
       label: '免費查詢按此',
       href: 'LINKS.wtsFree',
