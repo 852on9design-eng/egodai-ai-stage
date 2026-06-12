@@ -365,28 +365,44 @@ window.CHAT_CONFIG = {
     title: '$380up 金主尊享',
     titleEn: '$380 Premium · Full Package',
     introZh:
-      'DIY Apps + Online Shop 個人化品牌展示影片 — 大滿貫全方位套餐實戰參考，撳全屏播放或下方直接睇。',
+      '兩段 $380 展示 — ① 直向惡搞街頭試穿影片 ② DIY Apps 橫版海報配影片。左右滑動，撳全屏播放或下方直接睇。',
     introEn:
-      'DIY Apps & personalized online shop showcase — premium full-package demo. Tap full-screen or watch inline below.',
+      'Two $380 showcases — ① portrait streetwear clip ② DIY Apps banner + video. Swipe, tap full-screen or watch inline.',
     packagePrice: '$380 起',
     wtsLabel: '💬 WhatsApp 查詢 $380',
     wtsQuery: '想查詢 $380up 金主尊享',
     items: [
       {
+        id: 'on9-portrait-video',
+        title: '852on9 惡搞街頭 · 直向影片',
+        titleEn: '852on9 Streetwear · Portrait Clip',
+        shortLabel: '直向影片',
+        introZh:
+          '直向試穿展示 — 惡搞 ON9 圖案 T、復古 diner 場景，適合 IG Reels / 手機版網店主圖。',
+        introEn:
+          'Portrait try-on clip — ON9 graphic tee in retro diner setting, ideal for Reels & mobile shop hero.',
+        poster: 'assets/plan-380/portrait-poster.png',
+        video: 'assets/plan-380/portrait-showcase.mp4',
+        price: '$380 大滿貫全方位套餐',
+        wts:
+          'https://wa.me/85291306847?text=' +
+          encodeURIComponent('你好，想查詢 $380up 金主尊享 — 852on9 直向展示影片'),
+      },
+      {
         id: 'on9-diy-apps-video',
-        title: 'DIY Apps · Online Shop 個人化展示',
+        title: 'DIY Apps · Online Shop 橫版展示',
         titleEn: 'DIY Apps · Personalized Online Shop',
         shortLabel: 'DIY APPS',
         introZh:
-          'MAKE IT YOURS WITH ON9 DESIGN — 個人化網店、惡搞街頭視覺、AI 品牌影片一站式。適合金主尊享大滿貫套餐客戶參考。',
+          'MAKE IT YOURS WITH ON9 DESIGN — 橫版海報配影片，個人化網店、惡搞街頭視覺、AI 品牌一站式。',
         introEn:
-          'MAKE IT YOURS WITH ON9 DESIGN — personalized shop, streetwear visuals & AI brand video in one premium package.',
-        poster: 'assets/plan-380/diy-apps-poster.png',
+          'MAKE IT YOURS WITH ON9 DESIGN — banner + video for personalized shop & streetwear AI branding.',
+        poster: 'assets/plan-380/banner-poster.png',
         video: 'assets/plan-380/diy-apps-showcase.mp4',
         price: '$380 大滿貫全方位套餐',
         wts:
           'https://wa.me/85291306847?text=' +
-          encodeURIComponent('你好，想查詢 $380up 金主尊享 — DIY Apps 個人化網店展示'),
+          encodeURIComponent('你好，想查詢 $380up 金主尊享 — DIY Apps 橫版網店展示'),
       },
     ],
   },
@@ -734,7 +750,7 @@ window.CHAT_CONFIG = {
       label: '$100 平民企劃',
       href: 'LINKS.plan100',
       effect: 'shimmer',
-      position: { left: '38.75', top: '38', width: '12', height: '28', rotate: 0 },
+      position: { left: '44', top: '38', width: '12', height: '28', rotate: 0 },
     },
     {
       id: 'plan-180',
@@ -748,7 +764,7 @@ window.CHAT_CONFIG = {
       label: '$380up 金主尊享',
       href: 'LINKS.plan380',
       effect: 'shimmer',
-      position: { left: '47.21', top: '68', width: '16', height: '32', rotate: 0 },
+      position: { left: '42', top: '68', width: '16', height: '32', rotate: 0 },
     },
     {
       id: 'free-consult',
