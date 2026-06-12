@@ -274,7 +274,7 @@ window.CHAT_CONFIG = {
       id: 'free-consult',
       label: '免費查詢按此',
       href: 'LINKS.wtsFree',
-      effect: 'shimmer',
+      effect: 'lift',
       position: { left: '4.81', top: '94.74', width: '42.59', height: '4.27' },
     },
     {
