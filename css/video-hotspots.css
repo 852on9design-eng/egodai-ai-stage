@@ -36,6 +36,64 @@ body[data-hotspot-debug] .mp4-hotspot {
   background: rgba(255, 70, 70, 0.22);
 }
 
+body[data-hotspot-debug] .mp4-hotspot__tag--num {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 28px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 18px;
+  text-align: center;
+  background: rgba(255, 70, 70, 0.92);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.hotspot-debug-legend {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  z-index: 100;
+  max-width: 300px;
+  max-height: 70vh;
+  overflow: auto;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(10, 6, 4, 0.92);
+  border: 1px solid rgba(255, 70, 70, 0.55);
+  color: #f5e6c8;
+  font: 12px/1.45 system-ui, sans-serif;
+  pointer-events: none;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+}
+
+.hotspot-debug-legend strong {
+  color: #ff6b6b;
+  font-size: 13px;
+}
+
+.hotspot-debug-legend ul {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hotspot-debug-legend li {
+  margin-bottom: 3px;
+}
+
+.hotspot-debug-legend b {
+  color: #ffd56a;
+}
+
+.hotspot-debug-legend__hint {
+  display: block;
+  margin-top: 8px;
+  font-size: 11px;
+  opacity: 0.75;
+}
+
 /* ── 試位模式：多個候選框 ── */
 body[data-hotspot-try] .chat-widget {
   opacity: 0.25;

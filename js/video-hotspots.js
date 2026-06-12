@@ -167,9 +167,45 @@
     return pick;
   }
 
+  function hotspotNum(spot, fallback) {
+    return spot.num != null ? spot.num : fallback;
+  }
+
+  function attachHotspotNum(el, spot, num) {
+    el.dataset.hotspotNum = String(num);
+    el.title = '#' + num + ' ' + (spot.label || spot.id || '');
+    if (!debug || tryMode) return;
+    var tag = document.createElement('span');
+    tag.className = 'mp4-hotspot__tag mp4-hotspot__tag--num';
+    tag.textContent = String(num);
+    el.appendChild(tag);
+  }
+
+  function mountDebugLegend(entries) {
+    if (!debug || tryMode || !entries.length) return;
+    var panel = document.createElement('aside');
+    panel.className = 'hotspot-debug-legend';
+    panel.innerHTML = '<strong>Desktop 按鈕編號</strong>';
+    var ul = document.createElement('ul');
+    entries.forEach(function (item) {
+      var li = document.createElement('li');
+      li.innerHTML = '<b>#' + item.num + '</b> ' + item.label;
+      ul.appendChild(li);
+    });
+    panel.appendChild(ul);
+    var hint = document.createElement('span');
+    hint.className = 'hotspot-debug-legend__hint';
+    hint.textContent = '微調時話我：#8 向下 20px';
+    panel.appendChild(hint);
+    document.body.appendChild(panel);
+  }
+
   var wrap = document.createElement('nav');
   wrap.className = 'mp4-hotspots';
   wrap.setAttribute('aria-label', tryMode ? 'MP4 試位候選' : 'MP4 片上按鈕');
+
+  var debugEntries = [];
+  var renderIndex = 0;
 
   list.forEach(function (spot) {
     if (spot.image) return;
@@ -221,8 +257,13 @@
       bottomRightDrop: base.bottomRightDrop,
       clip: base.clip,
     }, spot, effect);
+    renderIndex += 1;
+    var num = hotspotNum(spot, renderIndex);
+    attachHotspotNum(el, spot, num);
+    debugEntries.push({ num: num, label: spot.label || spot.id });
     wrap.appendChild(el);
   });
 
   if (wrap.children.length) mount.appendChild(wrap);
+  mountDebugLegend(debugEntries);
 })();

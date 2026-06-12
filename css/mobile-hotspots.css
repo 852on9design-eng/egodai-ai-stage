@@ -176,7 +176,7 @@
 }
 
 .mobile-stage.is-debug .mobile-hotspot::before {
-  content: attr(aria-label);
+  content: '#' attr(data-hotspot-num) ' ' attr(aria-label);
   position: absolute;
   top: 2px;
   left: 2px;
@@ -191,7 +191,7 @@
 }
 
 .mobile-stage.is-debug .mobile-hotspot--fx-ripple::before {
-  content: attr(aria-label);
+  content: '#' attr(data-hotspot-num) ' ' attr(aria-label);
   width: auto;
   height: auto;
   inset: auto;
@@ -200,6 +200,50 @@
   border-radius: 3px;
   animation: none;
   opacity: 1;
+}
+
+.mobile-hotspot-legend {
+  position: fixed;
+  left: 8px;
+  bottom: max(8px, env(safe-area-inset-bottom));
+  z-index: 200;
+  max-width: 280px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(10, 6, 4, 0.94);
+  border: 1px solid rgba(0, 255, 120, 0.5);
+  color: #f5e6c8;
+  font: 12px/1.45 system-ui, -apple-system, sans-serif;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+
+.mobile-hotspot-legend strong {
+  display: block;
+  color: #5dff9a;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.mobile-hotspot-legend ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mobile-hotspot-legend li {
+  margin-bottom: 3px;
+}
+
+.mobile-hotspot-legend b {
+  color: #ffd56a;
+}
+
+.mobile-hotspot-legend__hint {
+  display: block;
+  margin-top: 8px;
+  font-size: 11px;
+  opacity: 0.8;
 }
 
 /* ── 效果預覽模式 ?hotspotFxPreview=1 ── */

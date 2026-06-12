@@ -62,8 +62,11 @@
   wrap.className = 'mobile-hotspots';
   wrap.setAttribute('aria-label', '手機版片上按鈕');
 
-  list.forEach(function (spot) {
+  var debugEntries = [];
+
+  list.forEach(function (spot, index) {
     var pos = spot.position || {};
+    var num = spot.num != null ? spot.num : index + 1;
     var el = document.createElement('a');
     var effectKey = spot.effect || 'shimmer';
     var startFx = FX_OPTIONS.findIndex(function (f) { return f.key === effectKey; });
@@ -78,9 +81,11 @@
     if (isWhatsApp(url)) {
       el.setAttribute('data-wts', '1');
     }
-    el.title = spot.label || '';
+    el.title = '#' + num + ' ' + (spot.label || '');
     el.setAttribute('aria-label', spot.label || '按鈕');
     el.dataset.spotId = spot.id || '';
+    el.dataset.hotspotNum = String(num);
+    debugEntries.push({ num: num, label: spot.label || spot.id });
     el.style.left = (pos.left != null ? pos.left : '0') + (String(pos.left).indexOf('%') >= 0 ? '' : '%');
     el.style.top = (pos.top != null ? pos.top : '0') + (String(pos.top).indexOf('%') >= 0 ? '' : '%');
     el.style.width = (pos.width != null ? pos.width : '20') + (String(pos.width).indexOf('%') >= 0 ? '' : '%');
@@ -98,6 +103,24 @@
   });
 
   if (!wrap.parentNode) mount.appendChild(wrap);
+
+  if (debug && debugEntries.length) {
+    var legend = document.createElement('aside');
+    legend.className = 'mobile-hotspot-legend';
+    legend.innerHTML = '<strong>手機按鈕編號</strong>';
+    var ul = document.createElement('ul');
+    debugEntries.forEach(function (item) {
+      var li = document.createElement('li');
+      li.innerHTML = '<b>#' + item.num + '</b> ' + item.label;
+      ul.appendChild(li);
+    });
+    legend.appendChild(ul);
+    var hint = document.createElement('span');
+    hint.className = 'mobile-hotspot-legend__hint';
+    hint.textContent = '微調時話我：#4 向下 20px';
+    legend.appendChild(hint);
+    document.body.appendChild(legend);
+  }
 
   if (fxPreview) {
     var legend = document.createElement('aside');

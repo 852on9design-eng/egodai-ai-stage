@@ -275,6 +275,7 @@ window.CHAT_CONFIG = {
   /* 手機版 MP4 透明按鈕（1080×1920 → 百分比）— ?hotspotDebug=1 微調 */
   mp4MobileHotspots: [
     {
+      num: 1,
       id: 'trial-ai',
       label: '試玩 AI 功能',
       href: 'LINKS.trialAi',
@@ -282,6 +283,7 @@ window.CHAT_CONFIG = {
       position: { left: '5.09', top: '29.84', width: '43.7', height: '8.91' },
     },
     {
+      num: 2,
       id: 'gallery',
       label: '上畫惡搞作品一覽',
       href: 'LINKS.gallery',
@@ -289,6 +291,7 @@ window.CHAT_CONFIG = {
       position: { left: '52.31', top: '29.84', width: '41.85', height: '8.91' },
     },
     {
+      num: 3,
       id: 'plan-100',
       label: '$100 平民企劃',
       href: 'LINKS.plan100',
@@ -296,6 +299,7 @@ window.CHAT_CONFIG = {
       position: { left: '4.63', top: '40.37', width: '90.74', height: '16.93' },
     },
     {
+      num: 4,
       id: 'plan-180',
       label: '$180 二樓超值',
       href: 'LINKS.plan180',
@@ -303,6 +307,7 @@ window.CHAT_CONFIG = {
       position: { left: '5.56', top: '58.65', width: '88.89', height: '17.08' },
     },
     {
+      num: 5,
       id: 'plan-380',
       label: '$380up 金主尊享',
       href: 'LINKS.plan380',
@@ -310,6 +315,7 @@ window.CHAT_CONFIG = {
       position: { left: '5.56', top: '77.81', width: '88.89', height: '14.58' },
     },
     {
+      num: 6,
       id: 'free-consult',
       label: '免費查詢按此',
       href: 'LINKS.wtsFree',
@@ -317,6 +323,7 @@ window.CHAT_CONFIG = {
       position: { left: '4.81', top: '94.74', width: '42.59', height: '4.27' },
     },
     {
+      num: 7,
       id: 'contact-advisor',
       label: '立即搵班主任傾!',
       href: 'LINKS.wtsAdvisor',
@@ -711,6 +718,7 @@ window.CHAT_CONFIG = {
 
   mp4Hotspots: [
     {
+      num: 1,
       id: 'trial-ai',
       label: '試玩 AI 功能 apps 威力',
       href: 'LINKS.trialAi',
@@ -718,6 +726,7 @@ window.CHAT_CONFIG = {
       position: { left: '1', top: '4', width: '14.4', height: '12', rotate: 11 },
     },
     {
+      num: 2,
       id: 'gallery',
       label: '上畫惡搞 作品一覽',
       href: 'LINKS.gallery',
@@ -732,6 +741,7 @@ window.CHAT_CONFIG = {
       },
     },
     {
+      num: 3,
       id: 'shop852',
       label: '852on9 ONLINE SHOP',
       href: 'LINKS.shop852',
@@ -739,6 +749,7 @@ window.CHAT_CONFIG = {
       position: { left: '83', top: '11', width: '14.5', height: '30.56', rotate: -11 },
     },
     {
+      num: 4,
       id: 'ai-class',
       label: 'AI 惡搞教室',
       href: 'LINKS.wtsAiClass',
@@ -746,6 +757,7 @@ window.CHAT_CONFIG = {
       position: { left: '83', top: '52', width: '16', height: '22', rotate: -11 },
     },
     {
+      num: 5,
       id: 'plan-100',
       label: '$100 平民企劃',
       href: 'LINKS.plan100',
@@ -753,6 +765,7 @@ window.CHAT_CONFIG = {
       position: { left: '26', top: '35', width: '16', height: '40', rotate: 0 },
     },
     {
+      num: 6,
       id: 'plan-180',
       label: '$180 二樓超值',
       href: 'LINKS.plan180',
@@ -760,6 +773,7 @@ window.CHAT_CONFIG = {
       position: { left: '42', top: '35', width: '16', height: '40', rotate: 0 },
     },
     {
+      num: 7,
       id: 'plan-380',
       label: '$380up 金主尊享',
       href: 'LINKS.plan380',
@@ -767,6 +781,7 @@ window.CHAT_CONFIG = {
       position: { left: '58', top: '35', width: '16', height: '40', rotate: 0 },
     },
     {
+      num: 8,
       id: 'free-consult',
       label: '免費查詢按此',
       href: 'LINKS.wtsFree',
@@ -774,6 +789,7 @@ window.CHAT_CONFIG = {
       position: { left: '24.6', top: '90.12', width: '24.4', height: '6.5', rotate: 0 },
     },
     {
+      num: 9,
       id: 'contact-advisor',
       label: '立即搵設計師 HONG',
       href: 'LINKS.wtsAdvisor',
@@ -781,6 +797,7 @@ window.CHAT_CONFIG = {
       position: { left: '51', top: '90.12', width: '24.4', height: '6.5', rotate: 0 },
     },
     {
+      num: 10,
       id: 'pricing',
       label: '價目表',
       href: 'LINKS.pricing',
