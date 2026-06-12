@@ -9,6 +9,7 @@
   var sendBtn = document.getElementById('chatSend');
   var toggleBtn = document.getElementById('chatToggle');
   var wtsLink = document.getElementById('chatWts');
+  var hipLink = document.getElementById('chatHipconcept');
   var appsEl = document.getElementById('chatApps');
 
   if (!cfg || !page) return;
@@ -222,6 +223,12 @@
 
   function updateWts() {
     wtsLink.href = buildWtsUrl();
+  }
+
+  function updateHipconcept() {
+    if (!hipLink || !cfg.links) return;
+    var url = cfg.links.hipconceptClass;
+    if (url) hipLink.href = url;
   }
 
   function renderApps() {
@@ -797,6 +804,7 @@
   /* ── 初始化 ── */
   renderApps();
   updateWts();
+  updateHipconcept();
   inputRow.hidden = true;
   stepWelcome();
 })();

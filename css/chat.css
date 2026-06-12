@@ -51,7 +51,7 @@
 
 /* ── 第 2 層：圖1 + 對話（一組） ── */
 .chat-widget {
-  --widget-w: min(520px, 90vw);
+  --widget-w: min(680px, 92vw);
   position: fixed;
   z-index: 10;
   width: var(--widget-w);
@@ -60,6 +60,10 @@
   top: 50%;
   transform: translate(-50%, -50%);
   touch-action: none;
+}
+
+body.mobile-page .chat-widget {
+  --widget-w: min(420px, 94vw);
 }
 
 .chat-widget.is-dragging {
@@ -99,6 +103,40 @@
 
 .chat-widget.is-dragging .chat-widget__drag {
   opacity: 1;
+}
+
+/* 右下角拉大／縮細 — 桌面版 */
+.chat-widget__resize {
+  position: absolute;
+  right: 3%;
+  bottom: 3%;
+  z-index: 21;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(255, 213, 106, 0.55);
+  border-radius: 0 0 8px 0;
+  background: rgba(40, 25, 15, 0.82);
+  color: #ffd56a;
+  font-size: 14px;
+  line-height: 1;
+  cursor: nwse-resize;
+  opacity: 0.88;
+}
+
+.chat-widget__resize:hover,
+.chat-widget.is-resizing .chat-widget__resize {
+  opacity: 1;
+  background: rgba(60, 38, 22, 0.92);
+}
+
+.chat-page.is-collapsed .chat-widget__resize {
+  display: none;
+}
+
+body.mobile-page .chat-widget__resize {
+  display: none;
 }
 
 /* 金框內 parchment — % 相對於 chat-widget */
@@ -331,6 +369,13 @@
   font-weight: 600;
 }
 
+.chat-actions a.chat-link-hipconcept {
+  background: linear-gradient(135deg, #4a6cf7, #3558e6);
+  color: #fff;
+  border-color: #2f4fd4;
+  font-weight: 600;
+}
+
 .chat-apps__label {
   font-size: 8px;
   color: #8a7355;
@@ -341,8 +386,3 @@
   gap: 2px;
 }
 
-@media (max-width: 768px) {
-  .chat-widget {
-    --widget-w: min(420px, 94vw);
-  }
-}

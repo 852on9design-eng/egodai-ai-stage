@@ -21,6 +21,7 @@ window.CHAT_CONFIG = {
     shop852: 'https://852on9design.myshopify.com/',
     gallery: 'gallery.html',
     pricing: 'frontpage.html',
+    hipconceptClass: 'https://hipconcept-class-mgmt.vercel.app/',
   },
 
   pricing: [
@@ -254,14 +255,14 @@ window.CHAT_CONFIG = {
       label: '$100 平民企劃',
       href: 'LINKS.wtsPlan100',
       effect: 'shimmer',
-      position: { left: '-0.93', top: '39.58', width: '101.85', height: '15.37' },
+      position: { left: '1.85', top: '41.15', width: '96.3', height: '16.15' },
     },
     {
       id: 'plan-180',
       label: '$180 二樓超值',
       href: 'LINKS.wtsPlan180',
       effect: 'shimmer',
-      position: { left: '5.56', top: '57.81', width: '88.89', height: '15.63' },
+      position: { left: '5.56', top: '58.91', width: '88.89', height: '15.63' },
     },
     {
       id: 'plan-380',
