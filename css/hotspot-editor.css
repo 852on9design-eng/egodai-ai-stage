@@ -82,11 +82,33 @@ body[data-hotspot-edit]::before {
   box-shadow: 0 10px 36px rgba(0, 0, 0, 0.55);
 }
 
-.hotspot-editor-panel strong {
+.hotspot-editor-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: -2px -2px 6px;
+  padding: 4px 2px;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.hotspot-editor-panel.is-dragging .hotspot-editor-panel__head {
+  cursor: grabbing;
+}
+
+.hotspot-editor-panel__head strong {
   display: block;
   color: #ffd56a;
   font-size: 14px;
-  margin-bottom: 6px;
+  margin: 0;
+}
+
+.hotspot-editor-panel__grip {
+  opacity: 0.75;
+  font-size: 16px;
+  line-height: 1;
 }
 
 .hotspot-editor-panel p {

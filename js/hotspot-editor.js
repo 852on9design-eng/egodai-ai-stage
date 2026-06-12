@@ -9,6 +9,7 @@
   var isMobile = document.body.classList.contains('mobile-page');
   var HOTSPOT_SEL = isMobile ? '.mobile-hotspot' : '.mp4-hotspot';
   var STORAGE_KEY = isMobile ? 'hotspotEditorDraftMobile' : 'hotspotEditorDraftDesktop';
+  var PANEL_POS_KEY = isMobile ? 'hotspotEditorPanelPosMobile' : 'hotspotEditorPanelPosDesktop';
 
   var selected = null;
   var states = new Map();
@@ -257,12 +258,72 @@
     return Promise.resolve();
   }
 
+  function restorePanelPos() {
+    try {
+      var raw = localStorage.getItem(PANEL_POS_KEY);
+      if (!raw || !panel) return;
+      var pos = JSON.parse(raw);
+      if (pos.left != null) panel.style.left = pos.left + 'px';
+      if (pos.top != null) panel.style.top = pos.top + 'px';
+      panel.style.right = 'auto';
+      panel.style.bottom = 'auto';
+    } catch (e) { /* ignore */ }
+  }
+
+  function savePanelPos(left, top) {
+    try {
+      localStorage.setItem(PANEL_POS_KEY, JSON.stringify({ left: left, top: top }));
+    } catch (e) { /* ignore */ }
+  }
+
+  function bindPanelDrag(head) {
+    head.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      e.preventDefault();
+      var rect = panel.getBoundingClientRect();
+      var startX = e.clientX;
+      var startY = e.clientY;
+      var originLeft = rect.left;
+      var originTop = rect.top;
+      panel.style.right = 'auto';
+      panel.style.bottom = 'auto';
+      panel.style.left = originLeft + 'px';
+      panel.style.top = originTop + 'px';
+      panel.classList.add('is-dragging');
+      head.setPointerCapture(e.pointerId);
+      function onMove(ev) {
+        var dx = ev.clientX - startX;
+        var dy = ev.clientY - startY;
+        var nextLeft = Math.max(8, Math.min(window.innerWidth - panel.offsetWidth - 8, originLeft + dx));
+        var nextTop = Math.max(36, Math.min(window.innerHeight - panel.offsetHeight - 8, originTop + dy));
+        panel.style.left = nextLeft + 'px';
+        panel.style.top = nextTop + 'px';
+      }
+      function onUp() {
+        head.removeEventListener('pointermove', onMove);
+        head.removeEventListener('pointerup', onUp);
+        head.removeEventListener('pointercancel', onUp);
+        panel.classList.remove('is-dragging');
+        savePanelPos(parseFloat(panel.style.left) || 0, parseFloat(panel.style.top) || 0);
+      }
+      head.addEventListener('pointermove', onMove);
+      head.addEventListener('pointerup', onUp);
+      head.addEventListener('pointercancel', onUp);
+    });
+  }
+
   function mountPanel() {
     panel = document.createElement('aside');
     panel.className = 'hotspot-editor-panel';
-    panel.innerHTML =
-      '<strong>框位角點編輯</strong>' +
-      '<p>撳掣選取 → 拖四角 · 撳「複製全部」貼俾我存檔</p>';
+    var head = document.createElement('div');
+    head.className = 'hotspot-editor-panel__head';
+    head.innerHTML = '<strong>框位角點編輯</strong><span class="hotspot-editor-panel__grip" aria-hidden="true">⠿</span>';
+    panel.appendChild(head);
+    bindPanelDrag(head);
+
+    var hint = document.createElement('p');
+    hint.textContent = '撳掣選取 → 拖四角 · 拖標題移動面板 · 撳「複製全部」貼俾我';
+    panel.appendChild(hint);
     statusEl = document.createElement('p');
     statusEl.className = 'hotspot-editor-panel__status';
     statusEl.textContent = '未選取';
@@ -303,6 +364,7 @@
     preview = document.createElement('pre');
     panel.appendChild(preview);
     document.body.appendChild(panel);
+    restorePanelPos();
   }
 
   function bindMove(st) {
