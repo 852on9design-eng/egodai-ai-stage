@@ -770,7 +770,7 @@ window.CHAT_CONFIG = {
       label: '$180 二樓超值',
       href: 'LINKS.plan180',
       effect: 'shimmer',
-      position: { left: '42', top: '35', width: '16', height: '40', rotate: 0 },
+      position: { left: '44.6', top: '32.22', width: '13.4', height: '40', rotate: 0 },
     },
     {
       num: 7,
@@ -778,7 +778,7 @@ window.CHAT_CONFIG = {
       label: '$380up 金主尊享',
       href: 'LINKS.plan380',
       effect: 'shimmer',
-      position: { left: '58', top: '35', width: '16', height: '40', rotate: 0 },
+      position: { left: '58', top: '32.22', width: '13.4', height: '40', rotate: 0 },
     },
     {
       num: 8,
