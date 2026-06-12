@@ -25,20 +25,22 @@ window.CHAT_CONFIG = {
     hipconceptClass: 'https://hipconcept-class-mgmt.vercel.app/',
   },
 
-  pricingAdvisorNote: '我會建議做品牌功能的 Apps $880 起',
+  pricingAdvisorNote: '我會建議做品牌功能的 apps $880 起',
 
   pricing: [
     {
       id: 'website',
       name: 'Set up 網站',
+      displayLine: 'set up 網站 <<< $1800起',
       price: '$1800 起',
       items: ['Landing / 引導式網站', '品牌視覺整合', '手機 + Desktop 同步', '可整合 AI 對話引導'],
     },
     {
       id: 'brand-app',
       name: '品牌功能 Apps',
+      displayLine: '我會建議做品牌功能的 apps $880 起',
       price: '$880 起',
-      items: ['PWA / 工具型 App', '客戶記錄、Mock-up、套票等模組', '可先試玩作品牆 Demo 再客製'],
+      items: ['PWA / 工具型 App', '客戶記錄、Mock-up、套票等模組', '可先試玩下面 Demo 再客製'],
       highlight: true,
       recommend: true,
     },
@@ -73,7 +75,7 @@ window.CHAT_CONFIG = {
     },
     price: {
       title: '價錢方案',
-      text: '設計師 HONG 會按你目標度身建議，以下係參考起步價：',
+      text: '設計師 HONG 會按你目標度身建議。參考起步價如下，並附上已做 Apps 連結俾你試玩：',
       tier: null,
     },
     cases: {

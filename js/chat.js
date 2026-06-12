@@ -224,6 +224,71 @@
     wtsLink.href = buildWtsUrl();
   }
 
+  function collectAppReferences() {
+    var seen = {};
+    var items = [];
+
+    function add(name, url) {
+      if (!name || !url || url === '#' || !/^https?:\/\//i.test(url) || seen[url]) return;
+      seen[url] = true;
+      items.push({ name: name, url: url });
+    }
+
+    (cfg.works || []).forEach(function (w) {
+      add(w.title || w.shortLabel, w.demoUrl);
+    });
+    (cfg.apps || []).forEach(function (a) {
+      add(a.name, a.url);
+    });
+    if (cfg.links) {
+      add('HipConcept 課堂', cfg.links.hipconceptClass);
+    }
+    return items;
+  }
+
+  function formatAppReferenceLinksHtml() {
+    var items = collectAppReferences();
+    if (!items.length) return '';
+    var html = '<br><br><strong>已做 Apps 參考（可免費試玩）：</strong><br>';
+    items.forEach(function (item) {
+      html +=
+        '· <a href="' +
+        item.url +
+        '" target="_blank" rel="noopener noreferrer">' +
+        escapeHtml(item.name) +
+        '</a><br>';
+    });
+    return html;
+  }
+
+  function buildPricingHtml() {
+    var html = '';
+    var tiers = cfg.pricing || [];
+
+    tiers.forEach(function (tier) {
+      if (tier.id === 'mockup') return;
+      var line = tier.displayLine || (tier.name + ' ' + tier.price);
+      html += '<br><br><strong>' + escapeHtml(line) + '</strong>';
+      if (tier.recommend && tier.displayLine !== cfg.pricingAdvisorNote && cfg.pricingAdvisorNote) {
+        html += '<br><em>' + escapeHtml(cfg.pricingAdvisorNote) + '</em>';
+      }
+      if (tier.items && tier.items.length) {
+        html += '<br>' + escapeHtml(tier.items.join(' · '));
+      }
+    });
+
+    var mockup = tiers.filter(function (t) { return t.id === 'mockup'; })[0];
+    if (mockup) {
+      html += '<br><br>' + escapeHtml(mockup.name) + ' ' + escapeHtml(mockup.price);
+      if (mockup.items && mockup.items.length) {
+        html += '<br>' + escapeHtml(mockup.items.join(' · '));
+      }
+    }
+
+    html += formatAppReferenceLinksHtml();
+    return html;
+  }
+
   function collectWorkLinks() {
     var seen = {};
     var items = [];
@@ -436,9 +501,10 @@
       html += '<br>' + (i + 1) + '. ' + formatOptionDetail(opt);
     });
 
-    var tierHint = cfg.pricingAdvisorNote || '品牌功能 Apps $880 起';
+    var websiteTier = (cfg.pricing || []).filter(function (t) { return t.id === 'website'; })[0];
+    var tierHint = cfg.pricingAdvisorNote || '我會建議做品牌功能的 apps $880 起';
     if (state.picks.indexOf('brand-web') >= 0) {
-      tierHint = 'Set up 網站 $1800 起';
+      tierHint = (websiteTier && websiteTier.displayLine) || 'set up 網站 <<< $1800起';
     } else if (
       state.picks.indexOf('mockup') >= 0 ||
       state.picks.indexOf('customer-data') >= 0 ||
@@ -590,16 +656,7 @@
       }
     }
     if (key === 'price' && cfg.pricing && cfg.pricing.length) {
-      cfg.pricing.forEach(function (tier) {
-        html += '<br><br><strong>' + escapeHtml(tier.name) + ' ' + escapeHtml(tier.price) + '</strong>';
-        if (tier.recommend) html += ' <span style="opacity:0.85">← 設計師建議</span>';
-        if (tier.items && tier.items.length) {
-          html += '<br>' + escapeHtml(tier.items.join(' · '));
-        }
-      });
-      if (cfg.pricingAdvisorNote) {
-        html += '<br><br><em>' + escapeHtml(cfg.pricingAdvisorNote) + '</em>';
-      }
+      html += buildPricingHtml();
     } else if (svc.tier && cfg.pricing) {
       var tier = cfg.pricing.filter(function (p) { return p.id === svc.tier; })[0];
       if (tier) {
