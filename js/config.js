@@ -240,14 +240,14 @@ window.CHAT_CONFIG = {
       label: '試玩 AI 功能',
       href: 'LINKS.gallery',
       effect: 'shimmer',
-      position: { left: '5.56', top: '30.21', width: '40.74', height: '7.29' },
+      position: { left: '5.83', top: '30.21', width: '40.74', height: '7.45' },
     },
     {
       id: 'gallery',
       label: '上畫惡搞作品一覽',
       href: 'LINKS.gallery',
       effect: 'shimmer',
-      position: { left: '53.7', top: '30.21', width: '40.74', height: '7.29' },
+      position: { left: '53.52', top: '30.21', width: '40.74', height: '7.45' },
     },
     {
       id: 'plan-100',
