@@ -268,7 +268,7 @@ window.CHAT_CONFIG = {
       label: '$380up 金主尊享',
       href: 'LINKS.wtsPlan380',
       effect: 'shimmer',
-      position: { left: '5.56', top: '64.58', width: '88.89', height: '14.58' },
+      position: { left: '5.56', top: '90.63', width: '88.89', height: '14.58' },
     },
     {
       id: 'free-consult',
