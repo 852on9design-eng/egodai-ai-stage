@@ -734,7 +734,7 @@ window.CHAT_CONFIG = {
       label: '$100 平民企劃',
       href: 'LINKS.plan100',
       effect: 'shimmer',
-      position: { left: '44', top: '38', width: '12', height: '28', rotate: 0 },
+      position: { left: '38.75', top: '38', width: '12', height: '28', rotate: 0 },
     },
     {
       id: 'plan-180',
@@ -748,7 +748,7 @@ window.CHAT_CONFIG = {
       label: '$380up 金主尊享',
       href: 'LINKS.plan380',
       effect: 'shimmer',
-      position: { left: '42', top: '68', width: '16', height: '32', rotate: 0 },
+      position: { left: '47.21', top: '68', width: '16', height: '32', rotate: 0 },
     },
     {
       id: 'free-consult',
