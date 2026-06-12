@@ -214,6 +214,35 @@ window.CHAT_CONFIG = {
     },
   ],
 
+  /* AI 客服前言 — 關閉後先進入對話引導 */
+  chatPreface: {
+    title: 'AI 客服',
+    welcome: '歡迎你哋！在 AI 技術全面爆發的 2026 年，善用 AI 就是最強競爭力！',
+    paragraphs: [
+      '過去5年我已成功利用 AI 開發多款網站與 App（<a href="gallery.html">歡迎點擊瀏覽我的作品</a>）。現在，過去破萬元的開發成本，只需<strong>十分之一（約千餘元）</strong>即可達成！無論是商業應用還是日常工具，AI 都能幫你用最低預算實現無限創意。',
+      '現在，你想用 AI 為你的生意或生活帶來什麼改變？隨時與我或我的 AI 客服聯絡。',
+    ],
+    examplesHint: '有興趣可看以下例子',
+    examples: [
+      {
+        id: 'shop-tryon',
+        title: '1. 網店買家吸引版（主打：解決尺碼焦慮）',
+        headline: '【 AI 一鍵試穿：告別尺碼選擇困難！】',
+        body:
+          '買衫最怕買錯 Size？依家只要輸入你嘅身高體重，AI 即時幫你做「尺寸 Mockup 虛擬上身」！\n\n' +
+          '寬鬆 (Oversized) 定修身 (Tailored)？一鍵切換 S / M / L 碼，動態模擬真實剪裁效果。啱身先至買，網購從此唔踩雷！',
+      },
+      {
+        id: 'recipe-nav',
+        title: '2. 家庭智能食譜導航（家庭/生活）',
+        body:
+          '概念：解決每天煮什麼的煩惱。用戶只需要剔選家裡雪櫃現有的剩餘食材（例如：兩隻蛋、半條青瓜、一塊雞胸肉），AI 就會立刻量身打造出幾道簡單的食譜。\n\n' +
+          'AI 賣點：AI 不僅能給出步驟，還能根據你想要的口味（如：港式、泰式、減脂）即時調整烹飪方法',
+      },
+    ],
+    startLabel: '開始對話',
+  },
+
   /* Gemini 經 server.mjs 代理，Key 放 .env，唔好寫喺呢度 */
   gemini: {
     enabled: true,

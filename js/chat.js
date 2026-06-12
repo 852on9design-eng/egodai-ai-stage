@@ -3,8 +3,10 @@
   var gemini = window.GeminiClient;
   var page = document.getElementById('chatPage');
   var panel = document.getElementById('chatPanel');
+  var panelBody = document.querySelector('.chat-panel__body');
   var messagesEl = document.getElementById('chatMessages');
   var inputRow = document.getElementById('chatInputRow');
+  var prefaceEl = null;
   var inputEl = document.getElementById('chatInput');
   var sendBtn = document.getElementById('chatSend');
   var toggleBtn = document.getElementById('chatToggle');
@@ -54,6 +56,7 @@
     picks: [],
     concluded: false,
     collapsed: false,
+    prefaceDismissed: false,
     geminiReady: false,
     busy: false,
     localMode: false,
@@ -372,6 +375,121 @@
     });
 
     setOpen(open);
+  }
+
+  function nlToBr(str) {
+    return escapeHtml(str).replace(/\n/g, '<br>');
+  }
+
+  function dismissPreface() {
+    if (state.prefaceDismissed) return;
+    state.prefaceDismissed = true;
+    if (panelBody) panelBody.classList.remove('is-preface');
+    if (prefaceEl) prefaceEl.hidden = true;
+    stepWelcome();
+  }
+
+  function renderPreface() {
+    var prefaceCfg = cfg.chatPreface;
+    if (!prefaceCfg || !panelBody || prefaceEl) return false;
+
+    prefaceEl = document.createElement('div');
+    prefaceEl.className = 'chat-preface';
+    prefaceEl.id = 'chatPreface';
+
+    var scroll = document.createElement('div');
+    scroll.className = 'chat-preface__scroll';
+
+    var head = document.createElement('header');
+    head.className = 'chat-preface__head';
+    head.innerHTML =
+      '<h3 class="chat-preface__title">' + escapeHtml(prefaceCfg.title || 'AI 客服') + '</h3>';
+
+    var closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'chat-preface__close';
+    closeBtn.setAttribute('aria-label', '關閉前言，開始對話');
+    closeBtn.textContent = '×';
+    closeBtn.addEventListener('click', dismissPreface);
+    head.appendChild(closeBtn);
+    scroll.appendChild(head);
+
+    if (prefaceCfg.welcome) {
+      var welcome = document.createElement('p');
+      welcome.className = 'chat-preface__welcome';
+      welcome.textContent = prefaceCfg.welcome;
+      scroll.appendChild(welcome);
+    }
+
+    (prefaceCfg.paragraphs || []).forEach(function (para) {
+      var p = document.createElement('p');
+      p.className = 'chat-preface__para';
+      p.innerHTML = para;
+      scroll.appendChild(p);
+    });
+
+    if (prefaceCfg.examplesHint) {
+      var hint = document.createElement('p');
+      hint.className = 'chat-preface__hint';
+      hint.textContent = prefaceCfg.examplesHint;
+      scroll.appendChild(hint);
+    }
+
+    var examplesWrap = document.createElement('div');
+    examplesWrap.className = 'chat-preface__examples';
+
+    (prefaceCfg.examples || []).forEach(function (ex) {
+      var card = document.createElement('article');
+      card.className = 'chat-preface__card';
+      card.dataset.exampleId = ex.id || '';
+
+      var cardClose = document.createElement('button');
+      cardClose.type = 'button';
+      cardClose.className = 'chat-preface__card-close';
+      cardClose.setAttribute('aria-label', '關閉例子');
+      cardClose.textContent = '×';
+      cardClose.addEventListener('click', function () {
+        card.classList.add('is-closed');
+      });
+      card.appendChild(cardClose);
+
+      if (ex.title) {
+        var title = document.createElement('h4');
+        title.className = 'chat-preface__card-title';
+        title.textContent = ex.title;
+        card.appendChild(title);
+      }
+      if (ex.headline) {
+        var headline = document.createElement('p');
+        headline.className = 'chat-preface__card-headline';
+        headline.textContent = ex.headline;
+        card.appendChild(headline);
+      }
+      if (ex.body) {
+        var body = document.createElement('p');
+        body.className = 'chat-preface__card-body';
+        body.innerHTML = nlToBr(ex.body);
+        card.appendChild(body);
+      }
+      examplesWrap.appendChild(card);
+    });
+
+    scroll.appendChild(examplesWrap);
+    prefaceEl.appendChild(scroll);
+
+    var foot = document.createElement('div');
+    foot.className = 'chat-preface__foot';
+    var startBtn = document.createElement('button');
+    startBtn.type = 'button';
+    startBtn.className = 'chat-preface__start';
+    startBtn.textContent = prefaceCfg.startLabel || '開始對話';
+    startBtn.addEventListener('click', dismissPreface);
+    foot.appendChild(startBtn);
+    prefaceEl.appendChild(foot);
+
+    panelBody.insertBefore(prefaceEl, messagesEl);
+    panelBody.classList.add('is-preface');
+    return true;
   }
 
   function escapeHtml(str) {
@@ -930,10 +1048,19 @@
     state.concluded = false;
     state.localMode = false;
     state.phase = 'welcome';
+    state.prefaceDismissed = false;
     state.geminiReady = false;
     geminiHistory = [];
     messagesEl.innerHTML = '';
     updateWts();
+    if (prefaceEl) {
+      prefaceEl.hidden = false;
+      prefaceEl.querySelectorAll('.chat-preface__card.is-closed').forEach(function (card) {
+        card.classList.remove('is-closed');
+      });
+      if (panelBody) panelBody.classList.add('is-preface');
+      return;
+    }
     stepWelcome();
   }
 
@@ -942,5 +1069,7 @@
   initWorksToggle();
   updateWts();
   inputRow.hidden = true;
-  stepWelcome();
+  if (!renderPreface()) {
+    stepWelcome();
+  }
 })();
