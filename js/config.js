@@ -261,14 +261,14 @@ window.CHAT_CONFIG = {
       label: '$100 平民企劃',
       href: 'LINKS.wtsPlan100',
       effect: 'shimmer',
-      position: { left: '1.85', top: '41.15', width: '96.3', height: '16.15' },
+      position: { left: '4.63', top: '40.37', width: '90.74', height: '16.93' },
     },
     {
       id: 'plan-180',
       label: '$180 二樓超值',
       href: 'LINKS.wtsPlan180',
       effect: 'shimmer',
-      position: { left: '5.56', top: '58.91', width: '88.89', height: '15.63' },
+      position: { left: '5.56', top: '60.73', width: '88.89', height: '15.63' },
     },
     {
       id: 'plan-380',
