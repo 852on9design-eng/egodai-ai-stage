@@ -72,13 +72,17 @@
 
   toggleBtn.addEventListener('click', function (e) {
     e.stopPropagation();
+    if (chatWidget && chatWidget.dataset.dragMoved) return;
     setCollapsed(!state.collapsed);
   });
 
   var chatSlot = document.getElementById('chatSlot');
+  var chatWidget = document.getElementById('chatWidget');
   if (chatSlot) {
     chatSlot.addEventListener('click', function () {
-      if (state.collapsed) setCollapsed(false);
+      if (!state.collapsed) return;
+      if (chatWidget && chatWidget.dataset.dragMoved) return;
+      setCollapsed(false);
     });
   }
 

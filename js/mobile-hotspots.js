@@ -1,4 +1,4 @@
-/** 手機版 MP4 透明按鈕 — 1152×2048 百分比；?hotspotDebug=1 顯示框 */
+/** 手機版 MP4 透明按鈕 — 1080×1920；?hotspotDebug=1 顯示框 */
 (function () {
   var cfg = window.CHAT_CONFIG;
   var mount = document.getElementById('mobileBgInner');
@@ -19,6 +19,10 @@
     return href;
   }
 
+  function isWhatsApp(url) {
+    return /^https:\/\/wa\.me\//i.test(url);
+  }
+
   var wrap = document.getElementById('mobileHotspots') || document.createElement('nav');
   wrap.className = 'mobile-hotspots';
   wrap.setAttribute('aria-label', '手機版片上按鈕');
@@ -27,10 +31,14 @@
     var pos = spot.position || {};
     var el = document.createElement('a');
     el.className = 'mobile-hotspot mobile-hotspot--fx-' + (spot.effect || 'shimmer');
-    el.href = resolveHref(spot.href);
-    if (el.href.startsWith('http')) {
+    var url = resolveHref(spot.href);
+    el.href = url;
+    if (url.startsWith('http')) {
       el.target = '_blank';
-      el.rel = 'noopener';
+      el.rel = 'noopener noreferrer';
+    }
+    if (isWhatsApp(url)) {
+      el.setAttribute('data-wts', '1');
     }
     el.title = spot.label || '';
     el.setAttribute('aria-label', spot.label || '按鈕');

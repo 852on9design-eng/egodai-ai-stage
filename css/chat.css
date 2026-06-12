@@ -142,12 +142,17 @@
   cursor: pointer;
 }
 
-/* 收起 */
+/* 收起 — 可拖動移位 */
 .chat-page.is-collapsed .chat-widget {
   width: min(240px, 70vw);
   aspect-ratio: auto;
   height: 44px;
-  cursor: pointer;
+  cursor: grab;
+  touch-action: none;
+}
+
+.chat-page.is-collapsed .chat-widget.is-dragging {
+  cursor: grabbing;
 }
 
 .chat-page.is-collapsed .chat-widget__frame,

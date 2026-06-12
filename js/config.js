@@ -11,10 +11,13 @@ window.CHAT_CONFIG = {
 
   /* WhatsApp 直 link（MP4 按鈕用） */
   links: {
-    wtsFree: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想免費查詢 AI 設計服務'),
-    wtsAdvisor: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想搵設計師 HONG 傾設計方案'),
+    wtsFree: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，我想免費查詢惡搞大舞台 AI 設計服務'),
+    wtsAdvisor: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，我想立即搵設計師 HONG 傾設計方案，請聯絡我'),
     wtsAiTry: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想試玩 AI 功能'),
     wtsAiClass: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想了解 AI 惡搞教室'),
+    wtsPlan100: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 $100 平民企劃（快速智能套餐）詳情'),
+    wtsPlan180: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 $180 二樓超值（品牌設計套餐）詳情'),
+    wtsPlan380: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 $380up 金主尊享（大滿貫全方位套餐）詳情'),
     shop852: 'https://852on9design.myshopify.com/',
     gallery: 'gallery.html',
     pricing: 'frontpage.html',
@@ -220,7 +223,7 @@ window.CHAT_CONFIG = {
 
   /*
    * 手機版底層 MP4 — mobile.html
-   * 畫布：1152 × 2048（9:16 直向）
+   * 畫布：1080 × 1920（9:16 直向）
    * 放入：assets/video/bg-loop-mobile.mp4
    * 微調：?debug=1 顯示邊界 · ?hotspotDebug=1 顯示按鈕框
    */
@@ -230,21 +233,56 @@ window.CHAT_CONFIG = {
     sources: ['assets/video/bg-loop-mobile.mp4'],
   },
 
-  /* 手機版 MP4 透明按鈕（1152×2048 百分比）— 之後按你片加 */
+  /* 手機版 MP4 透明按鈕（1080×1920 → 百分比）— ?hotspotDebug=1 微調 */
   mp4MobileHotspots: [
     {
-      id: 'gallery',
-      label: '作品一覽',
+      id: 'trial-ai',
+      label: '試玩 AI 功能',
       href: 'LINKS.gallery',
       effect: 'shimmer',
-      position: { left: '4', top: '28', width: '28', height: '8' },
+      position: { left: '5.56', top: '30.21', width: '40.74', height: '7.29' },
     },
     {
-      id: 'contact',
-      label: 'WhatsApp',
+      id: 'gallery',
+      label: '上畫惡搞作品一覽',
+      href: 'LINKS.gallery',
+      effect: 'shimmer',
+      position: { left: '53.7', top: '30.21', width: '40.74', height: '7.29' },
+    },
+    {
+      id: 'plan-100',
+      label: '$100 平民企劃',
+      href: 'LINKS.wtsPlan100',
+      effect: 'shimmer',
+      position: { left: '5.56', top: '39.58', width: '40.74', height: '10.42' },
+    },
+    {
+      id: 'plan-180',
+      label: '$180 二樓超值',
+      href: 'LINKS.wtsPlan180',
+      effect: 'shimmer',
+      position: { left: '5.56', top: '52.08', width: '40.74', height: '10.42' },
+    },
+    {
+      id: 'plan-380',
+      label: '$380up 金主尊享',
+      href: 'LINKS.wtsPlan380',
+      effect: 'shimmer',
+      position: { left: '5.56', top: '64.58', width: '88.89', height: '14.58' },
+    },
+    {
+      id: 'free-consult',
+      label: '免費查詢按此',
+      href: 'LINKS.wtsFree',
+      effect: 'shimmer',
+      position: { left: '5.56', top: '91.67', width: '44.44', height: '5.21' },
+    },
+    {
+      id: 'contact-advisor',
+      label: '立即搵班主任傾!',
       href: 'LINKS.wtsAdvisor',
       effect: 'shimmer',
-      position: { left: '4', top: '88', width: '40', height: '6' },
+      position: { left: '50', top: '91.67', width: '44.44', height: '5.21' },
     },
   ],
 
