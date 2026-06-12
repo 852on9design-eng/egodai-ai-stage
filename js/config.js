@@ -752,7 +752,7 @@ window.CHAT_CONFIG = {
         width: '14.5',
         height: '30.56',
         rotate: -11,
-        topLeftDrop: 6.06,
+        clip: 'polygon(0% 4.55%, 103.59% 0%, 100% 100%, 3.59% 100%)',
       },
     },
     {
