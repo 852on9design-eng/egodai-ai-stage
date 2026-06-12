@@ -49,8 +49,20 @@ body[data-hotspot-edit] .mobile-hotspot.is-editor-selected {
 .hotspot-editor__handle--br { cursor: nwse-resize; }
 .hotspot-editor__handle--bl { cursor: nesw-resize; }
 
+.hotspot-editor__handle--middle {
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 3px;
+  background: #33dd88;
+  border-color: #0a3d22;
+}
+
+.hotspot-editor__handle--tm { cursor: ns-resize; }
+.hotspot-editor__handle--bm { cursor: ns-resize; }
+
 body[data-hotspot-edit]::before {
-  content: '框位編輯 — 紅角拖形狀 · Shift+拖紅角拉大框 · 面板 1px 微調 →「複製全部設定」';
+  content: '框位編輯 — 紅角改形 · 綠點上下邊拉高拉低 · 1px 微調 →「複製全部設定」';
   position: fixed;
   top: 0;
   left: 0;

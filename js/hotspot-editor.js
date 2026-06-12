@@ -258,12 +258,32 @@
     saveDraft();
   }
 
+  function edgeMidpoint(st, key) {
+    if (key === 'tm') {
+      return {
+        x: (st.verts[0].x + st.verts[1].x) / 2,
+        y: (st.verts[0].y + st.verts[1].y) / 2,
+      };
+    }
+    return {
+      x: (st.verts[2].x + st.verts[3].x) / 2,
+      y: (st.verts[2].y + st.verts[3].y) / 2,
+    };
+  }
+
   function syncHandles(st) {
     ['tl', 'tr', 'br', 'bl'].forEach(function (key, i) {
       var handle = st.handles[key];
       if (!handle) return;
       handle.style.left = round2(st.verts[i].x) + '%';
       handle.style.top = round2(st.verts[i].y) + '%';
+    });
+    ['tm', 'bm'].forEach(function (key) {
+      var handle = st.handles[key];
+      if (!handle) return;
+      var mid = edgeMidpoint(st, key);
+      handle.style.left = round2(mid.x) + '%';
+      handle.style.top = round2(mid.y) + '%';
     });
   }
 
@@ -323,6 +343,58 @@
       st.el.appendChild(btn);
       st.handles[key] = btn;
     });
+
+    function bindMiddleEdge(key, mutate) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className =
+        'hotspot-editor__handle hotspot-editor__handle--middle hotspot-editor__handle--' + key;
+      btn.setAttribute('aria-label', key.toUpperCase());
+      btn.addEventListener('pointerdown', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        selectHotspot(st);
+        var start = {
+          x: e.clientX,
+          y: e.clientY,
+          left: st.left,
+          top: st.top,
+          width: st.width,
+          height: st.height,
+          verts: st.verts.map(function (v) { return { x: v.x, y: v.y }; }),
+        };
+        btn.setPointerCapture(e.pointerId);
+        function onMove(ev) {
+          var delta = parentDeltaFromPointer(st, start.x, start.y, ev.clientX, ev.clientY);
+          mutate(st, start, delta);
+          applyState(st);
+        }
+        function onUp() {
+          btn.removeEventListener('pointermove', onMove);
+          btn.removeEventListener('pointerup', onUp);
+          btn.removeEventListener('pointercancel', onUp);
+          saveDraft();
+        }
+        btn.addEventListener('pointermove', onMove);
+        btn.addEventListener('pointerup', onUp);
+        btn.addEventListener('pointercancel', onUp);
+      });
+      st.el.appendChild(btn);
+      st.handles[key] = btn;
+    }
+
+    bindMiddleEdge('tm', function (st, start, delta) {
+      st.top = round2(start.top + delta.y);
+      st.height = round2(Math.max(0.5, start.height - delta.y));
+      st.verts = start.verts.map(function (v) { return { x: v.x, y: v.y }; });
+      st.useClip = !isAxisRect(st.verts);
+    });
+    bindMiddleEdge('bm', function (st, start, delta) {
+      st.height = round2(Math.max(0.5, start.height + delta.y));
+      st.verts = start.verts.map(function (v) { return { x: v.x, y: v.y }; });
+      st.useClip = !isAxisRect(st.verts);
+    });
+
     syncHandles(st);
   }
 
@@ -502,7 +574,7 @@
     bindPanelDrag(head);
 
     var hint = document.createElement('p');
-    hint.textContent = '紅角拖形狀 · Shift+拖紅角拉大框 · 下面按鈕 1px 微調';
+    hint.textContent = '紅角改形 · 綠點上下邊拉高/拉低 · Shift+紅角拉大框 · 1px 微調';
     panel.appendChild(hint);
     statusEl = document.createElement('p');
     statusEl.className = 'hotspot-editor-panel__status';
@@ -555,6 +627,7 @@
     });
     st.el.addEventListener('pointerdown', function (e) {
       if (e.target.classList.contains('hotspot-editor__handle')) return;
+      if (e.target.closest('.hotspot-editor__handle')) return;
       e.preventDefault();
       e.stopPropagation();
       selectHotspot(st);
