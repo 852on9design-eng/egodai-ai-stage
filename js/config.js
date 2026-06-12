@@ -23,6 +23,7 @@ window.CHAT_CONFIG = {
     trialAi: 'trial-ai.html',
     plan100: 'info-100.html',
     plan180: 'info-180.html',
+    plan380: 'info-380.html',
     pricing: 'frontpage.html',
     hipconceptClass: 'https://hipconcept-class-mgmt.vercel.app/',
   },
@@ -304,7 +305,7 @@ window.CHAT_CONFIG = {
     {
       id: 'plan-380',
       label: '$380up 金主尊享',
-      href: 'LINKS.wtsPlan380',
+      href: 'LINKS.plan380',
       effect: 'shimmer',
       position: { left: '5.56', top: '77.81', width: '88.89', height: '14.58' },
     },
@@ -356,6 +357,39 @@ window.CHAT_CONFIG = {
    */
   hotspotTryTops: [25, 27.5, 30, 32.5],
   hotspotTryRotates: [8, 11, 14],
+
+  /*
+   * $380up 金主尊享 — 影片展示（info-380.html）
+   */
+  plan380Graphics: {
+    title: '$380up 金主尊享',
+    titleEn: '$380 Premium · Full Package',
+    introZh:
+      'DIY Apps + Online Shop 個人化品牌展示影片 — 大滿貫全方位套餐實戰參考，撳全屏播放或下方直接睇。',
+    introEn:
+      'DIY Apps & personalized online shop showcase — premium full-package demo. Tap full-screen or watch inline below.',
+    packagePrice: '$380 起',
+    wtsLabel: '💬 WhatsApp 查詢 $380',
+    wtsQuery: '想查詢 $380up 金主尊享',
+    items: [
+      {
+        id: 'on9-diy-apps-video',
+        title: 'DIY Apps · Online Shop 個人化展示',
+        titleEn: 'DIY Apps · Personalized Online Shop',
+        shortLabel: 'DIY APPS',
+        introZh:
+          'MAKE IT YOURS WITH ON9 DESIGN — 個人化網店、惡搞街頭視覺、AI 品牌影片一站式。適合金主尊享大滿貫套餐客戶參考。',
+        introEn:
+          'MAKE IT YOURS WITH ON9 DESIGN — personalized shop, streetwear visuals & AI brand video in one premium package.',
+        poster: 'assets/plan-380/diy-apps-poster.png',
+        video: 'assets/plan-380/diy-apps-showcase.mp4',
+        price: '$380 大滿貫全方位套餐',
+        wts:
+          'https://wa.me/85291306847?text=' +
+          encodeURIComponent('你好，想查詢 $380up 金主尊享 — DIY Apps 個人化網店展示'),
+      },
+    ],
+  },
 
   /*
    * $100 平民企劃 — 網店尺寸表 / 試穿導購展示（info-100.html · Apple Cover Flow）
@@ -712,7 +746,7 @@ window.CHAT_CONFIG = {
     {
       id: 'plan-380',
       label: '$380up 金主尊享',
-      href: 'LINKS.wtsPlan380',
+      href: 'LINKS.plan380',
       effect: 'shimmer',
       position: { left: '34', top: '68', width: '32', height: '16', rotate: 0 },
     },

@@ -18,6 +18,8 @@
   var demoEl = document.getElementById('coverflowDemo');
   var wtsEl = document.getElementById('coverflowWts');
   var playBtn = document.getElementById('coverflowPlay');
+  var inlineVideoWrap = document.getElementById('coverflowVideoWrap');
+  var inlineVideoEl = document.getElementById('coverflowInlineVideo');
   var prevBtn = document.getElementById('coverflowPrev');
   var nextBtn = document.getElementById('coverflowNext');
 
@@ -63,8 +65,14 @@
     return prefix + '：' + (work.title || '');
   }
 
+  var packHasVideo = isInfoGallery && works.some(function (w) { return w.video; });
+
   if (isInfoGallery && playBtn) {
-    playBtn.innerHTML = '<span class="works-coverflow__play-icon" aria-hidden="true">🔍</span> 放大睇';
+    if (packHasVideo) {
+      playBtn.innerHTML = '<span class="works-coverflow__play-icon" aria-hidden="true">▶</span> 全屏播放';
+    } else {
+      playBtn.innerHTML = '<span class="works-coverflow__play-icon" aria-hidden="true">🔍</span> 放大睇';
+    }
   }
 
   var active = 0;
@@ -289,6 +297,27 @@
     }
 
     renderRefs(coverflowRefs, coverflowRefsGrid, work);
+    updateInlineVideo(work);
+  }
+
+  function updateInlineVideo(work) {
+    if (!inlineVideoEl) return;
+    if (work && work.video) {
+      if (inlineVideoWrap) inlineVideoWrap.hidden = false;
+      if (inlineVideoEl.dataset.src !== work.video) {
+        inlineVideoEl.dataset.src = work.video;
+        inlineVideoEl.src = work.video;
+      }
+      inlineVideoEl.muted = true;
+      inlineVideoEl.loop = true;
+      inlineVideoEl.load();
+      inlineVideoEl.play().catch(function () {});
+    } else {
+      if (inlineVideoWrap) inlineVideoWrap.hidden = true;
+      inlineVideoEl.pause();
+      inlineVideoEl.removeAttribute('src');
+      inlineVideoEl.load();
+    }
   }
 
   function setActive(i) {
@@ -314,12 +343,33 @@
       revealIntroEn.textContent = work.introEn || '';
       revealIntroEn.hidden = !work.introEn;
     }
-    posterEl.src = work.poster || '';
-    posterEl.alt = work.title || '';
-    posterEl.style.cursor = 'zoom-in';
-    posterEl.onclick = getRefs(work).length
-      ? function () { openLightbox(getRefs(work), 0); }
-      : function () { openLightbox([{ src: work.poster, label: work.title }], 0); };
+    var videoWrap = videoEl ? videoEl.closest('.work-phone') : null;
+    var infoVideoMode = isInfoGallery && work.video && videoEl;
+
+    if (posterEl) {
+      posterEl.src = work.poster || '';
+      posterEl.alt = work.title || '';
+      if (infoVideoMode) {
+        posterEl.hidden = true;
+        posterEl.onclick = null;
+        posterEl.style.cursor = '';
+        if (videoWrap) videoWrap.hidden = false;
+      } else if (isInfoGallery) {
+        posterEl.hidden = false;
+        posterEl.classList.add('work-reveal__poster--full');
+        posterEl.style.cursor = 'zoom-in';
+        posterEl.onclick = function () {
+          openLightbox([{ src: work.poster, label: work.title }], 0);
+        };
+        if (videoWrap) videoWrap.hidden = true;
+      } else {
+        posterEl.hidden = false;
+        posterEl.style.cursor = 'zoom-in';
+        posterEl.onclick = getRefs(work).length
+          ? function () { openLightbox(getRefs(work), 0); }
+          : function () { openLightbox([{ src: work.poster, label: work.title }], 0); };
+      }
+    }
     revealPrice.textContent = work.price || (pack && pack.packagePrice) || '';
     revealPrice.hidden = !revealPrice.textContent;
     revealWts.href = work.wts || wtsUrl(defaultWtsQuery(work));
@@ -367,7 +417,7 @@
     reveal.hidden = true;
     reveal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    videoEl.pause();
+    if (videoEl) videoEl.pause();
   }
 
   prevBtn.addEventListener('click', function () {

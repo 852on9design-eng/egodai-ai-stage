@@ -314,6 +314,9 @@
     if (cfg.links && cfg.links.plan180) {
       add('🎨 $180 Info Graphic', cfg.links.plan180);
     }
+    if (cfg.links && cfg.links.plan380) {
+      add('👑 $380 影片', cfg.links.plan380);
+    }
     (cfg.works || []).forEach(function (w) {
       add(w.shortLabel || w.title, w.demoUrl);
     });

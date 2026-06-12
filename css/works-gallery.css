@@ -143,6 +143,42 @@
   align-items: center;
 }
 
+.work-reveal__body--video {
+  gap: 16px;
+}
+
+.works-coverflow__video {
+  margin: 6px 0 4px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 213, 106, 0.35);
+  background: #000;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.works-coverflow__inline-video {
+  display: block;
+  width: 100%;
+  max-height: min(42vh, 320px);
+  object-fit: contain;
+  background: #000;
+}
+
+.work-phone--landscape {
+  width: min(92vw, 860px);
+  padding: 8px;
+}
+
+.work-phone__video--landscape {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.works-page--plan380 .works-coverflow__detail {
+  margin-top: 8px;
+}
+
 .work-reveal__poster--full {
   width: min(92vw, 720px);
   height: auto;
