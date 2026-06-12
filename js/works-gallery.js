@@ -1,13 +1,21 @@
 /** 作品牆 — Apple Cover Flow 大氣滑動選取 */
 (function () {
   var cfg = window.CHAT_CONFIG || {};
-  var works = cfg.works || [];
+  var galleryKey = document.body.getAttribute('data-gallery-key') || 'works';
+  var pack = galleryKey === 'infoGraphics180' && cfg.infoGraphics180
+    ? cfg.infoGraphics180
+    : null;
+  var isInfoGallery = !!pack;
+  var works = pack ? (pack.items || []) : (cfg.works || []);
 
   var track = document.getElementById('coverflowTrack');
   var viewport = document.getElementById('coverflowViewport');
   var glow = document.getElementById('coverflowGlow');
   var dotsEl = document.getElementById('coverflowDots');
   var titleEl = document.getElementById('coverflowTitle');
+  var titleEnEl = document.getElementById('coverflowTitleEn');
+  var introEl = document.getElementById('coverflowIntro');
+  var introEnEl = document.getElementById('coverflowIntroEn');
   var priceEl = document.getElementById('coverflowPrice');
   var demoEl = document.getElementById('coverflowDemo');
   var wtsEl = document.getElementById('coverflowWts');
@@ -17,6 +25,9 @@
 
   var reveal = document.getElementById('workReveal');
   var revealTitle = document.getElementById('workRevealTitle');
+  var revealTitleEn = document.getElementById('workRevealTitleEn');
+  var revealIntro = document.getElementById('workRevealIntro');
+  var revealIntroEn = document.getElementById('workRevealIntroEn');
   var videoEl = document.getElementById('workVideo');
   var posterEl = document.getElementById('workPoster');
   var revealPrice = document.getElementById('workPrice');
@@ -33,6 +44,21 @@
   var lightboxNext = document.getElementById('refLightboxNext');
 
   if (!track || !works.length) return;
+
+  if (pack) {
+    var pageTitle = document.getElementById('galleryPageTitle');
+    var pageTitleEn = document.getElementById('galleryPageTitleEn');
+    var pageIntroZh = document.getElementById('galleryPageIntroZh');
+    var pageIntroEn = document.getElementById('galleryPageIntroEn');
+    if (pageTitle && pack.title) pageTitle.textContent = pack.title;
+    if (pageTitleEn && pack.titleEn) pageTitleEn.textContent = pack.titleEn;
+    if (pageIntroZh && pack.introZh) pageIntroZh.textContent = pack.introZh;
+    if (pageIntroEn && pack.introEn) pageIntroEn.textContent = pack.introEn;
+  }
+
+  if (isInfoGallery && playBtn) {
+    playBtn.innerHTML = '<span class="works-coverflow__play-icon" aria-hidden="true">🔍</span> 放大睇';
+  }
 
   var active = 0;
   var cards = [];
@@ -227,11 +253,23 @@
     if (!work) return;
 
     titleEl.textContent = work.title || '';
-    priceEl.textContent = work.price || '';
-    priceEl.hidden = !work.price;
-    wtsEl.href = work.wts || wtsUrl('想查詢：' + (work.title || 'App 作品'));
+    if (titleEnEl) {
+      titleEnEl.textContent = work.titleEn || '';
+      titleEnEl.hidden = !work.titleEn;
+    }
+    if (introEl) {
+      introEl.textContent = work.introZh || '';
+      introEl.hidden = !work.introZh;
+    }
+    if (introEnEl) {
+      introEnEl.textContent = work.introEn || '';
+      introEnEl.hidden = !work.introEn;
+    }
+    priceEl.textContent = work.price || (pack && pack.packagePrice) || '';
+    priceEl.hidden = !priceEl.textContent;
+    wtsEl.href = work.wts || wtsUrl('想查詢 $180 二樓超值：' + (work.title || 'Info Graphic'));
 
-    if (work.demoUrl && demoEl) {
+    if (work.demoUrl && demoEl && !isInfoGallery) {
       demoEl.href = work.demoUrl;
       demoEl.hidden = false;
       demoEl.querySelector('.work-demo-cta__text').textContent = work.demoLabel || 'Demo 免費試玩';
@@ -257,17 +295,29 @@
     if (!reveal) return;
 
     revealTitle.textContent = work.title || '';
+    if (revealTitleEn) {
+      revealTitleEn.textContent = work.titleEn || '';
+      revealTitleEn.hidden = !work.titleEn;
+    }
+    if (revealIntro) {
+      revealIntro.textContent = work.introZh || '';
+      revealIntro.hidden = !work.introZh;
+    }
+    if (revealIntroEn) {
+      revealIntroEn.textContent = work.introEn || '';
+      revealIntroEn.hidden = !work.introEn;
+    }
     posterEl.src = work.poster || '';
     posterEl.alt = work.title || '';
-    posterEl.style.cursor = getRefs(work).length ? 'zoom-in' : '';
+    posterEl.style.cursor = 'zoom-in';
     posterEl.onclick = getRefs(work).length
       ? function () { openLightbox(getRefs(work), 0); }
-      : null;
-    revealPrice.textContent = work.price || '';
-    revealPrice.hidden = !work.price;
-    revealWts.href = work.wts || wtsUrl('想查詢：' + (work.title || 'App 作品'));
+      : function () { openLightbox([{ src: work.poster, label: work.title }], 0); };
+    revealPrice.textContent = work.price || (pack && pack.packagePrice) || '';
+    revealPrice.hidden = !revealPrice.textContent;
+    revealWts.href = work.wts || wtsUrl('想查詢 $180 二樓超值：' + (work.title || 'Info Graphic'));
 
-    if (work.demoUrl && revealDemo) {
+    if (work.demoUrl && revealDemo && !isInfoGallery) {
       revealDemo.href = work.demoUrl;
       revealDemo.hidden = false;
       revealDemo.innerHTML =
@@ -277,16 +327,22 @@
       revealDemo.hidden = true;
     }
 
-    renderRefs(revealRefs, revealRefsGrid, work);
+    if (!isInfoGallery) {
+      renderRefs(revealRefs, revealRefsGrid, work);
+    } else if (revealRefs) {
+      revealRefs.hidden = true;
+    }
 
-    videoEl.pause();
-    videoEl.removeAttribute('src');
-    videoEl.load();
-    if (work.video) {
-      videoEl.src = work.video;
-      videoEl.muted = true;
+    if (videoEl) {
+      videoEl.pause();
+      videoEl.removeAttribute('src');
       videoEl.load();
-      videoEl.play().catch(function () {});
+      if (work.video) {
+        videoEl.src = work.video;
+        videoEl.muted = true;
+        videoEl.load();
+        videoEl.play().catch(function () {});
+      }
     }
 
     reveal.hidden = false;

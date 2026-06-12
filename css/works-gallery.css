@@ -54,6 +54,94 @@
   margin: 8px 0 0;
   color: rgba(245, 230, 200, 0.72);
   font-size: 14px;
+  line-height: 1.5;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.works-head__title-en {
+  margin: 4px 0 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 213, 106, 0.75);
+  letter-spacing: 0.04em;
+}
+
+.works-head__sub--en {
+  font-size: 13px;
+  opacity: 0.65;
+}
+
+.works-coverflow__title-en,
+.works-coverflow__intro,
+.works-coverflow__intro-en {
+  margin: 4px 0 0;
+  text-align: center;
+  line-height: 1.45;
+}
+
+.works-coverflow__title-en {
+  font-size: 13px;
+  color: rgba(255, 213, 106, 0.8);
+  font-weight: 500;
+}
+
+.works-coverflow__intro {
+  font-size: 14px;
+  color: rgba(245, 230, 200, 0.88);
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.works-coverflow__intro-en {
+  font-size: 12px;
+  color: rgba(245, 230, 200, 0.58);
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.work-reveal__title-en,
+.work-reveal__intro,
+.work-reveal__intro-en {
+  margin: 0 0 8px;
+  line-height: 1.45;
+}
+
+.work-reveal__title-en {
+  font-size: 14px;
+  color: rgba(255, 213, 106, 0.85);
+}
+
+.work-reveal__intro {
+  font-size: 14px;
+  color: rgba(245, 230, 200, 0.9);
+}
+
+.work-reveal__intro-en {
+  font-size: 13px;
+  color: rgba(245, 230, 200, 0.62);
+}
+
+.work-reveal__body--info {
+  flex-direction: column;
+  align-items: center;
+}
+
+.work-reveal__poster--full {
+  width: min(92vw, 720px);
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  cursor: zoom-in;
+}
+
+.works-page--info180 .works-coverflow__detail {
+  margin-top: 8px;
 }
 
 /* ── Cover Flow 舞台 ── */

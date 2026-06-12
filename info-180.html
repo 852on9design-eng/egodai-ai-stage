@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>惡搞大舞台｜$180 二樓超值 Info Graphic</title>
+  <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/works-gallery.css">
+</head>
+<body class="works-page works-page--info180" data-gallery-key="infoGraphics180">
+  <div class="chat-bg-scroll" id="bgScroll" aria-hidden="true">
+    <div class="chat-bg-inner" id="bgInner">
+      <video class="chat-bg-video" id="bgVideo" autoplay loop muted defaultMuted playsinline disablePictureInPicture preload="auto"></video>
+    </div>
+  </div>
+
+  <main class="works-stage">
+    <header class="works-head">
+      <a class="works-head__back" href="mobile.html">← 返回手機版</a>
+      <h1 class="works-head__title" id="galleryPageTitle">$180 二樓超值</h1>
+      <p class="works-head__title-en" id="galleryPageTitleEn">$180 Value · Brand Design</p>
+      <p class="works-head__sub" id="galleryPageIntroZh"></p>
+      <p class="works-head__sub works-head__sub--en" id="galleryPageIntroEn"></p>
+    </header>
+
+    <section class="works-coverflow" id="worksCoverflow" aria-label="Info Graphic 作品展示">
+      <button type="button" class="works-coverflow__nav works-coverflow__nav--prev" id="coverflowPrev" aria-label="上一張">‹</button>
+
+      <div class="works-coverflow__viewport" id="coverflowViewport">
+        <div class="works-coverflow__track" id="coverflowTrack"></div>
+        <div class="works-coverflow__glow" id="coverflowGlow" aria-hidden="true"></div>
+        <div class="works-coverflow__floor" aria-hidden="true"></div>
+      </div>
+
+      <button type="button" class="works-coverflow__nav works-coverflow__nav--next" id="coverflowNext" aria-label="下一張">›</button>
+
+      <div class="works-coverflow__dots" id="coverflowDots" role="tablist" aria-label="作品索引"></div>
+
+      <div class="works-coverflow__detail" id="coverflowDetail">
+        <h2 class="works-coverflow__title" id="coverflowTitle"></h2>
+        <p class="works-coverflow__title-en" id="coverflowTitleEn"></p>
+        <p class="works-coverflow__intro" id="coverflowIntro"></p>
+        <p class="works-coverflow__intro-en" id="coverflowIntroEn"></p>
+        <p class="works-coverflow__price" id="coverflowPrice"></p>
+        <div class="works-coverflow__actions">
+          <button type="button" class="works-coverflow__play" id="coverflowPlay">
+            <span class="works-coverflow__play-icon" aria-hidden="true">🔍</span> 放大睇
+          </button>
+          <a class="work-demo-cta" id="coverflowDemo" href="#" target="_blank" rel="noopener" hidden>
+            <span class="work-demo-cta__shine" aria-hidden="true"></span>
+            <span class="work-demo-cta__text">Demo 免費試玩</span>
+          </a>
+          <a class="works-coverflow__wts" id="coverflowWts" href="#">💬 WhatsApp 查詢 $180</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="work-reveal work-reveal--info" id="workReveal" hidden aria-hidden="true">
+    <div class="work-reveal__flash" aria-hidden="true"></div>
+    <div class="work-reveal__backdrop" data-close></div>
+    <article class="work-reveal__panel" role="dialog" aria-modal="true" aria-labelledby="workRevealTitle">
+      <button type="button" class="work-reveal__close" data-close aria-label="關閉">✕</button>
+      <h2 class="work-reveal__title" id="workRevealTitle"></h2>
+      <p class="work-reveal__title-en" id="workRevealTitleEn"></p>
+      <div class="work-reveal__body work-reveal__body--info">
+        <img class="work-reveal__poster work-reveal__poster--full" id="workPoster" alt="" width="1200" height="1600">
+        <div class="work-reveal__info">
+          <p class="work-reveal__intro" id="workRevealIntro"></p>
+          <p class="work-reveal__intro-en" id="workRevealIntroEn"></p>
+          <p class="work-reveal__price" id="workPrice"></p>
+          <div class="work-reveal__actions" id="workActions">
+            <a class="work-reveal__wts" id="workWts" href="#" target="_blank" rel="noopener">💬 WhatsApp 查詢 $180</a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/bg-video.js"></script>
+  <script src="js/works-gallery.js"></script>
+</body>
+</html>

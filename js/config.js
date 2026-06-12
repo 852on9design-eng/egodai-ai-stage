@@ -21,6 +21,7 @@ window.CHAT_CONFIG = {
     shop852: 'https://852on9design.myshopify.com/',
     gallery: 'gallery.html',
     trialAi: 'trial-ai.html',
+    plan180: 'info-180.html',
     pricing: 'frontpage.html',
     hipconceptClass: 'https://hipconcept-class-mgmt.vercel.app/',
   },
@@ -266,7 +267,7 @@ window.CHAT_CONFIG = {
     {
       id: 'plan-180',
       label: '$180 二樓超值',
-      href: 'LINKS.wtsPlan180',
+      href: 'LINKS.plan180',
       effect: 'shimmer',
       position: { left: '5.56', top: '60.73', width: '88.89', height: '15.63' },
     },
@@ -325,6 +326,98 @@ window.CHAT_CONFIG = {
    */
   hotspotTryTops: [25, 27.5, 30, 32.5],
   hotspotTryRotates: [8, 11, 14],
+
+  /*
+   * $180 二樓超值 — Info Graphic 作品牆（info-180.html · Apple Cover Flow）
+   */
+  infoGraphics180: {
+    title: '$180 二樓超值',
+    titleEn: '$180 Value · Brand Design',
+    introZh:
+      '品牌 Logo、海報、Info Graphic 與社交平台視覺 — 設計師 HONG 實戰作品參考。左右滑動，撳海報放大睇細節。',
+    introEn:
+      'Brand logos, posters, info graphics & social visuals — real portfolio by Designer HONG. Swipe to browse, tap to zoom.',
+    packagePrice: '$180 起',
+    items: [
+      {
+        id: 'global-mobile-beauty',
+        title: '她研志 · 全體移動美業',
+        titleEn: 'Global Mobile Beauty',
+        shortLabel: '移動美業',
+        introZh: '骨雕逆齡 Before/After 對比海報，高端金箔品牌視覺，適合美容業社交推廣。',
+        introEn: 'Premium bone-sculpting before/after infographic with luxury gold branding for beauty social campaigns.',
+        poster: 'assets/info-180/global-mobile-beauty.png',
+        price: 'Info Graphic · 品牌海報',
+        wts: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 $180 二樓超值 — 美容業 Info Graphic 設計'),
+      },
+      {
+        id: 'warwick-fashion',
+        title: 'Warwick Wong 時裝造型作品集',
+        titleEn: 'Warwick Wong Fashion Portfolio',
+        shortLabel: '時裝造型',
+        introZh: '專業造型師作品集排版：細節 callout、布料說明、中英文對照，大氣展示個人品牌。',
+        introEn: 'Editorial fashion portfolio layout with detail callouts, fabric notes & bilingual copy.',
+        poster: 'assets/info-180/warwick-wong-fashion.png',
+        price: 'Portfolio · 品牌設計',
+        wts: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 $180 二樓超值 — 時裝作品集設計'),
+      },
+      {
+        id: 'hipconcept-bench',
+        title: 'Hip concept 健身動作教材',
+        titleEn: 'Hip concept Bench Press Guide',
+        shortLabel: '健身教材',
+        introZh: '對比式訓練教材圖：正確 vs 錯誤姿勢、重點標註，適合 Gym / 教練品牌。',
+        introEn: 'Side-by-side training infographic — correct vs incorrect form with clear coaching cues for gym brands.',
+        poster: 'assets/info-180/hipconcept-bench-press.png',
+        price: 'Info Graphic · 教練教材',
+        wts: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 $180 二樓超值 — 健身教材 Info Graphic'),
+      },
+      {
+        id: 'beauty-poster',
+        title: '骨雕蛋白 · 一次效果海報',
+        titleEn: 'Bone Sculpt + Protein Results',
+        shortLabel: '美容海報',
+        introZh: '療程效果單張海報，Before/After 並列，強調「一次見效」賣點。',
+        introEn: 'Single-sheet treatment poster with before/after panels highlighting instant visible results.',
+        poster: 'assets/info-180/global-mobile-beauty-poster.png',
+        price: '療程海報 · Info Graphic',
+        wts: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 $180 二樓超值 — 美容療程海報'),
+      },
+      {
+        id: '852on9-street',
+        title: '852on9 街頭惡搞服飾宣傳',
+        titleEn: '852on9 Streetwear Campaign',
+        shortLabel: '852on9',
+        introZh: '復古快餐主題街拍造型，惡搞 IP 服飾展示，適合潮流品牌社交帖。',
+        introEn: 'Retro fast-food themed streetwear shoot — parody IP apparel for bold social campaigns.',
+        poster: 'assets/info-180/852on9-streetwear.png',
+        price: '品牌宣傳 · 造型海報',
+        wts: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 $180 二樓超值 — 服飾品牌宣傳設計'),
+      },
+      {
+        id: 'tsuenwan-gym',
+        title: '荃灣 Weight Train 課程一覽',
+        titleEn: 'Tsuen Wan Weight Train Course Menu',
+        shortLabel: '健身課程',
+        introZh: '健身中心多課程套餐 info graphic：PT、小組班、跆拳道、場租一次過展示。',
+        introEn: 'Multi-service gym course menu — PT, group class, taekwondo & venue rental in one bold flyer.',
+        poster: 'assets/info-180/tsuenwan-weighttrain.png',
+        price: '課程海報 · Info Graphic',
+        wts: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 $180 二樓超值 — 健身課程海報'),
+      },
+      {
+        id: 'tsuenwan-trial',
+        title: '小組訓練班試堂優惠',
+        titleEn: 'Group Class Trial Offer',
+        shortLabel: '試堂優惠',
+        introZh: '社交媒體試堂 promo 圖，價錢對比、行動呼籲清晰，適合 IG / 小紅書。',
+        introEn: 'Social trial-class promo with price contrast & clear CTA — built for IG / Xiaohongshu.',
+        poster: 'assets/info-180/tsuenwan-group-trial.png',
+        price: '社交 Promo · Info Graphic',
+        wts: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 $180 二樓超值 — 健身試堂 Promo 設計'),
+      },
+    ],
+  },
 
   /*
    * 作品牆 — gallery.html
