@@ -269,7 +269,7 @@ window.CHAT_CONFIG = {
       label: '$180 二樓超值',
       href: 'LINKS.plan180',
       effect: 'shimmer',
-      position: { left: '5.56', top: '57.60', width: '88.89', height: '17.71' },
+      position: { left: '5.56', top: '58.02', width: '88.89', height: '17.08' },
     },
     {
       id: 'plan-380',
