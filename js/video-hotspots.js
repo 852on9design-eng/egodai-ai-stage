@@ -7,10 +7,12 @@
 
   var params = new URLSearchParams(window.location.search);
   var tryMode = params.has('hotspotTry') || params.get('debug') === 'try';
-  var debug = tryMode || params.has('hotspotDebug') || params.get('debug') === 'hotspots';
+  var editMode = params.has('hotspotEdit');
+  var debug = editMode || tryMode || params.has('hotspotDebug') || params.get('debug') === 'hotspots';
   var onlyId = params.get('hotspotOnly') || (tryMode ? 'gallery' : null);
 
   if (debug) document.body.setAttribute('data-hotspot-debug', '1');
+  if (editMode) document.body.setAttribute('data-hotspot-edit', '1');
   if (tryMode) document.body.setAttribute('data-hotspot-try', '1');
 
   function resolveHref(href) {
@@ -176,6 +178,7 @@
 
   function attachHotspotNum(el, spot, num) {
     el.dataset.hotspotNum = String(num);
+    el.dataset.spotId = spot.id || '';
     el.title = '#' + num + ' ' + (spot.label || spot.id || '');
     if (!debug || tryMode) return;
     var tag = document.createElement('span');
@@ -198,7 +201,7 @@
     panel.appendChild(ul);
     var hint = document.createElement('span');
     hint.className = 'hotspot-debug-legend__hint';
-    hint.textContent = '微調時話我：#8 向下 20px';
+    hint.textContent = editMode ? '拖角點微調 → 撳「複製全部設定」貼俾我' : '微調時話我：#8 向下 20px · 或 ?hotspotEdit=1';
     panel.appendChild(hint);
     document.body.appendChild(panel);
   }

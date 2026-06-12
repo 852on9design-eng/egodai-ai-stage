@@ -358,7 +358,7 @@ window.CHAT_CONFIG = {
 
   /*
    * MP4 片上透明按鈕（1920×1080）
-   * 正式：?hotspotDebug=1
+   * 正式：?hotspotDebug=1 · 角點拖拉：?hotspotEdit=1
    * 一次試 12 個：?hotspotTry=1  ← 揀最貼嘅字母話我知
    * 斜度：左高右低 → rotate 正數
    */

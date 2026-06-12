@@ -20,7 +20,8 @@
   var PREVIEW_IDS = ['trial-ai', 'gallery', 'free-consult', 'contact-advisor'];
 
   var params = new URLSearchParams(window.location.search);
-  var debug = params.has('hotspotDebug') || params.get('debug') === 'hotspots';
+  var editMode = params.has('hotspotEdit');
+  var debug = editMode || params.has('hotspotDebug') || params.get('debug') === 'hotspots';
   var fxPreview = params.has('hotspotFxPreview') || params.get('fxPreview') === '1';
   if (debug && stage) stage.classList.add('is-debug');
   if (fxPreview && stage) stage.classList.add('is-fx-preview');
