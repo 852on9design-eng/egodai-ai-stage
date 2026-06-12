@@ -398,7 +398,7 @@ window.CHAT_CONFIG = {
         introEn:
           'MAKE IT YOURS WITH ON9 DESIGN — banner + video for personalized shop & streetwear AI branding.',
         poster: 'assets/plan-380/banner-poster.png',
-        video: 'assets/plan-380/diy-apps-showcase.mp4',
+        video: 'assets/plan-380/video-3-showcase.mp4',
         price: '$380 大滿貫全方位套餐',
         wts:
           'https://wa.me/85291306847?text=' +
