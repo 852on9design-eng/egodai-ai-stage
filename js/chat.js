@@ -234,6 +234,9 @@
       items.push({ name: name, url: url });
     }
 
+    if (cfg.links && cfg.links.trialAi) {
+      add('✨ 試玩 AI 功能', cfg.links.trialAi);
+    }
     if (cfg.links && cfg.links.gallery) {
       add('🖼 作品牆一覽', cfg.links.gallery);
     }

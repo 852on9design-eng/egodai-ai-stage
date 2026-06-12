@@ -20,6 +20,7 @@ window.CHAT_CONFIG = {
     wtsPlan380: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 $380up 金主尊享（大滿貫全方位套餐）詳情'),
     shop852: 'https://852on9design.myshopify.com/',
     gallery: 'gallery.html',
+    trialAi: 'trial-ai.html',
     pricing: 'frontpage.html',
     hipconceptClass: 'https://hipconcept-class-mgmt.vercel.app/',
   },
@@ -239,7 +240,7 @@ window.CHAT_CONFIG = {
     {
       id: 'trial-ai',
       label: '試玩 AI 功能',
-      href: 'LINKS.gallery',
+      href: 'LINKS.trialAi',
       effect: 'shimmer',
       position: { left: '5.09', top: '29.84', width: '43.7', height: '8.91' },
     },
@@ -378,7 +379,7 @@ window.CHAT_CONFIG = {
     {
       id: 'trial-ai',
       label: '試玩 AI 功能 apps 威力',
-      href: 'LINKS.wtsAiTry',
+      href: 'LINKS.trialAi',
       effect: 'shimmer',
       position: { left: '1', top: '4', width: '14.4', height: '12', rotate: 11 },
     },
