@@ -410,12 +410,12 @@ body.mobile-page .chat-widget__resize {
   border-color: rgba(180, 140, 60, 0.55);
 }
 
-/* 手機版 — 作品連結可開合 */
-body.mobile-page .chat-works-panel {
+/* 作品連結可開合 — 桌面 / 手機同步 */
+.chat-works-panel {
   margin-top: 4px;
 }
 
-body.mobile-page .chat-works__toggle {
+.chat-works__toggle {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -433,25 +433,25 @@ body.mobile-page .chat-works__toggle {
   cursor: pointer;
 }
 
-body.mobile-page .chat-works__chev {
+.chat-works__chev {
   font-size: 9px;
   opacity: 0.75;
   transition: transform 0.2s ease;
 }
 
-body.mobile-page .chat-works-panel.is-open .chat-works__chev {
+.chat-works-panel.is-open .chat-works__chev {
   transform: rotate(180deg);
 }
 
-body.mobile-page .chat-works-panel .chat-works {
+.chat-works-panel .chat-works {
   margin-top: 3px;
 }
 
-body.mobile-page .chat-works-panel:not(.is-open) .chat-works {
+.chat-works-panel:not(.is-open) .chat-works {
   display: none;
 }
 
-body.mobile-page .chat-works-panel.is-open .chat-works {
+.chat-works-panel.is-open .chat-works {
   display: grid;
 }
 

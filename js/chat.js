@@ -305,6 +305,9 @@
     if (cfg.links && cfg.links.gallery) {
       add('🖼 作品牆一覽', cfg.links.gallery);
     }
+    if (cfg.links && cfg.links.plan180) {
+      add('🎨 $180 Info Graphic', cfg.links.plan180);
+    }
     (cfg.works || []).forEach(function (w) {
       add(w.shortLabel || w.title, w.demoUrl);
     });
@@ -338,19 +341,20 @@
       .join('');
   }
 
-  function initMobileWorksToggle() {
-    if (!isMobile) return;
+  function initWorksToggle() {
     var panel = document.getElementById('chatWorksPanel');
     var toggle = document.getElementById('chatWorksToggle');
     if (!panel || !toggle || !worksEl) return;
 
-    var storageKey = 'chatWorksOpenMobile';
-    var open = false;
+    var storageKey = isMobile ? 'chatWorksOpenMobile' : 'chatWorksOpenDesktop';
+    var open = isMobile ? false : true;
 
     try {
-      open = localStorage.getItem(storageKey) === '1';
+      var saved = localStorage.getItem(storageKey);
+      if (saved === '1') open = true;
+      if (saved === '0') open = false;
     } catch (e) {
-      open = false;
+      open = isMobile ? false : true;
     }
 
     function setOpen(next) {
@@ -935,7 +939,7 @@
 
   /* ── 初始化 ── */
   renderWorkLinks();
-  initMobileWorksToggle();
+  initWorksToggle();
   updateWts();
   inputRow.hidden = true;
   stepWelcome();

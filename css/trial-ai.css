@@ -138,16 +138,8 @@
   color: #3d2817;
 }
 
-.trial-foot__mobile {
-  display: none;
-}
-
 @media (max-width: 768px) {
   .trial-widget {
     --widget-w: min(420px, 94vw);
-  }
-
-  .trial-foot__mobile {
-    display: inline-block;
   }
 }
