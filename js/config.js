@@ -254,7 +254,7 @@ window.CHAT_CONFIG = {
       label: '$100 平民企劃',
       href: 'LINKS.wtsPlan100',
       effect: 'shimmer',
-      position: { left: '5.56', top: '39.58', width: '88.89', height: '18.23' },
+      position: { left: '2.78', top: '39.58', width: '94.44', height: '16.67' },
     },
     {
       id: 'plan-180',
