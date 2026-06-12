@@ -281,7 +281,7 @@ window.CHAT_CONFIG = {
       id: 'contact-advisor',
       label: '立即搵班主任傾!',
       href: 'LINKS.wtsAdvisor',
-      effect: 'shimmer',
+      effect: 'lift',
       position: { left: '50', top: '94.74', width: '44.44', height: '4.27' },
     },
   ],
