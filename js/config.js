@@ -746,7 +746,14 @@ window.CHAT_CONFIG = {
       label: '852on9 ONLINE SHOP',
       href: 'LINKS.shop852',
       effect: 'shimmer',
-      position: { left: '83', top: '11', width: '14.5', height: '30.56', rotate: -11 },
+      position: {
+        left: '83',
+        top: '11',
+        width: '14.5',
+        height: '30.56',
+        rotate: -11,
+        topLeftDrop: 6.06,
+      },
     },
     {
       num: 4,

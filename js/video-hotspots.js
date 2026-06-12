@@ -51,11 +51,12 @@
 
   function buildClipPath(box) {
     if (box.clip) return box.clip;
+    var tl = box.topLeftDrop != null ? box.topLeftDrop : 0;
     var tr = box.topRightDrop != null ? box.topRightDrop : 0;
     var br = box.bottomRightDrop != null ? box.bottomRightDrop : 0;
-    if (!tr && !br) return '';
+    if (!tl && !tr && !br) return '';
     return (
-      'polygon(0% 0%, 100% ' + tr + '%, 100% ' + (100 - br) + '%, 0% 100%)'
+      'polygon(0% ' + tl + '%, 100% ' + tr + '%, 100% ' + (100 - br) + '%, 0% 100%)'
     );
   }
 
@@ -68,6 +69,7 @@
       height: pct(heightOverride, pos.height, '18.2'),
       skew: skewOverride != null ? parseFloat(skewOverride) : (pos.skew || 0),
       origin: pos.origin || '50% 50%',
+      topLeftDrop: pos.topLeftDrop != null ? parseFloat(pos.topLeftDrop) : 0,
       topRightDrop: numOverride(topRightDropOverride, pos.topRightDrop, 0),
       bottomRightDrop: numOverride(bottomRightDropOverride, pos.bottomRightDrop, 0),
       clip: clipOverride || pos.clip || '',
@@ -253,6 +255,7 @@
       rotate: rotate,
       skew: base.skew,
       origin: base.origin,
+      topLeftDrop: base.topLeftDrop,
       topRightDrop: base.topRightDrop,
       bottomRightDrop: base.bottomRightDrop,
       clip: base.clip,
