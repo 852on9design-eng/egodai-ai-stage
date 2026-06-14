@@ -109,3 +109,78 @@
   font-size: 11px;
   padding: 6px 10px;
 }
+
+/* 對話為主：WhatsApp / 連結在面板內向下滑才見 */
+.mobile-page .chat-panel {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+.mobile-page .chat-panel__body {
+  flex: 1 0 auto;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-page .chat-messages {
+  flex: 1 1 auto;
+  min-height: 6em;
+  overflow: visible;
+}
+
+.mobile-page .chat-input-row {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  flex-shrink: 0;
+  margin-top: auto;
+  padding-top: 6px;
+  background: linear-gradient(
+    to top,
+    rgba(255, 248, 235, 1) 65%,
+    rgba(255, 248, 235, 0.92) 85%,
+    rgba(255, 248, 235, 0)
+  );
+}
+
+.mobile-page .chat-panel:not(.is-preface) .chat-panel__body::after {
+  content: '向下滑 → WhatsApp / 連結';
+  flex-shrink: 0;
+  padding: 2px 0 4px;
+  font-size: 9px;
+  font-weight: 600;
+  text-align: center;
+  color: rgba(90, 64, 32, 0.5);
+  pointer-events: none;
+}
+
+.mobile-page .chat-panel.is-preface .chat-panel__body::after {
+  content: none;
+  display: none;
+}
+
+.mobile-page .chat-panel__foot {
+  flex-shrink: 0;
+  margin-top: 0;
+  padding: 10px 0 8px;
+  border-top: 1px dashed rgba(139, 105, 20, 0.3);
+}
+
+.mobile-page .chat-panel__foot::before {
+  content: '↓ WhatsApp 及連結';
+  display: block;
+  margin-bottom: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+  color: rgba(90, 64, 32, 0.65);
+  letter-spacing: 0.02em;
+}
+
+.mobile-page .chat-panel.is-preface .chat-panel__foot::before {
+  content: none;
+  display: none;
+}
