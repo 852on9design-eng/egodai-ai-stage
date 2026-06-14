@@ -949,3 +949,104 @@ a.work-reveal__demo:hover {
     position: fixed;
   }
 }
+
+/* ── 手機版：壓縮頂部空白，展示圖貼近標題，返回掣易觸及 ── */
+@media (max-width: 640px) {
+  .works-stage {
+    padding: 8px 12px 40px;
+  }
+
+  .works-head {
+    position: sticky;
+    top: 0;
+    z-index: 15;
+    margin-bottom: 6px;
+    padding: 6px 0 8px;
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 6, 4, 0.97) 0%,
+      rgba(10, 6, 4, 0.92) 75%,
+      rgba(10, 6, 4, 0) 100%
+    );
+  }
+
+  .works-head__back {
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  .works-head__title {
+    font-size: 20px;
+  }
+
+  .works-head__title-en {
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  .works-head__sub {
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .works-head__sub--en {
+    display: none;
+  }
+
+  .works-coverflow__viewport {
+    height: min(34vh, 260px);
+    min-height: 190px;
+    perspective-origin: 50% 38%;
+  }
+
+  .coverflow-card {
+    top: 42%;
+    width: min(240px, 58vw);
+  }
+
+  .works-coverflow__nav {
+    top: 38%;
+  }
+
+  .works-coverflow__glow {
+    top: 48%;
+    width: min(300px, 62vw);
+    height: min(200px, 38vw);
+  }
+
+  .works-coverflow__floor {
+    bottom: 4%;
+  }
+
+  .works-coverflow__dots {
+    margin-top: 4px;
+  }
+
+  .works-coverflow__detail {
+    margin-top: 10px;
+    padding: 0 8px;
+  }
+
+  .works-coverflow__title {
+    font-size: 17px;
+    margin-bottom: 4px;
+  }
+
+  .works-coverflow__intro {
+    font-size: 12px;
+  }
+
+  .works-coverflow__intro-en {
+    display: none;
+  }
+
+  .works-coverflow__price {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  .works-coverflow__inline-video {
+    max-height: min(32vh, 220px);
+  }
+}
