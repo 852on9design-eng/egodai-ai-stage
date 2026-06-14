@@ -519,6 +519,36 @@ window.CHAT_CONFIG = {
           'https://wa.me/85291306847?text=' +
           encodeURIComponent('你好，想查詢 $100 平民企劃 — 展示架優化版'),
       },
+      {
+        id: 'hair-dye-before',
+        title: '染髮價目 · Before（實拍原稿）',
+        titleEn: 'Hair Dye Menu · Before (Original Photo)',
+        shortLabel: '染髮 Before',
+        introZh:
+          '染髮選擇價目表 — 實店拍攝原稿，表格密集、品牌區分不明，適合作 AI 資訊圖優化起點。',
+        introEn:
+          'Hair dye price list — in-store photo original, dense table layout ready for AI info graphic upgrade.',
+        poster: 'assets/plan-100/hair-dye-before.png',
+        price: 'Info Graphic · Before',
+        wts:
+          'https://wa.me/85291306847?text=' +
+          encodeURIComponent('你好，想查詢 $100 平民企劃 — 染髮價目 Before/After'),
+      },
+      {
+        id: 'hair-dye-after',
+        title: '染髮價目 · After（AI 優化版）',
+        titleEn: 'Hair Dye Menu · After (AI Optimized)',
+        shortLabel: '染髮 After',
+        introZh:
+          '同一價目內容 — IDA / Paimore / Lebel / 中藥染髮分區清晰、插圖配合品牌、價錢一目了然，適合店內展示。',
+        introEn:
+          'Same price list — clear brand zones with icons, readable pricing for in-store & social display.',
+        poster: 'assets/plan-100/hair-dye-after.png',
+        price: 'Info Graphic · After',
+        wts:
+          'https://wa.me/85291306847?text=' +
+          encodeURIComponent('你好，想查詢 $100 平民企劃 — 染髮價目 AI 優化版'),
+      },
     ],
   },
 
@@ -658,15 +688,19 @@ window.CHAT_CONFIG = {
         wts: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 $180 二樓超值 — 美容療程海報'),
       },
       {
-        id: '852on9-street',
-        title: '852on9 街頭惡搞服飾宣傳',
-        titleEn: '852on9 Streetwear Campaign',
-        shortLabel: '852on9',
-        introZh: '復古快餐主題街拍造型，惡搞 IP 服飾展示，適合潮流品牌社交帖。',
-        introEn: 'Retro fast-food themed streetwear shoot — parody IP apparel for bold social campaigns.',
-        poster: 'assets/info-180/852on9-streetwear.png',
-        price: '品牌宣傳 · 造型海報',
-        wts: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 $180 二樓超值 — 服飾品牌宣傳設計'),
+        id: 'ai-fashion-display',
+        title: 'AI 時裝展示',
+        titleEn: 'AI Fashion Display',
+        shortLabel: 'AI 時裝',
+        introZh:
+          '復古快餐主題 AI 造型展示 — 852 ON9 惡搞 IP 街頭服飾，漢堡凳、霓虹招牌場景，適合潮流品牌社交帖。',
+        introEn:
+          'Retro fast-food AI fashion shoot — 852 ON9 parody streetwear with neon diner set for bold social campaigns.',
+        poster: 'assets/info-180/ai-fashion-display.png',
+        price: 'AI 時裝 · 造型展示',
+        wts:
+          'https://wa.me/85291306847?text=' +
+          encodeURIComponent('你好，想查詢 $180 二樓超值 — AI 時裝展示'),
       },
       {
         id: 'tsuenwan-gym',
