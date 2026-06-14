@@ -23,6 +23,8 @@
   var editMode = params.has('hotspotEdit');
   var debug = editMode || params.has('hotspotDebug') || params.get('debug') === 'hotspots';
   var fxPreview = params.has('hotspotFxPreview') || params.get('fxPreview') === '1';
+  var onlyId = params.get('hotspotOnly') || null;
+  var scrollBottom = params.has('scrollBottom') || params.get('view') === 'bottom';
   if (debug && stage) stage.classList.add('is-debug');
   if (fxPreview && stage) stage.classList.add('is-fx-preview');
 
@@ -66,6 +68,7 @@
   var debugEntries = [];
 
   list.forEach(function (spot, index) {
+    if (onlyId && spot.id !== onlyId) return;
     var pos = spot.position || {};
     var num = spot.num != null ? spot.num : index + 1;
     var el = document.createElement('a');
@@ -86,6 +89,12 @@
     el.setAttribute('aria-label', spot.label || '按鈕');
     el.dataset.spotId = spot.id || '';
     el.dataset.hotspotNum = String(num);
+    if (debug) {
+      var tag = document.createElement('span');
+      tag.className = 'mobile-hotspot__tag';
+      tag.textContent = String(num);
+      el.appendChild(tag);
+    }
     debugEntries.push({ num: num, label: spot.label || spot.id });
     el.style.left = (pos.left != null ? pos.left : '0') + (String(pos.left).indexOf('%') >= 0 ? '' : '%');
     el.style.top = (pos.top != null ? pos.top : '0') + (String(pos.top).indexOf('%') >= 0 ? '' : '%');
@@ -118,9 +127,23 @@
     legend.appendChild(ul);
     var hint = document.createElement('span');
     hint.className = 'mobile-hotspot-legend__hint';
-    hint.textContent = '微調時話我：#4 向下 20px';
+    hint.textContent = onlyId
+      ? '只顯示 #' + onlyId + ' · 移除網址 hotspotOnly 睇全部'
+      : '微調時話我：#6 向左 10px · 底部：?scrollBottom=1';
     legend.appendChild(hint);
     document.body.appendChild(legend);
+  }
+
+  if (scrollBottom) {
+    function scrollToBottom() {
+      var scroll = document.getElementById('mobileBgScroll');
+      if (!scroll) return;
+      scroll.scrollTop = scroll.scrollHeight - scroll.clientHeight;
+    }
+    window.addEventListener('load', function () {
+      setTimeout(scrollToBottom, 120);
+    });
+    if (document.readyState === 'complete') setTimeout(scrollToBottom, 120);
   }
 
   if (fxPreview) {

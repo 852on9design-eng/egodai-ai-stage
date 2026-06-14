@@ -265,7 +265,7 @@ window.CHAT_CONFIG = {
    * 手機版底層 MP4 — mobile.html
    * 畫布：1080 × 1920（9:16 直向）
    * 放入：assets/video/bg-loop-mobile.mp4
-   * 微調：?debug=1 顯示邊界 · ?hotspotDebug=1 顯示按鈕框
+   * 微調：?hotspotDebug=1 · 底部：?scrollBottom=1 · 單個：?hotspotOnly=free-consult
    */
   mobileBgVideo: {
     width: 1080,
