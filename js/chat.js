@@ -390,6 +390,7 @@
   function dismissPreface() {
     if (state.prefaceDismissed) return;
     state.prefaceDismissed = true;
+    if (panel) panel.classList.remove('is-preface');
     if (panelBody) panelBody.classList.remove('is-preface');
     if (prefaceEl) prefaceEl.hidden = true;
     stepWelcome();
@@ -481,20 +482,45 @@
     });
 
     scroll.appendChild(examplesWrap);
+
+    var closeLabel = prefaceCfg.closeLabel || '關閉 · 進入 AI 客服';
+
+    var endClose = document.createElement('div');
+    endClose.className = 'chat-preface__end-close';
+    var endBtn = document.createElement('button');
+    endBtn.type = 'button';
+    endBtn.className = 'chat-preface__end-close-btn';
+    endBtn.textContent = closeLabel;
+    endBtn.addEventListener('click', dismissPreface);
+    endClose.appendChild(endBtn);
+    scroll.appendChild(endClose);
+
     prefaceEl.appendChild(scroll);
 
-    var foot = document.createElement('div');
-    foot.className = 'chat-preface__foot';
-    var startBtn = document.createElement('button');
-    startBtn.type = 'button';
-    startBtn.className = 'chat-preface__start';
-    startBtn.textContent = prefaceCfg.startLabel || '開始對話';
-    startBtn.addEventListener('click', dismissPreface);
-    foot.appendChild(startBtn);
-    prefaceEl.appendChild(foot);
+    var stickyClose = document.createElement('div');
+    stickyClose.className = 'chat-preface__sticky-close';
+    stickyClose.hidden = true;
+    var stickyBtn = document.createElement('button');
+    stickyBtn.type = 'button';
+    stickyBtn.textContent = closeLabel;
+    stickyBtn.addEventListener('click', dismissPreface);
+    stickyClose.appendChild(stickyBtn);
+    prefaceEl.appendChild(stickyClose);
+
+    function syncStickyClose() {
+      var fits = scroll.scrollHeight <= scroll.clientHeight + 2;
+      var nearBottom =
+        fits || scroll.scrollTop + scroll.clientHeight >= scroll.scrollHeight - 28;
+      stickyClose.hidden = !nearBottom;
+      stickyClose.classList.toggle('is-visible', nearBottom);
+    }
+
+    scroll.addEventListener('scroll', syncStickyClose, { passive: true });
+    requestAnimationFrame(syncStickyClose);
 
     panelBody.insertBefore(prefaceEl, messagesEl);
     panelBody.classList.add('is-preface');
+    if (panel) panel.classList.add('is-preface');
     return true;
   }
 
@@ -1065,6 +1091,7 @@
         card.classList.remove('is-closed');
       });
       if (panelBody) panelBody.classList.add('is-preface');
+      if (panel) panel.classList.add('is-preface');
       return;
     }
     stepWelcome();

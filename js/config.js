@@ -243,6 +243,7 @@ window.CHAT_CONFIG = {
       },
     ],
     startLabel: '開始對話',
+    closeLabel: '關閉 · 進入 AI 客服',
   },
 
   /* Gemini 經 server.mjs 代理，Key 放 .env，唔好寫喺呢度 */
