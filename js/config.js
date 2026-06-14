@@ -422,72 +422,72 @@ window.CHAT_CONFIG = {
     title: '$100 平民企劃',
     titleEn: '$100 Quick Smart Package',
     introZh:
-      'AI 網店尺寸表與試穿導購 Info Graphic — 原版 vs 優化版對照。左右滑動，撳放大睇細節。',
+      'AI Info Graphic Before / After 對照 — 實拍原稿 vs 優化設計。左右滑動，撳放大睇細節。',
     introEn:
-      'AI shop size charts & try-on graphics — original vs optimized layouts. Swipe to browse, tap to zoom.',
+      'AI info graphic before/after — raw photo vs polished layout. Swipe to browse, tap to zoom.',
     packagePrice: '$100 起',
     wtsLabel: '💬 WhatsApp 查詢 $100',
     wtsQuery: '想查詢 $100 平民企劃',
     items: [
       {
-        id: 'tank-size-original',
-        title: '背心尺寸表 · 原版',
-        titleEn: 'Tank Size Chart · Original',
-        shortLabel: '背心 原版',
+        id: 'menu-before',
+        title: '餐牌午餐 · Before（實拍原稿）',
+        titleEn: 'Lunch Menu · Before (Original Photo)',
+        shortLabel: '餐牌 Before',
         introZh:
-          '240G 100% Cotton 中磅洗水背心尺寸表 — 四色展示、S–XXL 胸圍／肩寬／衫長，經典 PRICE LIST 排版。',
+          '和味煮意 Tuesday 精選午餐 — 實店拍攝原稿，文字密集、排版未整理，適合作 AI 優化起點。',
         introEn:
-          '240G washed tank top size chart — 4 colors, S–XXL chest/shoulder/length in classic price-list layout.',
-        poster: 'assets/plan-100/size-chart-tank-original.png',
-        price: 'Info Graphic · 尺寸表',
+          'Taste Yummy Tuesday lunch menu — in-store photo original, dense text ready for AI layout upgrade.',
+        poster: 'assets/plan-100/menu-before.png',
+        price: 'Info Graphic · Before',
         wts:
           'https://wa.me/85291306847?text=' +
-          encodeURIComponent('你好，想查詢 $100 平民企劃 — 背心尺寸表（原版）'),
+          encodeURIComponent('你好，想查詢 $100 平民企劃 — 餐牌 Before/After'),
       },
       {
-        id: 'tank-size-optimized',
-        title: '背心尺寸表 · 優化版',
-        titleEn: 'Tank Size Chart · Optimized',
-        shortLabel: '背心 優化',
+        id: 'menu-after',
+        title: '餐牌午餐 · After（AI 優化版）',
+        titleEn: 'Lunch Menu · After (AI Optimized)',
+        shortLabel: '餐牌 After',
         introZh:
-          '852 ON9 CULTURE 霓虹風格優化 — SIZE CHART 雙語、產品展示更搶眼，適合 IG / 網店主圖。',
+          '同一餐牌內容 — 精選午餐 A–G 清晰分格、食物相配合襯、品牌色一致，適合 IG / 店內展示。',
         introEn:
-          '852 ON9 neon-styled upgrade — bilingual size chart with bolder product hero for IG & online shop.',
-        poster: 'assets/plan-100/size-chart-tank-optimized.png',
-        price: 'Info Graphic · 優化設計',
+          'Same menu content — clear A–G grid, food photos, cohesive branding for IG & in-store display.',
+        poster: 'assets/plan-100/menu-after.png',
+        price: 'Info Graphic · After',
         wts:
           'https://wa.me/85291306847?text=' +
-          encodeURIComponent('你好，想查詢 $100 平民企劃 — 背心尺寸表（優化版）'),
+          encodeURIComponent('你好，想查詢 $100 平民企劃 — 餐牌 AI 優化版'),
       },
       {
-        id: 'tee-guide-original',
-        title: 'T恤尺碼建議 · 原版',
-        titleEn: 'Tee Size Guide · Original',
-        shortLabel: 'T恤 原版',
+        id: 'display-before',
+        title: '店內展示架 · Before（實拍原稿）',
+        titleEn: 'In-store Display · Before (Original Photo)',
+        shortLabel: '展示 Before',
         introZh:
-          '身高體重對照尺碼表 + 胸圍肩寬衣長袖長 — 解決網購尺碼焦慮，適合 AI 試穿導購配套。',
+          'zermatt 新品展示 — 實店拍攝原稿，太陽眼鏡、帽款同 NEW ARRIVAL 排版未標準化。',
         introEn:
-          'Height/weight size matrix plus garment measurements — ideal base for AI virtual try-on guides.',
-        poster: 'assets/plan-100/size-guide-tee-original.png',
-        price: 'Info Graphic · 尺碼建議',
+          'Zermatt new arrival stand — in-store photo with sunglasses, hat & promo text before design pass.',
+        poster: 'assets/plan-100/display-before.png',
+        price: 'Info Graphic · Before',
         wts:
           'https://wa.me/85291306847?text=' +
-          encodeURIComponent('你好，想查詢 $100 平民企劃 — T恤尺碼建議（原版）'),
+          encodeURIComponent('你好，想查詢 $100 平民企劃 — 展示架 Before/After'),
       },
       {
-        id: 'tee-guide-optimized',
-        title: 'T恤尺碼建議 · 優化版',
-        titleEn: 'Tee Size Guide · Optimized',
-        shortLabel: 'T恤 優化',
+        id: 'display-after',
+        title: '店內展示架 · After（尺寸標準化）',
+        titleEn: 'In-store Display · After (Spec Layout)',
+        shortLabel: '展示 After',
         introZh:
-          '惡搞大舞台 ON9 品牌風格優化 — 產品 flat-lay、雙語標題、身高體重矩陣更清晰，轉化率更高。',
+          '同一展示內容 — 加入 mm 尺寸標示、層次分明，方便印刷／製作落地，視覺更專業。',
         introEn:
-          'ON9 branded upgrade — product flat-lay, bilingual headers & clearer size matrix for higher conversion.',
-        poster: 'assets/plan-100/size-guide-tee-optimized.png',
-        price: 'Info Graphic · 優化設計',
+          'Same display — mm spec annotations & clear hierarchy for print/production-ready layout.',
+        poster: 'assets/plan-100/display-after.png',
+        price: 'Info Graphic · After',
         wts:
           'https://wa.me/85291306847?text=' +
-          encodeURIComponent('你好，想查詢 $100 平民企劃 — T恤尺碼建議（優化版）'),
+          encodeURIComponent('你好，想查詢 $100 平民企劃 — 展示架優化版'),
       },
     ],
   },
