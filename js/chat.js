@@ -63,6 +63,21 @@
   };
 
   var geminiHistory = [];
+  var PREFACE_DISMISSED_KEY = 'chatPrefaceDismissed';
+
+  function prefaceWasDismissed() {
+    try {
+      return localStorage.getItem(PREFACE_DISMISSED_KEY) === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function rememberPrefaceDismissed() {
+    try {
+      localStorage.setItem(PREFACE_DISMISSED_KEY, '1');
+    } catch (e) { /* ignore */ }
+  }
 
   /* ── 展開 / 收起 ── */
   function setCollapsed(collapsed) {
@@ -387,12 +402,16 @@
     return escapeHtml(str).replace(/\n/g, '<br>');
   }
 
-  function dismissPreface() {
+  function dismissPreface(persist) {
     if (state.prefaceDismissed) return;
     state.prefaceDismissed = true;
     if (panel) panel.classList.remove('is-preface');
     if (panelBody) panelBody.classList.remove('is-preface');
-    if (prefaceEl) prefaceEl.hidden = true;
+    if (prefaceEl) {
+      prefaceEl.remove();
+      prefaceEl = null;
+    }
+    if (persist !== false) rememberPrefaceDismissed();
     stepWelcome();
   }
 
@@ -1080,13 +1099,16 @@
     state.concluded = false;
     state.localMode = false;
     state.phase = 'welcome';
-    state.prefaceDismissed = false;
+    state.prefaceDismissed = prefaceWasDismissed();
     state.geminiReady = false;
     geminiHistory = [];
     messagesEl.innerHTML = '';
     updateWts();
+    if (state.prefaceDismissed) {
+      stepWelcome();
+      return;
+    }
     if (prefaceEl) {
-      prefaceEl.hidden = false;
       prefaceEl.querySelectorAll('.chat-preface__card.is-closed').forEach(function (card) {
         card.classList.remove('is-closed');
       });
@@ -1094,7 +1116,7 @@
       if (panel) panel.classList.add('is-preface');
       return;
     }
-    stepWelcome();
+    if (!renderPreface()) stepWelcome();
   }
 
   /* ── 初始化 ── */
@@ -1102,12 +1124,15 @@
   initWorksToggle();
   updateWts();
   inputRow.hidden = true;
-  if (!renderPreface()) {
+  if (prefaceWasDismissed()) {
+    state.prefaceDismissed = true;
+    stepWelcome();
+  } else if (!renderPreface()) {
     stepWelcome();
   }
 
   if (isMobile && (params.has('hotspotDebug') || params.get('debug') === 'hotspots')) {
     setCollapsed(true);
-    if (prefaceEl && !state.prefaceDismissed) dismissPreface();
+    if (prefaceEl && !state.prefaceDismissed) dismissPreface(false);
   }
 })();
