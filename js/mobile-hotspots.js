@@ -128,8 +128,10 @@
     var hint = document.createElement('span');
     hint.className = 'mobile-hotspot-legend__hint';
     hint.textContent = onlyId
-      ? '只顯示 #' + onlyId + ' · 移除網址 hotspotOnly 睇全部'
-      : '微調時話我：#6 向左 10px · 底部：?scrollBottom=1';
+      ? '只顯示 #' + onlyId + ' · 全部框：?hotspotDebug=1'
+      : scrollBottom
+        ? '底部 #6 #7 · 全部框：?hotspotDebug=1（唔加 scrollBottom）'
+        : '全部 7 個框 · 底部：加 &scrollBottom=1';
     legend.appendChild(hint);
     document.body.appendChild(legend);
   }

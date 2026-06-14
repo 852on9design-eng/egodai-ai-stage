@@ -1105,4 +1105,9 @@
   if (!renderPreface()) {
     stepWelcome();
   }
+
+  if (isMobile && (params.has('hotspotDebug') || params.get('debug') === 'hotspots')) {
+    setCollapsed(true);
+    if (prefaceEl && !state.prefaceDismissed) dismissPreface();
+  }
 })();
