@@ -402,15 +402,15 @@ window.CHAT_CONFIG = {
         titleEn: 'DIY Apps · Personalized Online Shop',
         shortLabel: 'DIY APPS',
         introZh:
-          'MAKE IT YOURS WITH ON9 DESIGN — 橫版海報配影片，個人化網店、惡搞街頭視覺、AI 品牌一站式。',
+          'DIY APPS — ONLINESHOP（PERSONALIZED）· ON9 DESIGN 霓虹惡搞場景，Gym Queen Tee 試穿展示；IG Bio 連結直達網店，個人化網店一站式。',
         introEn:
-          'MAKE IT YOURS WITH ON9 DESIGN — banner + video for personalized shop & streetwear AI branding.',
+          'DIY APPS online shop clip — ON9 DESIGN neon set, Gym Queen tee showcase; IG bio links straight to your store.',
         poster: 'assets/plan-380/banner-poster.png',
-        video: 'assets/plan-380/video-3-showcase.mp4',
+        video: 'assets/plan-380/diy-apps-showcase.mp4',
         price: '$380 大滿貫全方位套餐',
         wts:
           'https://wa.me/85291306847?text=' +
-          encodeURIComponent('你好，想查詢 $380up 金主尊享 — DIY Apps 橫版網店展示'),
+          encodeURIComponent('你好，想查詢 $380up 金主尊享 — DIY Apps Online Shop 影片'),
       },
     ],
   },
