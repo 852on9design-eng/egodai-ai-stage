@@ -298,6 +298,16 @@
 
     renderRefs(coverflowRefs, coverflowRefsGrid, work);
     updateInlineVideo(work);
+
+    if (playBtn && isInfoGallery) {
+      if (work.video) {
+        playBtn.innerHTML =
+          '<span class="works-coverflow__play-icon" aria-hidden="true">▶</span> 全屏播放';
+      } else {
+        playBtn.innerHTML =
+          '<span class="works-coverflow__play-icon" aria-hidden="true">🔍</span> 放大睇';
+      }
+    }
   }
 
   function updateInlineVideo(work) {

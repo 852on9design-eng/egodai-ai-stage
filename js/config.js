@@ -373,13 +373,43 @@ window.CHAT_CONFIG = {
     title: '$380up 金主尊享',
     titleEn: '$380 Premium · Full Package',
     introZh:
-      '兩段 $380 展示 — ① 直向惡搞街頭試穿影片 ② DIY Apps 橫版海報配影片。左右滑動，撳全屏播放或下方直接睇。',
+      '特式人物 · 時裝專用設計 · 直向影片 · DIY Apps 網店展示。左右滑動，撳放大或全屏播放。',
     introEn:
-      'Two $380 showcases — ① portrait streetwear clip ② DIY Apps banner + video. Swipe, tap full-screen or watch inline.',
+      'Character art, fashion graphics, portrait clip & DIY Apps shop video. Swipe, tap to zoom or play.',
     packagePrice: '$380 起',
     wtsLabel: '💬 WhatsApp 查詢 $380',
     wtsQuery: '想查詢 $380up 金主尊享',
     items: [
+      {
+        id: 'on9-character-snow',
+        title: '特式人物 · 白雪公主惡搞版',
+        titleEn: 'Character Art · Snow White Parody',
+        shortLabel: '特式人物',
+        introZh:
+          '經典童話人物惡搞重塑 — 撕紙質感、復古壁紙背景，適合品牌 IP、時裝 Lookbook 同社交媒體主圖。',
+        introEn:
+          'Classic fairy-tale character parody — torn-paper collage & vintage wallpaper for brand IP & lookbooks.',
+        poster: 'assets/plan-380/character-snow-white.png',
+        price: '$380 大滿貫全方位套餐',
+        wts:
+          'https://wa.me/85291306847?text=' +
+          encodeURIComponent('你好，想查詢 $380up 金主尊享 — 特式人物設計'),
+      },
+      {
+        id: 'on9-fashion-after-party',
+        title: '時裝專用設計 · AFTER THE PARTY',
+        titleEn: 'Fashion Graphic · After The Party',
+        shortLabel: '時裝設計',
+        introZh:
+          '惡搞童話時裝插畫 — AFTER THE PARTY 復古漫畫風，ON9 惡搞美學，適合 Tee / 海報 / 品牌聯名。',
+        introEn:
+          'Parody fairy-tale fashion illustration — retro comic AFTER THE PARTY style for tees, posters & collabs.',
+        poster: 'assets/plan-380/fashion-after-the-party.png',
+        price: '$380 大滿貫全方位套餐',
+        wts:
+          'https://wa.me/85291306847?text=' +
+          encodeURIComponent('你好，想查詢 $380up 金主尊享 — 時裝專用設計'),
+      },
       {
         id: 'on9-portrait-video',
         title: '852on9 惡搞街頭 · 直向影片',
