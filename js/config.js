@@ -831,7 +831,7 @@ window.CHAT_CONFIG = {
       num: 4,
       id: 'ai-class',
       label: 'AI 惡搞教室',
-      href: 'LINKS.hipconceptClass',
+      href: 'LINKS.trialAi',
       effect: 'shimmer',
       position: {
         left: '84.55',
