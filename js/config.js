@@ -207,7 +207,7 @@ window.CHAT_CONFIG = {
     {
       name: 'PetKuso AI',
       desc: '寵物惡搞 AI 創作',
-      url: '#',
+      url: 'https://petkuso-ai.vercel.app/',
     },
     {
       name: 'Nutrition AI Coach',
@@ -777,6 +777,25 @@ window.CHAT_CONFIG = {
       wts: 'https://wa.me/85291306847?text=' + encodeURIComponent('你好，想查詢 PB Tracker 健身追蹤 App 倒模'),
       refs: [
         { src: 'assets/works/pb-tracker-poster.png', label: '宣傳海報' },
+      ],
+    },
+    {
+      id: 'petkuso-ai',
+      title: 'PetKuso AI 寵物惡搞創作',
+      shortLabel: 'PETKUSO AI',
+      icon: 'assets/works/petkuso-icon.png',
+      poster: 'assets/works/petkuso-poster.png',
+      price: '倒模改你品牌只需 $680',
+      demoUrl: 'https://petkuso-ai.vercel.app/',
+      demoLabel: 'Demo 免費試玩',
+      wts:
+        'https://wa.me/85291306847?text=' +
+        encodeURIComponent('你好，想查詢 PetKuso AI 寵物惡搞 App 倒模'),
+      refs: [
+        { src: 'assets/works/petkuso-poster.png', label: '健身皇后模板' },
+        { src: 'assets/works/petkuso-ref-catbusters.png', label: '捉鬼貓敢死隊' },
+        { src: 'assets/works/petkuso-ref-meowwar.png', label: '喵戰' },
+        { src: 'assets/works/petkuso-ref-claws.png', label: '貓爪驚魂' },
       ],
     },
   ],
