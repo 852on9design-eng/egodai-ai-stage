@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0604">
+  <title>惡搞大舞台｜PetKuso AI 寵物惡搞</title>
+  <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/petkuso-embed.css">
+</head>
+<body class="petkuso-embed-page">
+  <main class="petkuso-stage" aria-label="PetKuso AI 試玩">
+    <div class="petkuso-widget">
+      <img
+        class="petkuso-widget__frame"
+        src="assets/chat-frame.png"
+        width="1024"
+        height="1024"
+        alt="惡搞大舞台 ON9 金框"
+        draggable="false"
+      >
+
+      <div class="petkuso-slot">
+        <iframe
+          id="petkusoFrame"
+          title="PetKuso AI 寵物惡搞創作"
+          allow="payment"
+          loading="eager"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+
+      <footer class="petkuso-foot">
+        <span class="petkuso-foot__badge">ON9 試玩 · 30 次免費生成</span>
+        <a href="gallery.html">🖼 作品牆</a>
+        <a href="trial-ai.html">✨ 更多試玩</a>
+        <a href="index.html">🖥 返回大舞台</a>
+        <a href="mobile.html">📱 手機版</a>
+      </footer>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script>
+    (function () {
+      var cfg = window.CHAT_CONFIG || {};
+      var links = cfg.links || {};
+      var src =
+        links.petkusoEmbed ||
+        'https://petkuso-ai.vercel.app/?ref=on9';
+      var frame = document.getElementById('petkusoFrame');
+      if (frame) frame.src = src;
+    })();
+  </script>
+</body>
+</html>

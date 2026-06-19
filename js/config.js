@@ -26,6 +26,8 @@ window.CHAT_CONFIG = {
     plan380: 'info-380.html',
     pricing: 'frontpage.html',
     hipconceptClass: 'https://hipconcept-class-mgmt.vercel.app/',
+    petkusoEmbed: 'https://petkuso-ai.vercel.app/?ref=on9',
+    petkusoFrame: 'petkuso.html',
   },
 
   pricingAdvisorNote: '我會建議做品牌功能的 apps $880 起',
@@ -207,7 +209,7 @@ window.CHAT_CONFIG = {
     {
       name: 'PetKuso AI',
       desc: '寵物惡搞 AI 創作',
-      url: 'https://petkuso-ai.vercel.app/',
+      url: 'petkuso.html',
     },
     {
       name: 'Nutrition AI Coach',
@@ -786,8 +788,8 @@ window.CHAT_CONFIG = {
       icon: 'assets/works/petkuso-icon.png',
       poster: 'assets/works/petkuso-poster.png',
       price: '倒模改你品牌只需 $680',
-      demoUrl: 'https://petkuso-ai.vercel.app/',
-      demoLabel: 'Demo 免費試玩',
+      demoUrl: 'petkuso.html',
+      demoLabel: 'ON9 金框試玩 · 30 次',
       wts:
         'https://wa.me/85291306847?text=' +
         encodeURIComponent('你好，想查詢 PetKuso AI 寵物惡搞 App 倒模'),
