@@ -209,7 +209,7 @@ window.CHAT_CONFIG = {
     {
       name: 'PetKuso AI',
       desc: '寵物惡搞 AI 創作',
-      url: 'petkuso.html',
+      url: 'https://petkuso-ai.vercel.app/',
     },
     {
       name: 'Nutrition AI Coach',
@@ -788,8 +788,8 @@ window.CHAT_CONFIG = {
       icon: 'assets/works/petkuso-icon.png',
       poster: 'assets/works/petkuso-poster.png',
       price: '倒模改你品牌只需 $680',
-      demoUrl: 'petkuso.html',
-      demoLabel: 'ON9 金框試玩 · 30 次',
+      demoUrl: 'https://petkuso-ai.vercel.app/',
+      demoLabel: 'Demo 免費試玩 · 10 次',
       wts:
         'https://wa.me/85291306847?text=' +
         encodeURIComponent('你好，想查詢 PetKuso AI 寵物惡搞 App 倒模'),
